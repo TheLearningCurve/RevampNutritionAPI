@@ -1,5 +1,12 @@
+import model.ItemData;
+import model.SearchData;
+import model.TypeAHead;
+import retrofit.Callback;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import service.GetAPICalls;
 
 /*
  * Created by Kyle Wolff May 8 2015
@@ -40,15 +47,15 @@ public class Adapter {
 		getapicalls.searchFood(QueryVariables.searchTerm, 50, 0, new Callback<SearchData>() {
 
 			@Override
-			public void success(SearchData searchData, Response response)
-			{
-							
+			public void success(SearchData arg0, Response arg1) {
+				// TODO Auto-generated method stub
+				
 			}
-
+			
 			@Override
-			public void failure(RetrofitError retrofitError)
-			{
-				System.out.println(retrofitError.getResponse().getReason());	
+			public void failure(RetrofitError arg0) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 	}

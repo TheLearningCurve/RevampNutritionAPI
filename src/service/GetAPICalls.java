@@ -13,10 +13,10 @@ import retrofit.http.Query;
 public interface GetAPICalls {
 	
 	@GET("/search")
-	void searchFood(@Query("q") String searchTerm, @Query("limit") int limit, @Query("offset") int offset, Callback<SearchData> cb);
+	void searchFood(@Query("q") String searchTerm, @Query("limit") int limit, @Query("offset") int offset, Callback<SearchData> callback);
 	
 	@GET("/item/{id}")
-	void itemFacts(@Path("id") String itemId, Callback<ItemData> cb);
+	void itemFacts(@Path("id") String itemId, Callback<ItemData> callback);
 	
 	@GET("/autocomplete")
 	void typeAhead(@Query("q") String text, Callback<TypeAHead> cb);
