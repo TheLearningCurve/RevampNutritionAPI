@@ -1,7 +1,7 @@
 package service;
-import ItemData;
-import SearchData;
-import TypeAHead;
+import model.ItemData;
+import model.SearchData;
+import model.TypeAHead;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;
