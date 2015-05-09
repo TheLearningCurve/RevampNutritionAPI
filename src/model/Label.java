@@ -7,5 +7,5 @@ import java.util.List;
  */
 public class Label {
 	
-	public List<Serving> serving = new ArrayList<Serving>();
+	public Serving serving = new Serving();
 }

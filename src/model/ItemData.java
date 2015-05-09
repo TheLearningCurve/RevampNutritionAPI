@@ -2,6 +2,10 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jdk.nashorn.internal.parser.JSONParser;
+import sun.print.resources.serviceui;
+
+import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
 
 /*
@@ -18,13 +22,17 @@ public class ItemData {
 	 @SerializedName("ingredient_statement")
 	 public String ingredientStatement; // may be null
 	 
-	 public List<Brand> brand = new ArrayList<Brand>();
+	 @SerializedName("brand")
+	 public Brand brand = new Brand();
 	 
-	 public List<Images> images = new ArrayList<Images>();
+	 @SerializedName("images")
+	 public Images images = new Images();
 	 
-	 public List<Label> label = new ArrayList<Label>();
+	 @SerializedName("label")
+	 public Label label = new Label();
 	 
+	 @SerializedName("nutrients")
 	 public List<Nutrients> nutrients = new ArrayList<Nutrients>();
+	 	 
 
-	 
 }

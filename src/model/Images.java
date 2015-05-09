@@ -6,11 +6,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Images {
 	
-	@SerializedName("front")
-	public String front;
-	
-	@SerializedName("label")
-	public String label;
-	
+	public Front front = new Front();
+	public LabelI label = new LabelI();
 
 }

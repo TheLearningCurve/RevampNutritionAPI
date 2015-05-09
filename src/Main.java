@@ -15,5 +15,11 @@ public class Main
 		 */
 		
 		//	MainFrame mainFrame = new MainFrame();
+		QueryVariables.setSearchTerm("hamburger");
+		QueryVariables.setItemId("MdAwfYyOO");	
+		QueryVariables.setText("ap");
+		
+		Adapter a = new Adapter();
+		a.getItem();
 	}
 }

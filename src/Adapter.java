@@ -1,4 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
+
+import jdk.internal.org.objectweb.asm.tree.analysis.Value;
+import model.Brand;
 import model.ItemData;
+import model.Nutrients;
+import model.Results;
 import model.SearchData;
 import model.TypeAHead;
 import retrofit.Callback;
@@ -7,6 +14,7 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import service.GetAPICalls;
+import sun.rmi.runtime.Log;
 
 /*
  * Created by Kyle Wolff May 8 2015
@@ -34,6 +42,7 @@ public class Adapter {
 		 */
 		RestAdapter restAdapter = new RestAdapter.Builder()
 		  .setEndpoint(Config.BASE_URL)
+		  .setLogLevel(RestAdapter.LogLevel.FULL)
 		  .setRequestInterceptor(requestInterceptor)
 		  .setErrorHandler(new ErrorHandling())
 		  .build();
@@ -47,14 +56,20 @@ public class Adapter {
 		getapicalls.searchFood(QueryVariables.searchTerm, 50, 0, new Callback<SearchData>() {
 
 			@Override
-			public void success(SearchData arg0, Response arg1) {
+			public void success(SearchData searchData, Response response) {
 				// TODO Auto-generated method stub
+				
+				for(Results r : searchData.results)
+				{
+					System.out.println(r.itemName);
+				}
 				
 			}
 			
 			@Override
-			public void failure(RetrofitError arg0) {
-				// TODO Auto-generated method stub
+			public void failure(RetrofitError retrofitError) {
+
+				System.out.println(retrofitError.getMessage());
 				
 			}
 		});
@@ -62,18 +77,29 @@ public class Adapter {
 	
 	public void getItem() {
 		
+		getapicalls = restAdapter.create(GetAPICalls.class);
 		getapicalls.itemFacts(QueryVariables.itemId, new Callback<ItemData>() {
 
 			@Override
 			public void success(ItemData itemData, Response response)
 			{
-							
+				if(itemData.nutrients != null)
+				{
+					for(Nutrients n : itemData.nutrients)
+					{
+						System.out.println(n.attr_id);
+					}
+				}
+				else
+				{
+					System.out.println(itemData.nutrients.size());
+				}
 			}
 
 			@Override
 			public void failure(RetrofitError retrofitError)
 			{
-				System.out.println(retrofitError.getResponse().getReason());	
+				System.out.println(retrofitError.getMessage());	
 			}
 		});	
 	}
@@ -85,7 +111,9 @@ public class Adapter {
 			@Override
 			public void success(TypeAHead typeAhead, Response response)
 			{
-							
+			
+					System.out.println(typeAhead.text);
+				
 			}
 
 			@Override

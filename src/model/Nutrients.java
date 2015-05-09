@@ -1,9 +1,13 @@
 package model;
-import com.google.gson.annotations.SerializedName;
 
+
+import com.google.gson.annotations.SerializedName;
 
 public class Nutrients {
 
+	@SerializedName("attr_id")
+	public int attr_id;
+	
 	@SerializedName("value")
 	public float value;
 
@@ -13,4 +17,7 @@ public class Nutrients {
 	@SerializedName("name")
 	public String name;
 
+	@SerializedName("usda_tag")
+	public String usda_tag;
 }
+

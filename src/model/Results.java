@@ -22,7 +22,7 @@ public class Results {
 	 public String nutrientUom;
 	 
 	 @SerializedName("serving_qty")
-	 public int servingQty;
+	 public float servingQty;
 	 
 	 @SerializedName("serving_uom")
 	 public String servingUom;
