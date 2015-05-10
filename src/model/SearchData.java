@@ -15,5 +15,5 @@ public class SearchData {
 	 @SerializedName("status")
 	 public int status;
 
-	 public List<Results> results = new ArrayList<Results>();
+	 public List<Results> results;
 }

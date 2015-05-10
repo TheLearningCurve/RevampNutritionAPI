@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Images {
 	
-	public Front front = new Front();
-	public LabelI label = new LabelI();
+	public Front front;
+	public LabelI label;
 
 }

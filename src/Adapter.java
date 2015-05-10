@@ -83,16 +83,16 @@ public class Adapter {
 			@Override
 			public void success(ItemData itemData, Response response)
 			{
-				if(itemData.nutrients != null)
+				if(itemData.label.nutrients != null)
 				{
-					for(Nutrients n : itemData.nutrients)
+					for(Nutrients n : itemData.label.nutrients)
 					{
-						System.out.println(n.attr_id);
+						System.out.println(n.name);
 					}
 				}
 				else
 				{
-					System.out.println(itemData.nutrients.size());
+					System.out.println(itemData.label.nutrients.size());
 				}
 			}
 
