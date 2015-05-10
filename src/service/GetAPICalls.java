@@ -1,4 +1,6 @@
 package service;
+import java.util.List;
+
 import model.ItemData;
 import model.SearchData;
 import model.TypeAHead;
@@ -19,6 +21,6 @@ public interface GetAPICalls {
 	void itemFacts(@Path("id") String itemId, Callback<ItemData> cb);
 	
 	@GET("/autocomplete")
-	void typeAhead(@Query("q") String text, Callback<TypeAHead> cb);
+	void typeAhead(@Query("q") String text, Callback<List<TypeAHead>> cb);
 
 }

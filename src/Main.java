@@ -20,6 +20,6 @@ public class Main
 		QueryVariables.setText("ap");
 		
 		Adapter a = new Adapter();
-		a.getItem();
+		a.typeAhead();
 	}
 }

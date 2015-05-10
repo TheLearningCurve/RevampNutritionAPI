@@ -1,8 +1,5 @@
-import java.util.ArrayList;
 import java.util.List;
 
-import jdk.internal.org.objectweb.asm.tree.analysis.Value;
-import model.Brand;
 import model.ItemData;
 import model.Nutrients;
 import model.Results;
@@ -14,7 +11,6 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import service.GetAPICalls;
-import sun.rmi.runtime.Log;
 
 /*
  * Created by Kyle Wolff May 8 2015
@@ -87,7 +83,7 @@ public class Adapter {
 				{
 					for(Nutrients n : itemData.label.nutrients)
 					{
-						System.out.println(n.name);
+						System.out.println(n.name + ": " + n.value + n.unit);
 					}
 				}
 				else
@@ -106,20 +102,22 @@ public class Adapter {
 	
 	public void typeAhead() {
 		
-		getapicalls.typeAhead(QueryVariables.text, new Callback<TypeAHead>() {
+		getapicalls = restAdapter.create(GetAPICalls.class);
+		getapicalls.typeAhead(QueryVariables.text, new Callback<List<TypeAHead>>() {
 
 			@Override
-			public void success(TypeAHead typeAhead, Response response)
-			{
-			
-					System.out.println(typeAhead.text);
+			public void success(List<TypeAHead> typeAhead, Response response) {
 				
+				for(TypeAHead h : typeAhead)
+				{
+					System.out.println(h.text);
+				}
 			}
-
+			
 			@Override
 			public void failure(RetrofitError retrofitError)
 			{
-				System.out.println(retrofitError.getResponse().getReason());	
+				System.out.println(retrofitError.getMessage());	
 			}
 		});
 		
