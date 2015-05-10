@@ -1,4 +1,6 @@
 package model;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,5 +9,8 @@ import java.util.List;
  */
 public class Label {
 	
-	public Serving serving = new Serving();
+	public Serving serving;
+
+	@SerializedName("nutrients")
+	public List<Nutrients> nutrients;
 }

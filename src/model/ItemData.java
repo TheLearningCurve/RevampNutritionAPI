@@ -23,16 +23,15 @@ public class ItemData {
 	 public String ingredientStatement; // may be null
 	 
 	 @SerializedName("brand")
-	 public Brand brand = new Brand();
+	 public Brand brand;
 	 
 	 @SerializedName("images")
-	 public Images images = new Images();
+	 public Images images;
 	 
 	 @SerializedName("label")
-	 public Label label = new Label();
+	 public Label label;
 	 
-	 @SerializedName("nutrients")
-	 public List<Nutrients> nutrients = new ArrayList<Nutrients>();
+
 	 	 
 
 }
