@@ -5,4 +5,4 @@
  * @author Brandon
  *
  */
-package model;
+package nutritionAPIV2_model;

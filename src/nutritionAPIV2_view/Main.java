@@ -1,4 +1,4 @@
-package gui;
+package nutritionAPIV2_view;
 
 import java.io.IOException;
 
