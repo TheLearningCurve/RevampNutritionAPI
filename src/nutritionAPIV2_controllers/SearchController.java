@@ -1,10 +1,10 @@
-package controllers;
+package nutritionAPIV2_controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import service.Adapter;
-import service.QueryVariables;
+import nutritionAPIV2_service.Adapter;
+import nutritionAPIV2_service.QueryVariables;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

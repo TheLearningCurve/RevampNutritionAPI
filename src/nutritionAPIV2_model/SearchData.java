@@ -1,4 +1,4 @@
-package model;
+package nutritionAPIV2_model;
 
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
