@@ -1,4 +1,4 @@
-package nutritionAPIV2_view;
+package gui;
 
 import java.io.IOException;
 
@@ -19,18 +19,16 @@ public class Main extends Application
 		
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage stage) {
 		
 		AnchorPane page;
 		
 		try {
-			
 			page = (AnchorPane) FXMLLoader.load(Main.class.getResource("SearchPanel.fxml"));
-			Scene scene = new Scene(page); 
+			Scene scene = new Scene(page);
 			scene.getStylesheets().add(getClass().getResource("SearchPanel.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
-			
+			stage.setScene(scene);
+			stage.show();
 		} catch (IOException e) {
 			
 			e.printStackTrace();

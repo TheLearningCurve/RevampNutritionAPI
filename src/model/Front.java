@@ -1,10 +1,13 @@
-package nutritionAPIV2_model;
+package model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LabelI {
+public class Front {
 	
 	@SerializedName("full")
 	public String full;
+	
+	@SerializedName("thumb")
+	public String thumb;
 
 }

@@ -1,9 +1,9 @@
-package nutritionAPIV2_service;
+package service;
 import java.util.List;
 
-import nutritionAPIV2_model.ItemData;
-import nutritionAPIV2_model.SearchData;
-import nutritionAPIV2_model.TypeAHead;
+import model.ItemData;
+import model.SearchData;
+import model.TypeAHead;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;

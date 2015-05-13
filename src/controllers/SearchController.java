@@ -1,10 +1,10 @@
-package nutritionAPIV2_controllers;
+package controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import nutritionAPIV2_service.Adapter;
-import nutritionAPIV2_service.QueryVariables;
+import service.Adapter;
+import service.QueryVariables;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -34,7 +34,7 @@ public class SearchController implements Initializable{
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		
 	}
-		
+	
 	@FXML
 	public void getTypeAHead(){
 		scrollPane.setVisible(true);
@@ -42,5 +42,5 @@ public class SearchController implements Initializable{
 		listView.setItems(items);
 		
 	}
-	
+
 }

@@ -1,4 +1,4 @@
-package nutritionAPIV2_service;
+package service;
 
 /*
  * Created by Kyle Wolff on May 8 2015

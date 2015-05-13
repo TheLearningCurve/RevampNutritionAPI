@@ -1,4 +1,4 @@
-package nutritionAPIV2_service;
+package service;
 
 public class QueryVariables {
 
