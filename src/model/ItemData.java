@@ -1,11 +1,5 @@
 package model;
-import java.util.ArrayList;
-import java.util.List;
 
-import jdk.nashorn.internal.parser.JSONParser;
-import sun.print.resources.serviceui;
-
-import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
 
 /*

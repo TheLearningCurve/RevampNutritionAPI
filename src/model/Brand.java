@@ -1,7 +1,6 @@
 package model;
 import com.google.gson.annotations.SerializedName;
 
-
 /*
  * Create by Kyle Wolff May 8 2015
  */
