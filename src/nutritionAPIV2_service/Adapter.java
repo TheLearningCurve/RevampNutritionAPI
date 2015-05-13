@@ -1,13 +1,13 @@
-package service;
+package nutritionAPIV2_service;
 import java.util.List;
 
 import javax.swing.SwingWorker;
 
-import model.ItemData;
-import model.Nutrients;
-import model.Results;
-import model.SearchData;
-import model.TypeAHead;
+import nutritionAPIV2_model.ItemData;
+import nutritionAPIV2_model.Nutrients;
+import nutritionAPIV2_model.Results;
+import nutritionAPIV2_model.SearchData;
+import nutritionAPIV2_model.TypeAHead;
 import retrofit.Callback;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;

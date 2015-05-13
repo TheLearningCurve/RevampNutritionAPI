@@ -1,4 +1,4 @@
-package model;
+package nutritionAPIV2_model;
 
 /*
  * Created by Kyle Wolff May 8 2015

@@ -1,4 +1,4 @@
-package service;
+package nutritionAPIV2_service;
 import org.omg.CORBA.portable.UnknownException;
 
 import retrofit.ErrorHandler;
