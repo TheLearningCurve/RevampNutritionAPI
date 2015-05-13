@@ -1,4 +1,7 @@
+package service;
 import java.util.List;
+
+import javax.swing.SwingWorker;
 
 import model.ItemData;
 import model.Nutrients;
@@ -10,7 +13,6 @@ import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import service.GetAPICalls;
 
 /*
  * Created by Kyle Wolff May 8 2015
@@ -53,12 +55,7 @@ public class Adapter {
 
 			@Override
 			public void success(SearchData searchData, Response response) {
-				// TODO Auto-generated method stub
 				
-				for(Results r : searchData.results)
-				{
-					System.out.println(r.itemName);
-				}
 				
 			}
 			
@@ -107,10 +104,10 @@ public class Adapter {
 
 			@Override
 			public void success(List<TypeAHead> typeAhead, Response response) {
-				
+
 				for(TypeAHead h : typeAhead)
 				{
-					System.out.println(h.text);
+					
 				}
 			}
 			
