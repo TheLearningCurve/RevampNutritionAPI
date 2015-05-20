@@ -13,12 +13,12 @@
    <!-- Top Panel -->
    
    	<!--  Created by Kyle Wolff May 13 2015 -->
-   	<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   	<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="92.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    	   <children>
-   	      <AnchorPane id="searchPane" layoutX="68.0" layoutY="14.0" prefHeight="64.0" prefWidth="463.0" AnchorPane.bottomAnchor="169.0" AnchorPane.leftAnchor="68.0" AnchorPane.rightAnchor="69.0" AnchorPane.topAnchor="14.0">
+   	      <AnchorPane id="searchPane" layoutX="21.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="558.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0">
    	         <children>
-   	            <TextField id="searchField" layoutX="7.0" layoutY="6.0" onKeyPressed="#getTypeAHead" prefHeight="50.0" prefWidth="449.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" />
-   	            <ImageView fitHeight="37.0" fitWidth="44.0" layoutX="403.0" layoutY="13.0" preserveRatio="true" AnchorPane.leftAnchor="411.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="13.0">
+   	            <TextField id="searchField" layoutX="-1.0" layoutY="6.0" onKeyPressed="#getTypeAHead" prefHeight="50.0" prefWidth="558.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" />
+   	            <ImageView fitHeight="37.0" fitWidth="44.0" layoutX="507.0" layoutY="13.0" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="13.0">
    	               <image>
    	                  <Image url="@ic_action_search.png" />
    	               </image>
