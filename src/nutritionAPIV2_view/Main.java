@@ -24,9 +24,9 @@ public class Main extends Application
 		AnchorPane page;
 		
 		try {
-			page = (AnchorPane) FXMLLoader.load(Main.class.getResource("SearchPanel.fxml"));
+			page = (AnchorPane) FXMLLoader.load(Main.class.getResource("Frame.fxml"));
 			Scene scene = new Scene(page);
-			scene.getStylesheets().add(getClass().getResource("SearchPanel.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("Frame.css").toExternalForm());
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e) {
