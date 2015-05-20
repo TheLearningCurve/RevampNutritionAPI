@@ -3,8 +3,6 @@ package nutritionAPIV2_controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import nutritionAPIV2_service.Adapter;
-import nutritionAPIV2_service.QueryVariables;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,11 +11,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 
-/* 
- * Created by Kyle Wolff May 13 2015
- */
-public class SearchController implements Initializable{
-
+public class FrameController implements Initializable
+{
+	/* Top Panel */
+	
 	@FXML
 	TextField searchField;	
 	@FXML
@@ -42,5 +39,10 @@ public class SearchController implements Initializable{
 		listView.setItems(items);
 		
 	}
-
+	
+	/* Left Panel */
+	
+	
+	
+	/* Right Panel */
 }
