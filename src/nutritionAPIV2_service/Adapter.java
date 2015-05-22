@@ -3,6 +3,7 @@ import java.util.List;
 
 import javax.swing.SwingWorker;
 
+import nutritionAPIV2_controllers.SearchController;
 import nutritionAPIV2_model.ItemData;
 import nutritionAPIV2_model.Nutrients;
 import nutritionAPIV2_model.Results;
@@ -107,8 +108,8 @@ public class Adapter {
 
 				for(TypeAHead h : typeAhead)
 				{
-					
-				}
+					SearchController.results(h.text);
+				}			
 			}
 			
 			@Override

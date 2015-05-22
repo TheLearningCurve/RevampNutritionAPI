@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 
 <!--  Created by Kyle Wolff May 13 2015 -->
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutritionAPIV2_controllers.SearchController">
    <children>
       <AnchorPane id="searchPane" layoutX="68.0" layoutY="14.0" prefHeight="64.0" prefWidth="463.0" AnchorPane.bottomAnchor="169.0" AnchorPane.leftAnchor="68.0" AnchorPane.rightAnchor="69.0" AnchorPane.topAnchor="14.0">
          <children>
