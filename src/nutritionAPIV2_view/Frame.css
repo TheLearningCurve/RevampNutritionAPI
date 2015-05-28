@@ -5,9 +5,6 @@
 }
 
 #searchField {
-	-fx-border-insets: 0;
-	-fx-border-width: 2px;
-	-fx-border-color: rgb(41,41,41) lightgrey lightgrey rgb(41,41,41);
 	-fx-font-family: "Arial";
 	-fx-font-size: 25.0px;
 }
