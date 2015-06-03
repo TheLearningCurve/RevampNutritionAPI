@@ -20,7 +20,7 @@
 			
 		    	<AnchorPane id="searchPane" layoutX="21.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0">
 		        	<children>
-		            	<TextField id="searchField" onKeyPressed="#getTypeAHead" prefHeight="50.0" prefWidth="558.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+		            	<TextField id="searchField" fx:id="searchField" prefHeight="50.0" prefWidth="558.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 		            	<ImageView fitHeight="37.0" fitWidth="44.0" layoutX="645.0" layoutY="7.0" onMousePressed="#addButtons" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="7.0">
 		               		<image>
 		                  		<Image url="@ic_action_search.png" />
