@@ -28,12 +28,6 @@
 		            	</ImageView>
 		         	</children>
 		      	</AnchorPane>
-		      	
-		      	<ScrollPane id="typeAhead" fx:id="scrollPane" hbarPolicy="NEVER" layoutX="82.0" layoutY="71.0" prefHeight="170.0" prefWidth="436.0" vbarPolicy="AS_NEEDED" visible="false">
-		         	<content>
-		            	<ListView id="listView" fx:id="listView" prefHeight="167.0" prefWidth="429.0" visible="false" />
-		         	</content>
-	         	</ScrollPane>
 	         	
 		   	</children>
 		</AnchorPane>
@@ -63,5 +57,10 @@
 				
 			</items>
 	   </SplitPane>
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="37.0" layoutY="58.0" prefHeight="116.0" prefViewportHeight="218.0" prefViewportWidth="516.0" prefWidth="723.0" visible="false" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="58.0">
+         <content>
+		      <ListView id="listView" fx:id="listView" layoutY="-51.0" prefHeight="114.0" prefWidth="724.0" visible="false" />
+         </content>
+      </ScrollPane>
 	</children>
 </AnchorPane>

@@ -1,6 +1,5 @@
 package nutritionAPIV2_controllers;
 
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -11,7 +10,8 @@ import nutritionAPIV2_service.Adapter;
 import nutritionAPIV2_service.QueryVariables;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,12 +20,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 
 public class FrameController implements Initializable
@@ -67,6 +64,7 @@ public class FrameController implements Initializable
     public static String x;
     public static int success;
     public Adapter adapter = new Adapter();
+    public static Task<Object> task;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) 
@@ -80,11 +78,48 @@ public class FrameController implements Initializable
 		        if(x.length() >= 2)
 		        {
 		            QueryVariables.setText(x);
-		            adapter.typeAhead();
+		            task = new Task<Object>() {
+						
+						@Override
+						protected Object call() throws Exception {
+
+				            adapter.typeAhead();
+				           	if(adapter.istORf() == false)
+				           	{
+				           		task.cancel();
+				           	}
+				           
+							return null;
+						}
+					};
+					
+					task.run();
+					task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+						
+						@Override
+						public void handle(WorkerStateEvent event) {
+						
+							scrollPane.setVisible(true);
+							listView.setVisible(true);
+							System.out.println("Null? " + getTypeAheadText());
+							listView.setItems(getTypeAheadText());
+							
+						}
+					});
 		        }
 			}
-		});
-				
+		});			
+	}
+	
+	
+	public static void setTypeAheadText(ObservableList<String> typeAhead)
+	{
+		typeaHeadtext = typeAhead;
+	}
+	
+	public ObservableList<String> getTypeAheadText()
+	{
+		return typeaHeadtext;
 	}
 	
 	private void getText(KeyCode keyCode) {
@@ -104,9 +139,8 @@ public class FrameController implements Initializable
 	
 	public void updateUI()
 	{
-		scrollPane.setVisible(true);
-		listView.setVisible(true);
-		listView.setItems(typeaHeadtext);
+		System.out.println("Progress == " + task.getProgress());
+
 	}
 
 	@FXML
@@ -136,21 +170,6 @@ public class FrameController implements Initializable
 	}
 	
 	
-	/* Right Panel Code */
+	/* Right Panel Code */	
 	
-	public static void getTypeAheadText(List<TypeAHead> typeAhead, Response response)
-	{
-		for(TypeAHead h : typeAhead)
-		{
-			typeaHeadtext.add(h.text);
-		}
-		
-		if(response.getStatus() == 200)
-		{
-			success = response.getStatus();
-			/*
-			 * I would call updateGUI(); here but it will not allow because of the non static components 
-			 */
-		}
-	}
 }

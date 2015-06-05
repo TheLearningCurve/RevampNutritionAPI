@@ -1,6 +1,9 @@
 package nutritionAPIV2_service;
+import java.awt.Frame;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import nutritionAPIV2_controllers.FrameController;
 import nutritionAPIV2_model.ItemData;
 import nutritionAPIV2_model.Nutrients;
@@ -18,6 +21,7 @@ import retrofit.client.Response;
 public class Adapter {
 
 	GetAPICalls getapicalls;
+	private boolean tORf = false;
 	
 	/*
 	 * RequestInterceptor is to add the headers to each call that is made
@@ -102,11 +106,19 @@ public class Adapter {
 	public void typeAhead() {
 		
 		getapicalls.typeAhead(QueryVariables.text, new Callback<List<TypeAHead>>() {
+			
+			public ObservableList<String> typeAheadText = FXCollections.observableArrayList ();
 
 			@Override
-			public void success(List<TypeAHead> typeAhead, Response response) {
-
-				FrameController.getTypeAheadText(typeAhead, response);
+			public void success(List<TypeAHead> typeAhead, Response response)
+			{				
+				for(TypeAHead h : typeAhead)
+				{
+					typeAheadText.add(h.text);
+				}
+				
+				FrameController.setTypeAheadText(typeAheadText);
+				settORf(true);
 			}
 			
 			@Override
@@ -115,6 +127,14 @@ public class Adapter {
 				System.out.println(retrofitError.getMessage());	
 			}
 		});
-		
 	}
+
+	public boolean istORf() {
+		return tORf;
+	}
+
+	public void settORf(boolean tORf) {
+		this.tORf = tORf;
+	}
+	
 }
