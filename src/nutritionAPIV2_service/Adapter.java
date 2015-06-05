@@ -1,6 +1,7 @@
 package nutritionAPIV2_service;
 import java.awt.Frame;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -127,6 +128,7 @@ public class Adapter {
 				System.out.println(retrofitError.getMessage());	
 			}
 		});
+		
 	}
 
 	public boolean istORf() {

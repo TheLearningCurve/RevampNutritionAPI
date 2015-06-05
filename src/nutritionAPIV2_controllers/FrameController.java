@@ -75,7 +75,7 @@ public class FrameController implements Initializable
 				getText(e.getCode());
 		        x = String.valueOf(sb);
 
-		        if(x.length() >= 2)
+		        if(x.length() >= 1)
 		        {
 		            QueryVariables.setText(x);
 		            task = new Task<Object>() {
@@ -84,10 +84,12 @@ public class FrameController implements Initializable
 						protected Object call() throws Exception {
 
 				            adapter.typeAhead();
+				            
 				           	if(adapter.istORf() == false)
 				           	{
 				           		task.cancel();
 				           	}
+				           	
 				           
 							return null;
 						}
@@ -97,13 +99,10 @@ public class FrameController implements Initializable
 					task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 						
 						@Override
-						public void handle(WorkerStateEvent event) {
-						
+						public void handle(WorkerStateEvent event) {				
 							scrollPane.setVisible(true);
 							listView.setVisible(true);
-							System.out.println("Null? " + getTypeAheadText());
-							listView.setItems(getTypeAheadText());
-							
+							listView.setItems(getTypeAheadText());						
 						}
 					});
 		        }
@@ -128,6 +127,10 @@ public class FrameController implements Initializable
         {
             sb.append(keyCode);
         }
+        else if(keyCode.getName().equals("Space"))
+        {
+        	sb.append(" ");
+        }
         else if (keyCode.getName().equals("Backspace"))
         {
             if(sb.length() != 0)
@@ -136,17 +139,10 @@ public class FrameController implements Initializable
             }
         }
 	}
-	
-	public void updateUI()
-	{
-		System.out.println("Progress == " + task.getProgress());
-
-	}
 
 	@FXML
 	public void addButtons()
-	{
-		
+	{		
 		Group g = new Group();
 		for (int i = 0; i < 20; i++)
 		{
