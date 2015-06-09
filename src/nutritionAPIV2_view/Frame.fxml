@@ -46,7 +46,7 @@
 			
 				<AnchorPane id="LeftPanel" fx:id="leftPanel" minHeight="0.0" minWidth="0.0" prefHeight="191.0" prefWidth="352.0">
                <children>
-                  <ScrollPane id="ButtonList" fx:id="buttonList" layoutX="14.0" layoutY="14.0" onMouseEntered="#finishedScroll" onScroll="#finishedScroll" onScrollFinished="#finishedScroll" onScrollStarted="#finishedScroll" prefHeight="403.0" prefWidth="368.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                  <ScrollPane id="ButtonList" fx:id="buttonList" layoutX="14.0" layoutY="14.0" onScroll="#finishedScroll" prefHeight="403.0" prefWidth="368.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                      <content>
                      </content>
                   </ScrollPane>
