@@ -1,11 +1,7 @@
 package nutritionAPIV2_service;
-import java.awt.Frame;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import nutritionAPIV2_controllers.FrameController;
+import java.util.List;
+
 import nutritionAPIV2_model.ItemData;
 import nutritionAPIV2_model.Nutrients;
 import nutritionAPIV2_model.SearchData;
@@ -21,7 +17,7 @@ import retrofit.client.Response;
  */
 public class Adapter {
 
-	GetAPICalls getapicalls;
+	public GetAPICalls getapicalls;
 	private boolean tORf = false;
 	
 	/*
@@ -42,39 +38,22 @@ public class Adapter {
          * RestAdapter is the class through which your API interfaces are turned into callable objects
          */
         public Adapter() {
-        
-        RestAdapter restAdapter = new RestAdapter.Builder()
-          .setEndpoint(Config.BASE_URL)
-          .setLogLevel(RestAdapter.LogLevel.FULL)
-		  .setRequestInterceptor(requestInterceptor)
-          .setErrorHandler(new ErrorHandling())
-          .build();
-        
-        getapicalls = restAdapter.create(GetAPICalls.class);
-        
-        };
-        	
+			
+			 RestAdapter restAdapter = new RestAdapter.Builder()
+	          .setEndpoint(Config.BASE_URL)
+	          .setLogLevel(RestAdapter.LogLevel.FULL)
+			  .setRequestInterceptor(requestInterceptor)
+	          .setErrorHandler(new ErrorHandling())
+	          .build();
+	        
+	        getapicalls = restAdapter.create(GetAPICalls.class);
+	        
+		}
+     
+  
 	/*
 	 * These are the methods we call in order to make the retrofit @Get calls
 	 */
-	public void searchForFood() {
-		
-		getapicalls.searchFood(QueryVariables.searchTerm, 50, 0, new Callback<SearchData>() {
-
-			@Override
-			public void success(SearchData searchData, Response response) {
-				
-				
-			}
-			
-			@Override
-			public void failure(RetrofitError retrofitError) {
-
-				System.out.println(retrofitError.getMessage());
-				
-			}
-		});
-	}
 	
 	public void getItem() {
 		
@@ -103,40 +82,4 @@ public class Adapter {
 			}
 		});	
 	}
-	
-	public void typeAhead() {
-		
-		getapicalls.typeAhead(QueryVariables.text, new Callback<List<TypeAHead>>() {
-			
-			public ObservableList<String> typeAheadText = FXCollections.observableArrayList ();
-
-			@Override
-			public void success(List<TypeAHead> typeAhead, Response response)
-			{				
-				for(TypeAHead h : typeAhead)
-				{
-					typeAheadText.add(h.text);
-				}
-				
-				FrameController.setTypeAheadText(typeAheadText);
-				settORf(true);
-			}
-			
-			@Override
-			public void failure(RetrofitError retrofitError)
-			{
-				System.out.println(retrofitError.getMessage());	
-			}
-		});
-		
-	}
-
-	public boolean istORf() {
-		return tORf;
-	}
-
-	public void settORf(boolean tORf) {
-		this.tORf = tORf;
-	}
-	
 }

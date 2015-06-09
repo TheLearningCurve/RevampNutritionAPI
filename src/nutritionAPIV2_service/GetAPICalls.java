@@ -1,6 +1,7 @@
 package nutritionAPIV2_service;
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import nutritionAPIV2_model.ItemData;
 import nutritionAPIV2_model.SearchData;
 import nutritionAPIV2_model.TypeAHead;

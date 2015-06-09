@@ -3,15 +3,31 @@ package nutritionAPIV2_controllers;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CountDownLatch;
 
+import com.sun.deploy.uitoolkit.impl.fx.ui.FXUIFactory;
+
+import retrofit.Callback;
+import retrofit.RequestInterceptor;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.RequestInterceptor.RequestFacade;
 import retrofit.client.Response;
+import nutritionAPIV2_model.Results;
+import nutritionAPIV2_model.SearchData;
 import nutritionAPIV2_model.TypeAHead;
 import nutritionAPIV2_service.Adapter;
+import nutritionAPIV2_service.Config;
+import nutritionAPIV2_service.ErrorHandling;
+import nutritionAPIV2_service.GetAPICalls;
 import nutritionAPIV2_service.QueryVariables;
+import nutritionAPIV2_view.Main;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
+import javafx.embed.swing.JFXPanel;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +38,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebView;
 
@@ -37,10 +54,6 @@ public class FrameController implements Initializable
 	
 	@FXML
 	ListView<String> listView;
-	
-	@FXML
-	ScrollPane scrollPane;
-	
 	
 	/* LeftPanel Variables */
 	@FXML
@@ -59,17 +72,16 @@ public class FrameController implements Initializable
 
 	/* Top Panel Code */
 	
-	public static ObservableList<String> typeaHeadtext =FXCollections.observableArrayList ();
+	public ObservableList<String> typeaHeadtext = FXCollections.observableArrayList();
     public static StringBuffer sb = new StringBuffer();
     public static String x;
-    public static int success;
     public Adapter adapter = new Adapter();
-    public static Task<Object> task;
-
+    
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) 
 	{ 
 		searchField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			
 			@Override
 			public void handle(KeyEvent e) {
 				getText(e.getCode());
@@ -78,49 +90,69 @@ public class FrameController implements Initializable
 		        if(x.length() >= 1)
 		        {
 		            QueryVariables.setText(x);
-		            task = new Task<Object>() {
-						
-						@Override
-						protected Object call() throws Exception {
+		            requestTypeAHeadData();		                                
+                }
+			};	       
+		});
+		
+		listView.setOnMousePressed(new EventHandler<MouseEvent>() {
 
-				            adapter.typeAhead();
-				            
-				           	if(adapter.istORf() == false)
-				           	{
-				           		task.cancel();
-				           	}
-				           	
-				           
-							return null;
-						}
-					};
-					
-					task.run();
-					task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-						
-						@Override
-						public void handle(WorkerStateEvent event) {				
-							scrollPane.setVisible(true);
-							listView.setVisible(true);
-							listView.setItems(getTypeAheadText());						
-						}
-					});
-		        }
+			@Override
+			public void handle(MouseEvent event) {
+				QueryVariables.setSearchTerm(listView.getSelectionModel().getSelectedItem());
+				requestSearchData();
 			}
-		});			
-	}
+		});
+	 }
 	
-	
-	public static void setTypeAheadText(ObservableList<String> typeAhead)
+	public void requestTypeAHeadData()
 	{
-		typeaHeadtext = typeAhead;
+		
+     adapter.getapicalls.typeAhead(QueryVariables.text, new Callback<List<TypeAHead>>() {
+		
+		@Override
+		public void success(List<TypeAHead> typeAhead, Response response) {
+			
+			ObservableList<String> typeAheadText = FXCollections.observableArrayList();
+			
+			for(TypeAHead h : typeAhead)
+			{
+				typeAheadText.add(h.text);
+			}	
+			
+			if(!typeAheadText.isEmpty())
+			{
+				settypeaHeadtext(typeAheadText);
+			}
+			else 
+			{
+				settypeaHeadtext(null);
+			}
+			
+			updateUI();
+		}
+		
+		@Override
+		public void failure(RetrofitError arg0) {
+			
+		}
+	});
+      
 	}
 	
-	public ObservableList<String> getTypeAheadText()
-	{
-		return typeaHeadtext;
+	protected void updateUI() {
+		
+		new JFXPanel();
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				listView.setVisible(true);
+				listView.setItems(gettypeaHeadtext());	
+			}
+		});
 	}
-	
+
 	private void getText(KeyCode keyCode) {
 		   
         if(keyCode.isLetterKey())
@@ -136,8 +168,53 @@ public class FrameController implements Initializable
             if(sb.length() != 0)
             {
                 sb.setLength(sb.length() - 1);
+               if(sb.length() == 0)
+               {
+            	   listView.setVisible(false);
+               }
             }
-        }
+        }     
+	}
+	
+	public ObservableList<String> gettypeaHeadtext()
+	{
+		return typeaHeadtext;	
+	}
+	    
+	public void settypeaHeadtext(ObservableList<String> typeaHeadtext)
+	{
+    	if(this.typeaHeadtext.equals(typeaHeadtext))
+    	{
+        	
+    	}
+    	else if(typeaHeadtext == null)
+    	{
+    		listView.setVisible(false);
+    	}
+    	else
+    	{
+    		this.typeaHeadtext = typeaHeadtext;
+    	}
+	}
+	
+	public void requestSearchData()
+	{
+		adapter.getapicalls.searchFood(QueryVariables.searchTerm, 50, 0, new Callback<SearchData>() {
+
+			@Override
+			public void success(SearchData searchData, Response response) {
+						
+				for(Results s : searchData.results )
+				{
+					
+				}
+			}
+			
+			@Override
+			public void failure(RetrofitError retrofitError) {
+				
+			}
+		});
 	}
 
 	@FXML
@@ -165,7 +242,5 @@ public class FrameController implements Initializable
 		System.out.println("V max: " + buttonList.getVmax());
 	}
 	
-	
 	/* Right Panel Code */	
-	
 }
