@@ -1,6 +1,7 @@
 package nutritionAPIV2_controllers;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
@@ -61,6 +62,13 @@ public class FrameController implements Initializable
 	
 	@FXML
 	ScrollPane buttonList;
+	
+	int numberOfButtons = 0;
+	static int buttonNumberPressed = -1;
+	
+	Group buttonGroup = new Group();
+	
+	static List<ItemButton> buttons = new ArrayList<ItemButton>();
 	
 	
 	/* RightPanel Variables */
@@ -218,28 +226,25 @@ public class FrameController implements Initializable
 	}
 
 	@FXML
-	public void addButtons()
-	{		
-		Group g = new Group();
-		for (int i = 0; i < 20; i++)
-		{
-			Button but = new Button(String.valueOf(i));
-			but.setLayoutY(i*40);
-			g.getChildren().add(but);
-			
-		}
-		
-		buttonList.setContent(g);
+	public void addButtons() // Change to your liking.
+	{
+			for (int i = 0; i < 10; i++)
+			{
+				ItemButton but = new ItemButton(numberOfButtons);
+				but.setLayoutY(numberOfButtons * 60);
+				buttons.add(but);
+				buttonGroup.getChildren().add(but);
+				numberOfButtons++;
+			}
+	
+			buttonList.setContent(buttonGroup);
 	}
-	
-	/* Left Panel Code */
-	
 
 	@FXML
-	public void finishedScroll()
+	public void finishedScroll() // Change to your liking.
 	{
-		System.out.println("V value: " + buttonList.getVvalue());
-		System.out.println("V max: " + buttonList.getVmax());
+		if (buttonList.getVvalue() == 1)
+			addButtons();
 	}
 	
 	/* Right Panel Code */	
