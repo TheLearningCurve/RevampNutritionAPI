@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TextField?>
+
+<!--  Created by Kyle Wolff May 13 2015 -->
+
+<AnchorPane fx:controller="nutritionAPIV2_controllers.FrameTopController" id="TopAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>	
+		<AnchorPane id="searchPane" layoutX="21.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0">
+			<children>
+			<TextField id="searchField" fx:id="searchField"  prefHeight="50.0" prefWidth="558.0" promptText="Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+			
+				<ImageView fx:id="ImageButton" fitHeight="37.0" fitWidth="44.0" layoutX="645.0" layoutY="7.0" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="7.0">
+					<image>
+						<Image url="@ic_action_search.png" />
+					</image>
+				</ImageView>
+			</children>
+		</AnchorPane>
+		<ListView id="listView" fx:id="listView" layoutX="21.0" layoutY="58.0" prefHeight="132.0" prefWidth="758.0" visible="false" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="58.0" />
+	</children>
+</AnchorPane>
+
