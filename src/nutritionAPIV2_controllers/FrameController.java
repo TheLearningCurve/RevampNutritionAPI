@@ -4,39 +4,29 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.CountDownLatch;
-
-import com.sun.deploy.uitoolkit.impl.fx.ui.FXUIFactory;
 
 import retrofit.Callback;
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
-import retrofit.RequestInterceptor.RequestFacade;
 import retrofit.client.Response;
 import nutritionAPIV2_model.Results;
 import nutritionAPIV2_model.SearchData;
 import nutritionAPIV2_model.TypeAHead;
 import nutritionAPIV2_service.Adapter;
-import nutritionAPIV2_service.Config;
-import nutritionAPIV2_service.ErrorHandling;
-import nutritionAPIV2_service.GetAPICalls;
 import nutritionAPIV2_service.QueryVariables;
-import nutritionAPIV2_view.Main;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -61,15 +51,17 @@ public class FrameController implements Initializable
 	AnchorPane leftPanel;
 	
 	@FXML
+	ImageView ImageButton;
+	
+	@FXML
 	ScrollPane buttonList;
 	
 	int numberOfButtons = 0;
 	static int buttonNumberPressed = -1;
 	
 	Group buttonGroup = new Group();
-	
+		
 	static List<ItemButton> buttons = new ArrayList<ItemButton>();
-	
 	
 	/* RightPanel Variables */
 	@FXML
@@ -81,37 +73,69 @@ public class FrameController implements Initializable
 	/* Top Panel Code */
 	
 	public ObservableList<String> typeaHeadtext = FXCollections.observableArrayList();
-    public static StringBuffer sb = new StringBuffer();
-    public static String x;
     public Adapter adapter = new Adapter();
     
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) 
-	{ 
-		searchField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			
+	{		
+		searchField.setFocusTraversable(false);
+		searchField.setOnKeyReleased(new EventHandler<KeyEvent>() 
+		{
 			@Override
-			public void handle(KeyEvent e) {
-				getText(e.getCode());
-		        x = String.valueOf(sb);
-
-		        if(x.length() >= 1)
-		        {
-		            QueryVariables.setText(x);
-		            requestTypeAHeadData();		                                
-                }
-			};	       
-		});
+			public void handle(KeyEvent event) {	
+				
+			if(event.getCode() != KeyCode.ENTER)
+			{
+				if(searchField.getText().length() == 0)
+				{
+					listView.setVisible(false);
+				}
+				
+				if(searchField.getText().length() != 0)
+				{
+					QueryVariables.setText(searchField.getText());
+					requestTypeAHeadData();
+				}
+			}
+		   }
+	    });
 		
-		listView.setOnMousePressed(new EventHandler<MouseEvent>() {
-
+		listView.setOnMousePressed(new EventHandler<MouseEvent>() 
+		{
 			@Override
-			public void handle(MouseEvent event) {
+			public void handle(MouseEvent event) 
+			{
 				QueryVariables.setSearchTerm(listView.getSelectionModel().getSelectedItem());
+				searchField.setText(listView.getSelectionModel().getSelectedItem());
 				requestSearchData();
+				listView.setVisible(false);
 			}
 		});
-	 }
+		
+		ImageButton.setOnMousePressed(new EventHandler<MouseEvent>()
+		{
+			@Override
+			public void handle(MouseEvent event) 
+			{
+				QueryVariables.setSearchTerm(searchField.getText());
+				requestSearchData();
+				listView.setVisible(false);
+			}
+		});
+		
+		buttonList.vvalueProperty().addListener(new ChangeListener<Number>()
+		{
+			@Override
+			public void changed(ObservableValue<? extends Number> observable,
+					Number oldValue, Number newValue)
+			{
+				if(newValue.intValue() == 1)
+				{
+					finishedScroll();
+				}
+			}		
+		});
+	}
 	
 	public void requestTypeAHeadData()
 	{
@@ -123,25 +147,30 @@ public class FrameController implements Initializable
 			
 			ObservableList<String> typeAheadText = FXCollections.observableArrayList();
 			
-			for(TypeAHead h : typeAhead)
-			{
-				typeAheadText.add(h.text);
-			}	
+		if(!searchField.getText().isEmpty())
+		{
 			
-			if(!typeAheadText.isEmpty())
+			if(!typeAhead.isEmpty())
+			{
+				for(TypeAHead h : typeAhead)
+				{
+					typeAheadText.add(h.text);
+				}	
+				
+				settypeaHeadtext(typeAheadText);
+				updateUI();
+			}
+			
+			if(typeAhead.isEmpty())
 			{
 				settypeaHeadtext(typeAheadText);
+				updateUI();
 			}
-			else 
-			{
-				settypeaHeadtext(null);
-			}
-			
-			updateUI();
 		}
+	}
 		
 		@Override
-		public void failure(RetrofitError arg0) {
+		public void failure(RetrofitError retrofitError) {
 			
 		}
 	});
@@ -155,33 +184,18 @@ public class FrameController implements Initializable
 			
 			@Override
 			public void run() {
-				listView.setVisible(true);
-				listView.setItems(gettypeaHeadtext());	
+				
+				if(gettypeaHeadtext() != null && !gettypeaHeadtext().isEmpty())
+				{
+					listView.setVisible(true);
+					listView.setItems(gettypeaHeadtext());	
+				}
+				else 
+				{
+					listView.setVisible(false);
+				}	
 			}
 		});
-	}
-
-	private void getText(KeyCode keyCode) {
-		   
-        if(keyCode.isLetterKey())
-        {
-            sb.append(keyCode);
-        }
-        else if(keyCode.getName().equals("Space"))
-        {
-        	sb.append(" ");
-        }
-        else if (keyCode.getName().equals("Backspace"))
-        {
-            if(sb.length() != 0)
-            {
-                sb.setLength(sb.length() - 1);
-               if(sb.length() == 0)
-               {
-            	   listView.setVisible(false);
-               }
-            }
-        }     
 	}
 	
 	public ObservableList<String> gettypeaHeadtext()
@@ -191,15 +205,15 @@ public class FrameController implements Initializable
 	    
 	public void settypeaHeadtext(ObservableList<String> typeaHeadtext)
 	{
-    	if(this.typeaHeadtext.equals(typeaHeadtext))
+		if(this.typeaHeadtext.equals(typeaHeadtext))
     	{
-        	
+			this.typeaHeadtext = typeaHeadtext;
     	}
-    	else if(typeaHeadtext == null)
-    	{
-    		listView.setVisible(false);
-    	}
-    	else
+		else if(typeaHeadtext.isEmpty())
+		{
+			this.typeaHeadtext = typeaHeadtext;
+		}
+    	else 
     	{
     		this.typeaHeadtext = typeaHeadtext;
     	}
@@ -207,15 +221,19 @@ public class FrameController implements Initializable
 	
 	public void requestSearchData()
 	{
-		adapter.getapicalls.searchFood(QueryVariables.searchTerm, 50, 0, new Callback<SearchData>() {
+		adapter.getapicalls.searchFood(QueryVariables.searchTerm, 10, QueryVariables.offset, new Callback<SearchData>() {
 
 			@Override
-			public void success(SearchData searchData, Response response) {
-						
-				for(Results s : searchData.results )
+			public void success(SearchData searchData, Response response) {			
+	
+				for(Results results : searchData.results )
 				{
-					
-				}
+					ItemButton but = new ItemButton(numberOfButtons, results.brandName, results.itemName);
+					but.setLayoutY(numberOfButtons * 60);
+					buttons.add(but);
+					updateButtonList(but);				
+					numberOfButtons++;
+				}					
 			}
 			
 			@Override
@@ -224,27 +242,28 @@ public class FrameController implements Initializable
 			}
 		});
 	}
-
-	@FXML
-	public void addButtons() // Change to your liking.
-	{
-			for (int i = 0; i < 10; i++)
-			{
-				ItemButton but = new ItemButton(numberOfButtons);
-				but.setLayoutY(numberOfButtons * 60);
-				buttons.add(but);
-				buttonGroup.getChildren().add(but);
-				numberOfButtons++;
-			}
 	
-			buttonList.setContent(buttonGroup);
+	protected void updateButtonList(ItemButton but) {
+		
+		new JFXPanel();
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				buttonGroup.getChildren().add(but);
+				buttonList.setContent(buttonGroup);
+			}
+		});
 	}
 
 	@FXML
 	public void finishedScroll() // Change to your liking.
 	{
 		if (buttonList.getVvalue() == 1)
-			addButtons();
+		{
+			QueryVariables.setOffset(10);
+			requestSearchData();
+		}
 	}
 	
 	/* Right Panel Code */	

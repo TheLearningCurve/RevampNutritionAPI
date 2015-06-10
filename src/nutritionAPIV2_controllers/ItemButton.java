@@ -22,16 +22,26 @@ public class ItemButton extends StackPane
 	
 	private ImageView backgroundView = new ImageView();
 	
-	public ItemButton(int buttonNumber) // Instantiate after properties are set (?).
+	public ItemButton(int buttonNumber, String brandNameIn, String itemNameIn) // Instantiate after properties are set (?).
 	{
 		this.number = buttonNumber;
+		this.brandName = brandNameIn;
+		this.itemName = itemNameIn;
 		
 		backgroundView.setImage(normalButton);
 		
-		Label buttonText = new Label(brandName + " " + itemName);	//	Just for demonstrations
-		
+		Label buttonText = new Label(brandName + " " + itemName);
 		this.getChildren().add(backgroundView);
-		this.getChildren().add(buttonText);
+		
+		if((buttonText.getText().length()) > 41)
+		{	
+			Label newText = new Label(buttonText.getText().substring(0, 35).trim() + "...");		
+			this.getChildren().add(newText);
+		}
+		else
+		{
+			this.getChildren().add(buttonText);
+		}
 		
 		this.setOnMousePressed(new EventHandler<MouseEvent>() {
 
