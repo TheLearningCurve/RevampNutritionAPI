@@ -13,50 +13,21 @@
 	<children>
  
 		<!-- Top Panel -->
-  
-		<!--  Created by Kyle Wolff May 13 2015 -->
-		<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-			<children>
-			
-		    	<AnchorPane id="searchPane" layoutX="21.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0">
-		        	<children>
-		            	<TextField id="searchField" fx:id="searchField"  prefHeight="50.0" prefWidth="558.0" promptText="Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-		            	<ImageView fx:id="ImageButton" fitHeight="37.0" fitWidth="44.0" layoutX="645.0" layoutY="7.0" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="7.0">
-		               		<image>
-		                  		<Image url="@ic_action_search.png" />
-		               		</image>
-		            	</ImageView>
-		         	</children>
-		      	</AnchorPane>
-	         	
-		   	</children>
-		</AnchorPane>
+		<fx:include fx:id="frameTop" source="FrameTop.fxml" />
 		
 		<!-- Created by Brandon VanderMeyf May 20 2015 -->
 	   	<SplitPane id="LeftRightContainer" dividerPositions="0.5" layoutY="67.0" prefHeight="333.0" prefWidth="738.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="67.0">
 			<items>
 			
 				<!-- Left Panel -->
-			
-				<AnchorPane id="LeftPanel" fx:id="leftPanel" minHeight="0.0" minWidth="0.0" prefHeight="191.0" prefWidth="352.0">
-               <children>
-                  <ScrollPane id="ButtonList" fx:id="buttonList" layoutX="14.0" layoutY="14.0" prefHeight="403.0" prefWidth="368.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
-                     <content>
-                     </content>
-                  </ScrollPane>
-               </children>
-			 	</AnchorPane>
-			 	
-			 	<!-- Right Panel -->
-			 	
-				<AnchorPane id="RightPanel" fx:id="rightPanel" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-					<children>
-						<WebView id="WebViewControl" fx:id="webViewControl" layoutX="14.0" layoutY="14.0" prefHeight="403.0" prefWidth="368.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
-					</children>
-				</AnchorPane>
 				
+				<fx:include fx:id="frameBottomLeft" source="FrameBottomLeft.fxml" />
+				
+			 	<!--  Right Panel -->
+			 	
+			 	<fx:include fx:id="frameBottomRight" source="FrameBottomRight.fxml" />
+			 	
 			</items>
 	   </SplitPane>
-		      <ListView id="listView" fx:id="listView" layoutX="21.0" layoutY="58.0" prefHeight="132.0" prefWidth="758.0" visible="false" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="58.0" />
 	</children>
 </AnchorPane>
