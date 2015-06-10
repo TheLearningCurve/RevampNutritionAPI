@@ -11,9 +11,6 @@
 
 <AnchorPane id="mainPanel" fx:id="mainPanel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutritionAPIV2_controllers.FrameController">
 	<children>
- 
-		<!-- Top Panel -->
-		<fx:include fx:id="frameTop" source="FrameTop.fxml" />
 		
 		<!-- Created by Brandon VanderMeyf May 20 2015 -->
 	   	<SplitPane id="LeftRightContainer" dividerPositions="0.5" layoutY="67.0" prefHeight="333.0" prefWidth="738.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="67.0">
@@ -29,5 +26,8 @@
 			 	
 			</items>
 	   </SplitPane>
+ 
+		<!-- Top Panel -->
+		<fx:include fx:id="frameTop" source="FrameTop.fxml" />
 	</children>
 </AnchorPane>
