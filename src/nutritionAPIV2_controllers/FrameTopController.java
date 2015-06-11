@@ -92,7 +92,18 @@ public class FrameTopController extends AnchorPane implements Initializable
 			{
 				QueryVariables.setSearchTerm(listView.getSelectionModel().getSelectedItem());
 				searchField.setText(listView.getSelectionModel().getSelectedItem());
-				requestSearchData();
+				
+				if(FrameBottomLeftController.controller.buttonList.getContent() == null)
+				{
+					requestSearchData();
+				}
+				else
+				{
+					FrameBottomLeftController.controller.buttonList.setContent(null);
+					FrameBottomLeftController.controller.buttonGroup.getChildren().clear();
+					requestSearchData();
+				}
+				
 				listView.setVisible(false);
 			}
 		});
@@ -104,10 +115,27 @@ public class FrameTopController extends AnchorPane implements Initializable
 			{
 				QueryVariables.setSearchTerm(searchField.getText());
 				requestSearchData();
+				
+				if(FrameBottomLeftController.controller.buttonList.getContent() == null)
+				{
+					requestSearchData();
+				}
+				else
+				{
+					FrameBottomLeftController.controller.buttonList.setContent(null);
+					FrameBottomLeftController.controller.buttonGroup.getChildren().clear();
+					requestSearchData();
+				}
+				
 				listView.setVisible(false);
 			}
 		});
 		
+		
+	}
+	
+	public void refreshSearchData()
+	{
 		
 	}
 	
@@ -158,16 +186,12 @@ public class FrameTopController extends AnchorPane implements Initializable
 			@Override
 			public void success(SearchData searchData, Response response) 
 			{			
-				for(Results results : searchData.results )	//	I know 
+				for(Results results : searchData.results )
 				{
 					FrameBottomLeftController.controller.createButton(results.brandName, results.itemName);
-					
-					//ItemButton but = new ItemButton(FrameController.numberOfButtons, results.brandName, results.itemName);
-					//but.setLayoutY(FrameController.numberOfButtons * 60);
-					//buttons.add(but);
-					//updateButtonList(but);				
-					//numberOfButtons++;
-				}					
+				}	
+				
+				FrameBottomLeftController.controller.updateButtonList();
 			}
 			
 			@Override

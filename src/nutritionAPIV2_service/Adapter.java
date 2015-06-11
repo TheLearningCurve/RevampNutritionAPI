@@ -41,7 +41,7 @@ public class Adapter {
 			
 			 RestAdapter restAdapter = new RestAdapter.Builder()
 	          .setEndpoint(Config.BASE_URL)
-	          .setLogLevel(RestAdapter.LogLevel.FULL)
+	          //.setLogLevel(RestAdapter.LogLevel.FULL)
 			  .setRequestInterceptor(requestInterceptor)
 	          .setErrorHandler(new ErrorHandling())
 	          .build();

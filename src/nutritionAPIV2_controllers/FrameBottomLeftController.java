@@ -81,26 +81,37 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 		}
 	}
 	
-	public void updateButtonList(final ItemButton but) 
-	{
-		
+	public void updateButtonGroup(ItemButton but) 
+	{	
 		new JFXPanel();
 		Platform.runLater(new Runnable() {
 			
 			@Override
 			public void run() {
 				buttonGroup.getChildren().add(but);
+			}
+		});
+	}
+	
+	public void updateButtonList() 
+	{	
+		new JFXPanel();
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
 				buttonList.setContent(buttonGroup);
 			}
 		});
 	}
 	
+	
 	public void createButton(String brandName, String itemName)
 	{
 		ItemButton but = new ItemButton(numberOfButtons, brandName, itemName);
 		but.setLayoutY(numberOfButtons * 60);
-		buttons.add(but);
-		updateButtonList(but);				
+		buttons.add(but);	
+		updateButtonGroup(but);
 		numberOfButtons++;
 	}
 }

@@ -1,12 +1,14 @@
 package nutritionAPIV2_controllers;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class ItemButton extends StackPane
 {
@@ -30,18 +32,34 @@ public class ItemButton extends StackPane
 		
 		backgroundView.setImage(normalButton);
 		
-		Label buttonText = new Label(brandName + " " + itemName);
-		this.getChildren().add(backgroundView);
+		Label brandNameLabel = new Label(brandName);
+		Label itemNameLabel = new Label(itemName);
+
+		VBox vbox = new VBox();
+		vbox.alignmentProperty().set(Pos.CENTER);
 		
-		if((buttonText.getText().length()) > 41)
-		{	
-			Label newText = new Label(buttonText.getText().substring(0, 35).trim() + "...");		
-			this.getChildren().add(newText);
+		if(brandName.length() > 48)
+		{
+			Label newBrandNameLabel = new Label(brandName.substring(0, 36) + "...");
+			vbox.getChildren().add(newBrandNameLabel);		
+		}
+		else 
+		{
+			vbox.getChildren().add(brandNameLabel);
+		}
+		
+		if(itemName.length() > 48)
+		{
+			Label newItemNameLabel = new Label(itemName.substring(0, 36) + "...");
+			vbox.getChildren().add(newItemNameLabel);
 		}
 		else
 		{
-			this.getChildren().add(buttonText);
+			vbox.getChildren().add(itemNameLabel);
 		}
+		
+		this.getChildren().add(backgroundView);
+		this.getChildren().add(vbox);
 		
 		this.setOnMousePressed(new EventHandler<MouseEvent>() {
 
