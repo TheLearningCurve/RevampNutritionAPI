@@ -32,11 +32,14 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 	public static int numberOfButtons = 0;
 	public static int buttonNumberPressed = -1;
 	
+	public static FrameBottomLeftController controller;
+	
 	public FrameBottomLeftController()
 	{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/nutritionAPIV2_view/FrameBottomLeft.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
+		controller = (FrameBottomLeftController) fxmlLoader.getController();
 		
 		try
 		{
@@ -74,11 +77,11 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 		if (buttonList.getVvalue() == 1)
 		{
 			QueryVariables.setOffset(10);
-			//requestSearchData();
+			FrameTopController.controller.requestSearchData();
 		}
 	}
 	
-	public void updateButtonList(ItemButton but) 
+	public void updateButtonList(final ItemButton but) 
 	{
 		
 		new JFXPanel();
@@ -86,9 +89,18 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 			
 			@Override
 			public void run() {
-				//buttonGroup.getChildren().add(but);
+				buttonGroup.getChildren().add(but);
 				buttonList.setContent(buttonGroup);
 			}
 		});
+	}
+	
+	public void createButton(String brandName, String itemName)
+	{
+		ItemButton but = new ItemButton(numberOfButtons, brandName, itemName);
+		but.setLayoutY(numberOfButtons * 60);
+		buttons.add(but);
+		updateButtonList(but);				
+		numberOfButtons++;
 	}
 }

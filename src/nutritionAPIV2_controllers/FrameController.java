@@ -51,15 +51,7 @@ public class FrameController extends AnchorPane implements Initializable
 	@FXML
 	FrameBottomRightController frameBottomRightController;
 	
-	/* LeftPanel Variables */
-	
-
-	
-
-	
-	
-	
-	/* RightPanel Variables */
+	public static FrameController controller;
 
     
 	public FrameController()
@@ -71,9 +63,8 @@ public class FrameController extends AnchorPane implements Initializable
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/nutritionAPIV2_view/Frame.fxml"));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
-		
+		controller = (FrameController) fxmlLoader.getController();
 
-		
 		try
 		{
 			fxmlLoader.load();

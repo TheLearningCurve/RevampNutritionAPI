@@ -43,12 +43,14 @@ public class FrameTopController extends AnchorPane implements Initializable
 	
 	public ObservableList<String> typeaHeadtext = FXCollections.observableArrayList();
     public Adapter adapter = new Adapter();
+    public static FrameTopController controller;
 	
 	public FrameTopController()
 	{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/nutritionAPIV2_view/FrameTop.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
+		controller = (FrameTopController) fxmlLoader.getController();
 		
 		try
 		{
@@ -158,6 +160,8 @@ public class FrameTopController extends AnchorPane implements Initializable
 			{			
 				for(Results results : searchData.results )	//	I know 
 				{
+					FrameBottomLeftController.controller.createButton(results.brandName, results.itemName);
+					
 					//ItemButton but = new ItemButton(FrameController.numberOfButtons, results.brandName, results.itemName);
 					//but.setLayoutY(FrameController.numberOfButtons * 60);
 					//buttons.add(but);
