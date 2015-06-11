@@ -19,11 +19,14 @@ public class FrameBottomRightController extends AnchorPane implements Initializa
 	@FXML
 	WebView webViewControl;
 	
+	public static FrameBottomRightController controller;
+	
 	public FrameBottomRightController()
 	{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/nutritionAPIV2_view/FrameBottomRight.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
+		controller = (FrameBottomRightController) fxmlLoader.getController();
 		
 		try
 		{
