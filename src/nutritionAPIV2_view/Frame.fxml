@@ -8,8 +8,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.TextField?>
+<?import nutritionAPIV2_controllers.*?>
 
-<AnchorPane id="mainPanel" fx:id="mainPanel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutritionAPIV2_controllers.FrameController">
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0">
 	<children>
 		
 		<!-- Created by Brandon VanderMeyf May 20 2015 -->
@@ -18,16 +19,16 @@
 			
 				<!-- Left Panel -->
 				
-				<fx:include fx:id="frameBottomLeft" source="FrameBottomLeft.fxml" />
+				<FrameBottomLeftController fx:id="frameBottomLeftController"/>
 				
 			 	<!--  Right Panel -->
 			 	
-			 	<fx:include fx:id="frameBottomRight" source="FrameBottomRight.fxml" />
+			 	<FrameBottomRightController fx:id="frameBottomRightController"/>
 			 	
 			</items>
 	   </SplitPane>
  
 		<!-- Top Panel -->
-		<fx:include fx:id="frameTop" source="FrameTop.fxml" />
+		<FrameTopController fx:id="frameTopController"/>
 	</children>
-</AnchorPane>
+</fx:root>

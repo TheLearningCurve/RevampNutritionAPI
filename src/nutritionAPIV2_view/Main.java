@@ -2,16 +2,16 @@
 
 package nutritionAPIV2_view;
 
-import java.io.IOException;
-
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import nutritionAPIV2_controllers.*;
 
 public class Main extends Application
 {
+	public FrameController frameController;
+	public FrameTopController frameTopController;
+	
 	public static void main(String[] args) 
 	{
         launch(args);
@@ -20,18 +20,12 @@ public class Main extends Application
 	@Override
 	public void start(Stage stage) 
 	{
-		try 
-		{
-			Parent parent = FXMLLoader.load(Main.class.getResource("Frame.fxml"));
-			Scene scene = new Scene(parent);
-			scene.getStylesheets().add(getClass().getResource("Frame.css").toExternalForm());
-			stage.setScene(scene);
-			stage.show();
-		} 
+		FrameController frameController = new FrameController();
 		
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
+		Scene scene = new Scene(frameController);
+		scene.getStylesheets().add(getClass().getResource("Frame.css").toExternalForm());
+		stage.setScene(scene);
+		stage.show();
+		
 	}
 }

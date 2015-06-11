@@ -60,12 +60,12 @@ public class ItemButton extends StackPane
 				{
 					backgroundView.setImage(clickButton);
 					
-					if (FrameController.buttonNumberPressed != number && FrameController.buttonNumberPressed != -1)
+					if (FrameBottomLeftController.buttonNumberPressed != number && FrameBottomLeftController.buttonNumberPressed != -1)
 					{
-						FrameController.buttons.get(FrameController.buttonNumberPressed).setButtonBackgound(normalButton);
+						FrameBottomLeftController.buttons.get(FrameBottomLeftController.buttonNumberPressed).setButtonBackgound(normalButton);
 					}
 						
-					FrameController.buttonNumberPressed = number;
+					FrameBottomLeftController.buttonNumberPressed = number;
 					
 					pressed = true;
 				}

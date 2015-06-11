@@ -10,7 +10,7 @@
 
 <!--  Created by Kyle Wolff May 13 2015 -->
 
-<AnchorPane fx:controller="nutritionAPIV2_controllers.FrameTopController" id="TopAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="javafx.scene.layout.AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml/1">
 	<children>	
 		<AnchorPane id="searchPane" layoutX="21.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="558.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0">
 			<children>
@@ -25,5 +25,5 @@
 		</AnchorPane>
 		<ListView id="listView" fx:id="listView" layoutX="21.0" layoutY="58.0" prefHeight="132.0" prefWidth="758.0" visible="false" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="58.0" />
 	</children>
-</AnchorPane>
+</fx:root>
 

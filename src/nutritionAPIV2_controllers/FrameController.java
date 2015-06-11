@@ -1,5 +1,6 @@
 package nutritionAPIV2_controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.ListView;
@@ -33,7 +35,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebView;
 
-public class FrameController implements Initializable
+public class FrameController extends AnchorPane implements Initializable
 {	
 	@FXML
 	private AnchorPane mainPanel;
@@ -41,28 +43,51 @@ public class FrameController implements Initializable
 	/* TopPanel Variables */
 	
 	@FXML
-	private FrameTopController frameTopController;
+	FrameTopController frameTopController;
+	
+	@FXML
+	FrameBottomLeftController frameBottomLeftController;
+	
+	@FXML
+	FrameBottomRightController frameBottomRightController;
 	
 	/* LeftPanel Variables */
 	
 
 	
-	static int numberOfButtons = 0;
-	static int buttonNumberPressed = -1;
-	static List<ItemButton> buttons = new ArrayList<ItemButton>();
+
 	
 	
 	
 	/* RightPanel Variables */
 
     
+	public FrameController()
+	{
+		frameTopController = new FrameTopController();
+		frameBottomLeftController = new FrameBottomLeftController();
+		frameBottomRightController = new FrameBottomRightController();
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/nutritionAPIV2_view/Frame.fxml"));
+		fxmlLoader.setRoot(this);
+		fxmlLoader.setController(this);
+		
+
+		
+		try
+		{
+			fxmlLoader.load();
+		}
+		
+		catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+	
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) 
 	{		
 
 	}
-	
-
-
-
 }
