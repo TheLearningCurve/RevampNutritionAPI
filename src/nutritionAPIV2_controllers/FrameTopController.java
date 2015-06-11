@@ -1,6 +1,8 @@
 package nutritionAPIV2_controllers;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -18,6 +20,7 @@ import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -25,8 +28,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
-public class FrameTopController implements Initializable
+public class FrameTopController extends AnchorPane implements Initializable
 {
 	@FXML
 	TextField searchField;	
@@ -40,9 +44,23 @@ public class FrameTopController implements Initializable
 	public ObservableList<String> typeaHeadtext = FXCollections.observableArrayList();
     public Adapter adapter = new Adapter();
 	
-	@Override
-	public void initialize(URL location, ResourceBundle resources)
+	public FrameTopController()
 	{
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/nutritionAPIV2_view/FrameTop.fxml"));
+		fxmlLoader.setController(this);
+		fxmlLoader.setRoot(this);
+		
+		try
+		{
+			fxmlLoader.load();
+		}
+		
+		catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+		
+		
 		searchField.setFocusTraversable(false);
 		searchField.setOnKeyReleased(new EventHandler<KeyEvent>() 
 		{
@@ -138,10 +156,10 @@ public class FrameTopController implements Initializable
 			@Override
 			public void success(SearchData searchData, Response response) 
 			{			
-				for(Results results : searchData.results )
+				for(Results results : searchData.results )	//	I know 
 				{
-					//ItemButton but = new ItemButton(numberOfButtons, results.brandName, results.itemName);
-					//but.setLayoutY(numberOfButtons * 60);
+					//ItemButton but = new ItemButton(FrameController.numberOfButtons, results.brandName, results.itemName);
+					//but.setLayoutY(FrameController.numberOfButtons * 60);
 					//buttons.add(but);
 					//updateButtonList(but);				
 					//numberOfButtons++;
@@ -196,5 +214,12 @@ public class FrameTopController implements Initializable
     	{
     		this.typeaHeadtext = typeaHeadtext;
     	}
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1)
+	{
+		// XXX Auto-generated method stub
+		
 	}
 }
