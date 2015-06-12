@@ -58,6 +58,7 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 			public void changed(ObservableValue<? extends Number> observable,
 					Number oldValue, Number newValue)
 			{
+			
 				if(newValue.intValue() == 1)
 				{
 					finishedScroll();
@@ -89,26 +90,18 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 			@Override
 			public void run() {
 				buttonGroup.getChildren().add(but);
-			}
-		});
-	}
-	
-	public void updateButtonList() 
-	{	
-		new JFXPanel();
-		Platform.runLater(new Runnable() {
-			
-			@Override
-			public void run() {
 				buttonList.setContent(buttonGroup);
+				
+				System.out.println(buttonGroup.getChildren());
+				System.out.println(buttonList.getContent());
+
 			}
 		});
 	}
 	
-	
-	public void createButton(String brandName, String itemName)
+	public void createButton(String brandName, String itemName, String thumbnail)
 	{
-		ItemButton but = new ItemButton(numberOfButtons, brandName, itemName);
+		ItemButton but = new ItemButton(numberOfButtons, brandName, itemName, thumbnail);
 		but.setLayoutY(numberOfButtons * 60);
 		buttons.add(but);	
 		updateButtonGroup(but);

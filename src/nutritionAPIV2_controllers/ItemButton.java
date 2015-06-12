@@ -24,19 +24,22 @@ public class ItemButton extends StackPane
 	
 	private ImageView backgroundView = new ImageView();
 	
-	public ItemButton(int buttonNumber, String brandNameIn, String itemNameIn) // Instantiate after properties are set (?).
+	public ItemButton(int buttonNumber, String brandNameIn, String itemNameIn, String thumbnail) // Instantiate after properties are set (?).
 	{
 		this.number = buttonNumber;
 		this.brandName = brandNameIn;
 		this.itemName = itemNameIn;
+		this.brandLogoUrl = thumbnail;
 		
 		backgroundView.setImage(normalButton);
 		
 		Label brandNameLabel = new Label(brandName);
 		Label itemNameLabel = new Label(itemName);
+		ImageView image = new ImageView(brandLogoUrl);
 
 		VBox vbox = new VBox();
-		vbox.alignmentProperty().set(Pos.CENTER);
+		vbox.alignmentProperty().set(Pos.CENTER_RIGHT);
+		vbox.getChildren().add(image);
 		
 		if(brandName.length() > 48)
 		{

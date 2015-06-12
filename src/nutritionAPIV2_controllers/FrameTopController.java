@@ -44,6 +44,8 @@ public class FrameTopController extends AnchorPane implements Initializable
 	public ObservableList<String> typeaHeadtext = FXCollections.observableArrayList();
     public Adapter adapter = new Adapter();
     public static FrameTopController controller;
+    public int buttonPress = 0;
+    public String searchFieldText = "Empty String";
 	
 	public FrameTopController()
 	{
@@ -68,7 +70,7 @@ public class FrameTopController extends AnchorPane implements Initializable
 		{
 			@Override
 			public void handle(KeyEvent event) 
-			{	
+			{					
 				if(event.getCode() != KeyCode.ENTER)
 				{
 					if(searchField.getText().length() == 0)
@@ -114,26 +116,38 @@ public class FrameTopController extends AnchorPane implements Initializable
 			public void handle(MouseEvent event) 
 			{
 				QueryVariables.setSearchTerm(searchField.getText());
-				requestSearchData();
-				
-				if(FrameBottomLeftController.controller.buttonList.getContent() == null)
+				// This stops the user from clicking multiple times when the text is the same
+				if(searchField.getText().matches(searchFieldText))
+				{
+					
+				}
+				else if(FrameBottomLeftController.controller.buttonList.getContent() == null)
 				{
 					requestSearchData();
 				}
-				else
+				
+				else if(FrameBottomLeftController.controller.buttonList.getContent() != null || FrameBottomLeftController.controller.buttonList.getVvalue() < 1)
 				{
+					FrameBottomLeftController.controller.buttonList.setVvalue(0.0);
 					FrameBottomLeftController.controller.buttonList.setContent(null);
 					FrameBottomLeftController.controller.buttonGroup.getChildren().clear();
 					requestSearchData();
 				}
-				
+			
 				listView.setVisible(false);
+				rememberTextField(searchField.getText());
 			}
 		});
 		
 		
 	}
 	
+	protected void rememberTextField(String string) {
+		
+		searchFieldText = string;
+		
+	}
+
 	public void refreshSearchData()
 	{
 		
@@ -188,16 +202,15 @@ public class FrameTopController extends AnchorPane implements Initializable
 			{			
 				for(Results results : searchData.results )
 				{
-					FrameBottomLeftController.controller.createButton(results.brandName, results.itemName);
+					FrameBottomLeftController.controller.createButton(results.brandName, results.itemName, results.thumbnail);
 				}	
 				
-				FrameBottomLeftController.controller.updateButtonList();
 			}
 			
 			@Override
 			public void failure(RetrofitError retrofitError) 
 			{
-				
+				System.out.println(retrofitError);
 			}
 		});
 	}
