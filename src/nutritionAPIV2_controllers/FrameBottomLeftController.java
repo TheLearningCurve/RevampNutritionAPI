@@ -91,10 +91,6 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 			public void run() {
 				buttonGroup.getChildren().add(but);
 				buttonList.setContent(buttonGroup);
-				
-				System.out.println(buttonGroup.getChildren());
-				System.out.println(buttonList.getContent());
-
 			}
 		});
 	}

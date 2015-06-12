@@ -7,6 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -31,25 +33,29 @@ public class ItemButton extends StackPane
 		this.itemName = itemNameIn;
 		this.brandLogoUrl = thumbnail;
 		
+		
 		backgroundView.setImage(normalButton);
 		
-		Label brandNameLabel = new Label(brandName);
+		Label brandNameLabel = new Label("from " +brandName);
 		Label itemNameLabel = new Label(itemName);
-		ImageView image = new ImageView(brandLogoUrl);
-
+		brandNameLabel.setStyle("-fx-font-family: Arial; -fx-font-size: 11.0px; -fx-text-fill: gray;"
+				+ "-fx-font-style: italic");
+		
+		Image image = new Image(brandLogoUrl);
+		
 		VBox vbox = new VBox();
 		vbox.alignmentProperty().set(Pos.CENTER_RIGHT);
-		vbox.getChildren().add(image);
 		
-		if(brandName.length() > 48)
-		{
-			Label newBrandNameLabel = new Label(brandName.substring(0, 36) + "...");
-			vbox.getChildren().add(newBrandNameLabel);		
-		}
-		else 
-		{
-			vbox.getChildren().add(brandNameLabel);
-		}
+		ImageView imageView = new ImageView();
+		imageView.setImage(image);
+		imageView.setFitWidth(256 / 2);
+		imageView.setFitHeight(50);
+		imageView.setPreserveRatio(true);
+		
+		HBox hbox = new HBox();
+		HBox.setHgrow(imageView, Priority.ALWAYS);
+		
+		hbox.getChildren().add(imageView);
 		
 		if(itemName.length() > 48)
 		{
@@ -61,8 +67,22 @@ public class ItemButton extends StackPane
 			vbox.getChildren().add(itemNameLabel);
 		}
 		
+		
+		if(brandName.length() > 48)
+		{
+			Label newBrandNameLabel = new Label("from " + brandName.substring(0, 36) + "...");
+			vbox.getChildren().add(newBrandNameLabel);		
+		}
+		else 
+		{
+			vbox.getChildren().add(brandNameLabel);
+		}
+		
+	
 		this.getChildren().add(backgroundView);
 		this.getChildren().add(vbox);
+		this.getChildren().add(hbox);
+
 		
 		this.setOnMousePressed(new EventHandler<MouseEvent>() {
 
@@ -72,10 +92,8 @@ public class ItemButton extends StackPane
 				if (pressed)
 				{
 					backgroundView.setImage(normalButton);
-					
 					pressed = false;
-				}
-					
+				}					
 				
 				if (!pressed)
 				{
