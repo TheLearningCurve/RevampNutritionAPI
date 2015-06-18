@@ -11,11 +11,11 @@
 
 <!--  Created by Kyle Wolff May 13 2015 -->
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="537.0" type="javafx.scene.layout.AnchorPane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="520.0" type="javafx.scene.layout.AnchorPane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>	
-		<AnchorPane id="searchPane" layoutX="-35.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="513.0" AnchorPane.leftAnchor="-35.0" AnchorPane.rightAnchor="11.0">
+		<AnchorPane id="searchPane" layoutX="2.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="507.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="11.0">
 			<children>
-      			<TextField id="searchField" fx:id="searchField" layoutX="41.0" prefHeight="49.0" prefWidth="550.0" promptText="Search" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      			<TextField id="searchField" fx:id="searchField" prefHeight="49.0" prefWidth="496.0" promptText="Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font name="SansSerif Regular" size="14.0" />
                </font>

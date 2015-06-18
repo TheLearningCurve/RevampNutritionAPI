@@ -58,7 +58,7 @@
                      <effect>
                         <ImageInput>
                            <source>
-                              <Image url="file:/C:/Users/Kyle%20Wolff/Documents/RevampNutritionAPI/src/resources/menuButton.png" />
+                              <Image url="/resources/menuButton.png" />
                            </source>
                         </ImageInput>
                      </effect>
