@@ -14,9 +14,13 @@ import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 public class FrameBottomLeftController extends AnchorPane implements Initializable
 {
@@ -25,6 +29,7 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 	
 	@FXML
 	ScrollPane buttonList;
+	
 	
 	Group buttonGroup = new Group();
 	
@@ -58,6 +63,7 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 			public void changed(ObservableValue<? extends Number> observable,
 					Number oldValue, Number newValue)
 			{
+			
 				if(newValue.intValue() == 1)
 				{
 					finishedScroll();
@@ -69,7 +75,7 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-
+		
 	}
 
 	public void finishedScroll() // Change to your liking.
@@ -81,9 +87,8 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 		}
 	}
 	
-	public void updateButtonList(final ItemButton but) 
-	{
-		
+	public void updateButtonGroup(ItemButton but) 
+	{	
 		new JFXPanel();
 		Platform.runLater(new Runnable() {
 			
@@ -95,12 +100,15 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 		});
 	}
 	
-	public void createButton(String brandName, String itemName)
+	public void createButton(String brandName, String itemName, String thumbnail)
 	{
-		ItemButton but = new ItemButton(numberOfButtons, brandName, itemName);
-		but.setLayoutY(numberOfButtons * 60);
-		buttons.add(but);
-		updateButtonList(but);				
+		Insets inset = new Insets(30);
+		
+		ItemButton but = new ItemButton(numberOfButtons, brandName, itemName, thumbnail);
+		but.setLayoutY(numberOfButtons * 150);
+		but.setPadding(inset);
+		buttons.add(but);	
+		updateButtonGroup(but);
 		numberOfButtons++;
 	}
 }

@@ -18,7 +18,6 @@ import retrofit.client.Response;
 public class Adapter {
 
 	public GetAPICalls getapicalls;
-	private boolean tORf = false;
 	
 	/*
 	 * RequestInterceptor is to add the headers to each call that is made
