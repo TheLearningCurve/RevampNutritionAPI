@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.web.*?>
 <?import javafx.scene.image.*?>
@@ -10,25 +12,62 @@
 <?import javafx.scene.control.TextField?>
 <?import nutritionAPIV2_controllers.*?>
 
-<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0">
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="832.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		
-		<!-- Created by Brandon VanderMeyf May 20 2015 -->
-	   	<SplitPane id="LeftRightContainer" dividerPositions="0.5" layoutY="67.0" prefHeight="333.0" prefWidth="738.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="67.0">
-			<items>
-			
-				<!-- Left Panel -->
-				
-				<FrameBottomLeftController fx:id="frameBottomLeftController"/>
-				
-			 	<!--  Right Panel -->
-			 	
-			 	<FrameBottomRightController fx:id="frameBottomRightController"/>
-			 	
-			</items>
-	   </SplitPane>
  
 		<!-- Top Panel -->
-		<FrameTopController fx:id="frameTopController"/>
+		
+      <StackPane layoutY="100.0" prefHeight="449.0" prefWidth="832.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <children>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <SplitPane fx:id="navMenuPane" dividerPositions="0.0036144578313253013" layoutY="1.0" prefHeight="442.0" prefWidth="832.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
+                    <items>
+                      <AnchorPane fx:id="navMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="456.0" prefWidth="71.0" SplitPane.resizableWithParent="false" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="489.0" prefWidth="763.0">
+                           <children>
+                              <HBox prefHeight="463.0" prefWidth="824.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                              				<!-- Created by Brandon VanderMeyf May 20 2015 -->
+                              	   	
+      			
+                                    				<!-- Left Panel -->
+      				
+                                    				<FrameBottomLeftController fx:id="frameBottomLeftController" />
+      				
+                                    			 	<!--  Right Panel -->
+      			 	
+                                    			 	<FrameBottomRightController fx:id="frameBottomRightController" />
+          			 	
+                                                            		
+                              	   
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+         </children></StackPane>
+      <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="93.0" prefWidth="833.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
+         <children>
+            <AnchorPane layoutX="47.0" layoutY="28.0">
+               <children>
+                  <Button id="menuButton" fx:id="menuButton" mnemonicParsing="false" opacity="0.37" prefHeight="38.0" prefWidth="38.0">
+                     <effect>
+                        <ImageInput>
+                           <source>
+                              <Image url="file:/C:/Users/Kyle%20Wolff/Documents/RevampNutritionAPI/src/resources/menuButton.png" />
+                           </source>
+                        </ImageInput>
+                     </effect>
+                  </Button>
+               </children>
+            </AnchorPane>
+         <FrameTopController fx:id="frameTopController" layoutX="250.0" layoutY="15.0" />
+         </children>
+      </Pane>
+
 	</children>
 </fx:root>

@@ -18,7 +18,6 @@ import retrofit.client.Response;
 public class Adapter {
 
 	public GetAPICalls getapicalls;
-	private boolean tORf = false;
 	
 	/*
 	 * RequestInterceptor is to add the headers to each call that is made
@@ -41,7 +40,7 @@ public class Adapter {
 			
 			 RestAdapter restAdapter = new RestAdapter.Builder()
 	          .setEndpoint(Config.BASE_URL)
-	          //.setLogLevel(RestAdapter.LogLevel.FULL)
+	          .setLogLevel(RestAdapter.LogLevel.FULL)
 			  .setRequestInterceptor(requestInterceptor)
 	          .setErrorHandler(new ErrorHandling())
 	          .build();

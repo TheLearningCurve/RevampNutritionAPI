@@ -1,16 +1,22 @@
 package nutritionAPIV2_controllers;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.*;
 
 public class ItemButton extends StackPane
 {
@@ -20,9 +26,9 @@ public class ItemButton extends StackPane
 	private boolean pressed = false;
 	private int number;
 	
-	static Image normalButton = new Image(ItemButton.class.getResource("/resources/LeftPanelItemButtons_Normal.png").toString());
-	static Image hoverButton = new Image(ItemButton.class.getResource("/resources/LeftPanelItemButtons_Hover.png").toString());
-	static Image clickButton = new Image(ItemButton.class.getResource("/resources/LeftPanelItemButtons_Click.png").toString());
+	static Image normalButton = new Image(ItemButton.class.getResource("/resources/ItemContainer.jpg").toString());
+	static Image hoverButton = new Image(ItemButton.class.getResource("/resources/ItemHover.jpg").toString());
+	static Image clickButton = new Image(ItemButton.class.getResource("/resources/ItemContainer.jpg").toString());
 	
 	private ImageView backgroundView = new ImageView();
 	
@@ -33,38 +39,44 @@ public class ItemButton extends StackPane
 		this.itemName = itemNameIn;
 		this.brandLogoUrl = thumbnail;
 		
-		
 		backgroundView.setImage(normalButton);
 		
+		
+		
 		Label brandNameLabel = new Label("from " +brandName);
-		Label itemNameLabel = new Label(itemName);
-		brandNameLabel.setStyle("-fx-font-family: Arial; -fx-font-size: 11.0px; -fx-text-fill: gray;"
-				+ "-fx-font-style: italic");
+		Text itemNameLabel = new Text(itemName);
 		
 		Image image = new Image(brandLogoUrl);
 		
+		Insets insets = new Insets(25);
+		
 		VBox vbox = new VBox();
-		vbox.alignmentProperty().set(Pos.CENTER_RIGHT);
+		vbox.setPadding(insets);
+		vbox.setAlignment(Pos.CENTER_RIGHT);
+		vbox.spacingProperty().add(2);
+		
+	
 		
 		ImageView imageView = new ImageView();
 		imageView.setImage(image);
-		imageView.setFitWidth(256 / 2);
-		imageView.setFitHeight(50);
+		imageView.setFitWidth(75); 
+		imageView.setFitHeight(65);
 		imageView.setPreserveRatio(true);
 		
-		HBox hbox = new HBox();
-		HBox.setHgrow(imageView, Priority.ALWAYS);
+		Insets inset = new Insets(20);
+		
+		HBox hbox = new HBox(1);
+		hbox.setPadding(inset);
+		
+		
 		
 		hbox.getChildren().add(imageView);
+		vbox.getChildren().add(itemNameLabel);
 		
-		if(itemName.length() > 48)
+
+		if(itemNameLabel.getText().length() > 30)
 		{
-			Label newItemNameLabel = new Label(itemName.substring(0, 36) + "...");
-			vbox.getChildren().add(newItemNameLabel);
-		}
-		else
-		{
-			vbox.getChildren().add(itemNameLabel);
+			itemNameLabel.setWrappingWidth(150);
 		}
 		
 		
@@ -89,6 +101,7 @@ public class ItemButton extends StackPane
 			@Override
 			public void handle(MouseEvent arg0)
 			{
+						
 				if (pressed)
 				{
 					backgroundView.setImage(normalButton);
@@ -97,15 +110,17 @@ public class ItemButton extends StackPane
 				
 				if (!pressed)
 				{
-					backgroundView.setImage(clickButton);
 					
 					if (FrameBottomLeftController.buttonNumberPressed != number && FrameBottomLeftController.buttonNumberPressed != -1)
 					{
 						FrameBottomLeftController.buttons.get(FrameBottomLeftController.buttonNumberPressed).setButtonBackgound(normalButton);
 					}
-						
+				
+					
 					FrameBottomLeftController.buttonNumberPressed = number;
 					
+					
+									
 					pressed = true;
 				}
 			}
@@ -116,8 +131,11 @@ public class ItemButton extends StackPane
 			@Override
 			public void handle(MouseEvent event)
 			{
+				
 				if (!pressed)
+				{
 					backgroundView.setImage(hoverButton);
+				}
 			}
 		});
 		
@@ -127,7 +145,9 @@ public class ItemButton extends StackPane
 			public void handle(MouseEvent event)
 			{
 				if (!pressed)
+				{
 					backgroundView.setImage(normalButton);
+				}
 			}
 		});
 	}

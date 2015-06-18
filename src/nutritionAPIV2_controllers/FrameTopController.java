@@ -29,6 +29,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 
 public class FrameTopController extends AnchorPane implements Initializable
 {
@@ -57,13 +58,14 @@ public class FrameTopController extends AnchorPane implements Initializable
 		try
 		{
 			fxmlLoader.load();
+			Font Roboto = Font.loadFont(getClass().getResourceAsStream("/font/Roboto/Roboto-Regular.ttf"), 20);
+			searchField.setFont(Roboto);
 		}
 		
 		catch (IOException e)
 		{
 			throw new RuntimeException(e);
 		}
-		
 		
 		searchField.setFocusTraversable(false);
 		searchField.setOnKeyReleased(new EventHandler<KeyEvent>() 
