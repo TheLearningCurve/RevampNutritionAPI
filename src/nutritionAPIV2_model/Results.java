@@ -16,7 +16,7 @@ public class Results {
 	 public String nutruentName;
 	 
 	 @SerializedName("nutrient_value")
-	 public int nutrientValue;
+	 public float nutrientValue;
 	 
 	 @SerializedName("nutrient_uom")
 	 public String nutrientUom;

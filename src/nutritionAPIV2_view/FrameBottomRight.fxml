@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.TextField?>
 
-<fx:root type="javafx.scene.layout.AnchorPane" id="RightPanel" fx:id="rightPanel" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="RightPanel" fx:id="rightPanel" minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="250.0" type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
 	<children>
 		<WebView id="WebViewControl" fx:id="webViewControl" layoutX="14.0" layoutY="14.0" prefHeight="403.0" prefWidth="368.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
 	</children>

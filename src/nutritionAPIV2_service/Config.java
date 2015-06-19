@@ -6,6 +6,6 @@ package nutritionAPIV2_service;
 public class Config {
 	
 	public static final String BASE_URL = "https://api.nutritionix.com/v2";
-	public static final String appId = "e07891b3";
-	public static final String appKey = "3110965832cc6ca7266dc702e1d67e03";
+	public static final String appId = "781dbb8d";
+	public static final String appKey = "e77d941048fab5a248b15903bf9fdca4";
 }

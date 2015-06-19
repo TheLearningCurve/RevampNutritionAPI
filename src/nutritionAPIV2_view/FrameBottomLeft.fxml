@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.web.*?>
 <?import javafx.scene.control.*?>
@@ -8,10 +9,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.TextField?>
 
-<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="191.0" prefWidth="352.0">
+<fx:root minHeight="0.0" minWidth="0.0" prefHeight="318.0" prefWidth="400.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<ScrollPane id="ButtonList" fx:id="buttonList" layoutX="14.0" layoutY="14.0" prefHeight="403.0" prefWidth="368.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
-			
-		</ScrollPane>
+		<ScrollPane id="ButtonList" fx:id="buttonList" layoutX="14.0" layoutY="14.0" prefHeight="403.0" 
+		prefWidth="368.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" 
+		AnchorPane.topAnchor="14.0" hbarPolicy="NEVER" />
 	</children>
 </fx:root>

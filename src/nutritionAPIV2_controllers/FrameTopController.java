@@ -29,6 +29,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 
 public class FrameTopController extends AnchorPane implements Initializable
 {
@@ -44,6 +45,8 @@ public class FrameTopController extends AnchorPane implements Initializable
 	public ObservableList<String> typeaHeadtext = FXCollections.observableArrayList();
     public Adapter adapter = new Adapter();
     public static FrameTopController controller;
+    public int buttonPress = 0;
+    public String searchFieldText = "Empty String";
 	
 	public FrameTopController()
 	{
@@ -55,6 +58,8 @@ public class FrameTopController extends AnchorPane implements Initializable
 		try
 		{
 			fxmlLoader.load();
+			Font Roboto = Font.loadFont(getClass().getResourceAsStream("/font/Roboto/Roboto-Regular.ttf"), 20);
+			searchField.setFont(Roboto);
 		}
 		
 		catch (IOException e)
@@ -62,13 +67,12 @@ public class FrameTopController extends AnchorPane implements Initializable
 			throw new RuntimeException(e);
 		}
 		
-		
 		searchField.setFocusTraversable(false);
 		searchField.setOnKeyReleased(new EventHandler<KeyEvent>() 
 		{
 			@Override
 			public void handle(KeyEvent event) 
-			{	
+			{					
 				if(event.getCode() != KeyCode.ENTER)
 				{
 					if(searchField.getText().length() == 0)
@@ -92,7 +96,18 @@ public class FrameTopController extends AnchorPane implements Initializable
 			{
 				QueryVariables.setSearchTerm(listView.getSelectionModel().getSelectedItem());
 				searchField.setText(listView.getSelectionModel().getSelectedItem());
-				requestSearchData();
+				
+				if(FrameBottomLeftController.controller.buttonList.getContent() == null)
+				{
+					requestSearchData();
+				}
+				else
+				{
+					FrameBottomLeftController.controller.buttonList.setContent(null);
+					FrameBottomLeftController.controller.buttonGroup.getChildren().clear();
+					requestSearchData();
+				}
+				
 				listView.setVisible(false);
 			}
 		});
@@ -103,11 +118,40 @@ public class FrameTopController extends AnchorPane implements Initializable
 			public void handle(MouseEvent event) 
 			{
 				QueryVariables.setSearchTerm(searchField.getText());
-				requestSearchData();
+				// This stops the user from clicking multiple times when the text is the same
+				if(searchField.getText().matches(searchFieldText))
+				{
+					
+				}
+				else if(FrameBottomLeftController.controller.buttonList.getContent() == null)
+				{
+					requestSearchData();
+				}
+				
+				else if(FrameBottomLeftController.controller.buttonList.getContent() != null || FrameBottomLeftController.controller.buttonList.getVvalue() < 1)
+				{
+					FrameBottomLeftController.controller.buttonList.setVvalue(0.0);
+					FrameBottomLeftController.controller.buttonList.setContent(null);
+					FrameBottomLeftController.controller.buttonGroup.getChildren().clear();
+					requestSearchData();
+				}
+			
 				listView.setVisible(false);
+				rememberTextField(searchField.getText());
 			}
 		});
 		
+		
+	}
+	
+	protected void rememberTextField(String string) {
+		
+		searchFieldText = string;
+		
+	}
+
+	public void refreshSearchData()
+	{
 		
 	}
 	
@@ -158,22 +202,17 @@ public class FrameTopController extends AnchorPane implements Initializable
 			@Override
 			public void success(SearchData searchData, Response response) 
 			{			
-				for(Results results : searchData.results )	//	I know 
+				for(Results results : searchData.results )
 				{
-					FrameBottomLeftController.controller.createButton(results.brandName, results.itemName);
-					
-					//ItemButton but = new ItemButton(FrameController.numberOfButtons, results.brandName, results.itemName);
-					//but.setLayoutY(FrameController.numberOfButtons * 60);
-					//buttons.add(but);
-					//updateButtonList(but);				
-					//numberOfButtons++;
-				}					
+					FrameBottomLeftController.controller.createButton(results.brandName, results.itemName, results.thumbnail);
+				}	
+				
 			}
 			
 			@Override
 			public void failure(RetrofitError retrofitError) 
 			{
-				
+				System.out.println(retrofitError);
 			}
 		});
 	}
