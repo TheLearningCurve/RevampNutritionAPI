@@ -3,10 +3,11 @@
 }
 .list-cell {
 	-fx-background-color: white;
+	-fx-font-weight: bold;
 }
 
 .list-cell:filled {
-	-fx-text-fill: black;
+	-fx-text-fill: derive(black, 50%);
 }
 
 #listView {
@@ -22,7 +23,7 @@
 }
 
 .list-view .scroll-bar:vertical .track {
-	-fx-background-color: white;
+	-fx-background-color: #F9F9F9;
 	-fx-border-color: transparent;
 }
 
