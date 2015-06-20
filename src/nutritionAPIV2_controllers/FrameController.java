@@ -6,6 +6,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +18,7 @@ import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import javafx.animation.*;
 
@@ -37,15 +40,15 @@ public class FrameController extends AnchorPane implements Initializable
 	AnchorPane navMenu;
 	
 	@FXML
-	SplitPane LeftRightContainer;
+	AnchorPane LeftandRightAnchor;
+	
+	@FXML
+	HBox LeftAndRightPanel;
 	
 	public double opacity;
 	
 	public static FrameController controller;
 	
-	public boolean firstPress = true;
-	
-
 	public Image standardButton = new Image("resources/menuButton.png");
 	public Image buttonClicked = new Image("resources/menuButtonClicked.png");
 	ImageInput image = new ImageInput();
@@ -103,16 +106,7 @@ public class FrameController extends AnchorPane implements Initializable
 				
 				image.setSource(buttonClicked);
 				menuButton.setEffect(image);
-				if(firstPress == true)
-				{
-					openMenu();
-					firstPress = false;
-				}
-				else 
-				{
-					closeMenu();
-					firstPress = true;
-				}
+				checkDividerPosition();
 
 			}
 		});
@@ -127,13 +121,31 @@ public class FrameController extends AnchorPane implements Initializable
 			}
 		});
 		
+		
+		
+	}
+	
+	public void checkDividerPosition()
+	{
+		DoubleProperty doubleProperty = navMenuPane.getDividers().get(0).positionProperty();
+		System.out.println(doubleProperty);
+		
+		if(doubleProperty.getValue() == 0.0036144578313253013)
+		{
+			openMenu();
+		}
+		else if(doubleProperty.getValue() > 0.0036144578313253013)
+		{
+			closeMenu();
+		}
+		
 	}
 	
 	public void openMenu()
 	{
 		DoubleProperty doubleProperty = navMenuPane.getDividers().get(0).positionProperty();
 		DoubleTransition dt = new DoubleTransition(Duration.millis(1000), doubleProperty);
-		dt.setToValue(0.1969); dt.play();
+		dt.setToValue(0.1469); dt.play();
 			
 	}
 	
@@ -144,5 +156,6 @@ public class FrameController extends AnchorPane implements Initializable
 		dt.setToValue(0); dt.play();
 	
 	}
+	
 
 }

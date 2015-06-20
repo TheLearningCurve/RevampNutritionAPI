@@ -18,7 +18,9 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -58,8 +60,6 @@ public class FrameTopController extends AnchorPane implements Initializable
 		try
 		{
 			fxmlLoader.load();
-			Font Roboto = Font.loadFont(getClass().getResourceAsStream("/font/Roboto/Roboto-Regular.ttf"), 20);
-			searchField.setFont(Roboto);
 		}
 		
 		catch (IOException e)
@@ -85,6 +85,10 @@ public class FrameTopController extends AnchorPane implements Initializable
 						QueryVariables.setText(searchField.getText());
 						requestTypeAHeadData();
 					}
+				}
+				else if(event.getCode() == KeyCode.ENTER)
+				{
+					searchFieldButtonPress();
 				}
 		    } 
 	    });
@@ -117,31 +121,38 @@ public class FrameTopController extends AnchorPane implements Initializable
 			@Override
 			public void handle(MouseEvent event) 
 			{
-				QueryVariables.setSearchTerm(searchField.getText());
-				// This stops the user from clicking multiple times when the text is the same
-				if(searchField.getText().matches(searchFieldText))
-				{
-					
-				}
-				else if(FrameBottomLeftController.controller.buttonList.getContent() == null)
-				{
-					requestSearchData();
-				}
-				
-				else if(FrameBottomLeftController.controller.buttonList.getContent() != null || FrameBottomLeftController.controller.buttonList.getVvalue() < 1)
-				{
-					FrameBottomLeftController.controller.buttonList.setVvalue(0.0);
-					FrameBottomLeftController.controller.buttonList.setContent(null);
-					FrameBottomLeftController.controller.buttonGroup.getChildren().clear();
-					requestSearchData();
-				}
-			
-				listView.setVisible(false);
-				rememberTextField(searchField.getText());
+				searchFieldButtonPress();
 			}
-		});
+		});			
+	}
+	
+	public void searchFieldButtonPress()
+	{
+		QueryVariables.setSearchTerm(searchField.getText());
+		QueryVariables.clearOffset();
+		// This stops the user from clicking multiple times when the text is the same
+		if(searchField.getText().isEmpty())
+		{
+			// Do not allow another search with the same term
+		}
+		else if(searchField.getText().matches(searchFieldText))
+		{
+			// Do not allow another search with the same term
+		}
+		else if(FrameBottomLeftController.controller.buttonList.getContent() == null)
+		{
+			requestSearchData();
+		}		
+		else if(FrameBottomLeftController.controller.buttonList.getContent() != null || FrameBottomLeftController.controller.buttonList.getVvalue() < 1)
+		{
+			FrameBottomLeftController.controller.buttonList.setVvalue(0.0);
+			FrameBottomLeftController.controller.buttonList.setContent(null);
+			FrameBottomLeftController.controller.buttonGroup.getChildren().clear();
+			requestSearchData();
+		}
 		
-		
+		listView.setVisible(false);
+		rememberTextField(searchField.getText());			
 	}
 	
 	protected void rememberTextField(String string) {
@@ -150,17 +161,14 @@ public class FrameTopController extends AnchorPane implements Initializable
 		
 	}
 
-	public void refreshSearchData()
-	{
-		
-	}
 	
 	public void requestTypeAHeadData()
 	{
 		adapter.getapicalls.typeAhead(QueryVariables.text, new Callback<List<TypeAHead>>() {
 		
 			@Override
-			public void success(List<TypeAHead> typeAhead, Response response) {
+			public void success(List<TypeAHead> typeAhead, Response response) 
+			{
 				
 				ObservableList<String> typeAheadText = FXCollections.observableArrayList();
 				
@@ -184,6 +192,7 @@ public class FrameTopController extends AnchorPane implements Initializable
 						updateUI();
 					}
 				}
+			
 			}
 			
 			@Override
@@ -201,7 +210,9 @@ public class FrameTopController extends AnchorPane implements Initializable
 
 			@Override
 			public void success(SearchData searchData, Response response) 
-			{			
+			{		
+				FrameBottomLeftController.controller.getResultLabel(10,QueryVariables.offset,searchData.total);
+				
 				for(Results results : searchData.results )
 				{
 					FrameBottomLeftController.controller.createButton(results.brandName, results.itemName, results.thumbnail);

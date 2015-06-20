@@ -1,18 +1,16 @@
 package nutritionAPIV2_controllers;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import com.sun.javafx.css.Style;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -34,15 +32,20 @@ public class ItemButton extends StackPane
 	
 	public ItemButton(int buttonNumber, String brandNameIn, String itemNameIn, String thumbnail) // Instantiate after properties are set (?).
 	{
+		String bevelStyle = "-fx-background-color: linear-gradient(#f2f2f2, #d6d6d6) ,linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),"
+				+ "linear-gradient(#dddddd 0%, #f6f6f6 50%); "
+				+ "-fx-background-radius: 8,7,6;"
+				+ "-fx-background-insets: 0,1,2;"
+				+ "-fx-text-fill: black;"
+				+ "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 ) ";
+		
 		this.number = buttonNumber;
 		this.brandName = brandNameIn;
 		this.itemName = itemNameIn;
 		this.brandLogoUrl = thumbnail;
 		
 		backgroundView.setImage(normalButton);
-		
-		
-		
+			
 		Label brandNameLabel = new Label("from " +brandName);
 		Text itemNameLabel = new Text(itemName);
 		
@@ -68,8 +71,7 @@ public class ItemButton extends StackPane
 		HBox hbox = new HBox(1);
 		hbox.setPadding(inset);
 		
-		
-		
+				
 		hbox.getChildren().add(imageView);
 		vbox.getChildren().add(itemNameLabel);
 		
@@ -102,13 +104,13 @@ public class ItemButton extends StackPane
 			public void handle(MouseEvent arg0)
 			{
 						
-				if (pressed)
+				if (pressed == false)
 				{
 					backgroundView.setImage(normalButton);
-					pressed = false;
+					pressed = true;
 				}					
 				
-				if (!pressed)
+				if (pressed == true)
 				{
 					
 					if (FrameBottomLeftController.buttonNumberPressed != number && FrameBottomLeftController.buttonNumberPressed != -1)
@@ -118,10 +120,18 @@ public class ItemButton extends StackPane
 				
 					
 					FrameBottomLeftController.buttonNumberPressed = number;
+					FrameBottomLeftController.buttons.get(FrameBottomLeftController.buttonNumberPressed).backgroundView.setEffect(null);
+					FrameBottomLeftController.buttons.get(FrameBottomLeftController.buttonNumberPressed).backgroundView.setStyle(bevelStyle);
+							
+					pressed = false;
 					
-					
-									
-					pressed = true;
+					for(int i = 0; i < FrameBottomLeftController.buttons.size(); i++)
+					{
+						
+							FrameBottomLeftController.buttons.get(i).setOpacity(.35);
+							FrameBottomLeftController.buttons.get(FrameBottomLeftController.buttonNumberPressed).setOpacity(1);
+						
+					}
 				}
 			}
 		});
@@ -131,11 +141,22 @@ public class ItemButton extends StackPane
 			@Override
 			public void handle(MouseEvent event)
 			{
-				
-				if (!pressed)
+				for(int i = 0; i < FrameBottomLeftController.buttons.size(); i++)
 				{
-					backgroundView.setImage(hoverButton);
+					if(FrameBottomLeftController.buttons.get(i).getOpacity() < 1)
+					{
+						backgroundView.setEffect(null);
+					}
+					else
+					{
+						if (pressed == false)
+						{
+							backgroundView.setEffect(new DropShadow(3d, 2d, 8d, Color.BLACK));
+						}
+					}
+					
 				}
+				
 			}
 		});
 		
@@ -144,10 +165,11 @@ public class ItemButton extends StackPane
 			@Override
 			public void handle(MouseEvent event)
 			{
-				if (!pressed)
+				if (pressed == false)
 				{
-					backgroundView.setImage(normalButton);
+					backgroundView.setEffect(null);
 				}
+				
 			}
 		});
 	}

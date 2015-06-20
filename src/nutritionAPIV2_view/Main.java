@@ -3,12 +3,12 @@
 package nutritionAPIV2_view;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
-import javafx.scene.control.ToolBar;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Font;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import nutritionAPIV2_controllers.*;
 
 public class Main extends Application
@@ -37,4 +37,5 @@ public class Main extends Application
 		primaryStage.show();
 		
 	}
+	
 }
