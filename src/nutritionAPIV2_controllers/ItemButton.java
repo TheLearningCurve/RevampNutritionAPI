@@ -30,8 +30,10 @@ public class ItemButton extends StackPane
 	
 	private ImageView backgroundView = new ImageView();
 	
+	
 	public ItemButton(int buttonNumber, String brandNameIn, String itemNameIn, String thumbnail) // Instantiate after properties are set (?).
 	{
+		
 		String bevelStyle = "-fx-background-color: linear-gradient(#f2f2f2, #d6d6d6) ,linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),"
 				+ "linear-gradient(#dddddd 0%, #f6f6f6 50%); "
 				+ "-fx-background-radius: 8,7,6;"
@@ -68,7 +70,7 @@ public class ItemButton extends StackPane
 		
 		Insets inset = new Insets(20);
 		
-		HBox hbox = new HBox(1);
+		HBox hbox = new HBox();
 		hbox.setPadding(inset);
 		
 				

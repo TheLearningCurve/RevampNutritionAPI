@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import javafx.animation.*;
 
@@ -37,7 +38,7 @@ public class FrameController extends AnchorPane implements Initializable
 	SplitPane navMenuPane;
 	
 	@FXML
-	AnchorPane navMenu;
+	Pane navMenu;
 	
 	@FXML
 	AnchorPane LeftandRightAnchor;
@@ -78,7 +79,6 @@ public class FrameController extends AnchorPane implements Initializable
 		
 		opacity = menuButton.getOpacity();
 	
-		navMenu.setMaxWidth(158);
 		
 		menuButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
