@@ -239,6 +239,7 @@ public class FrameTopController extends AnchorPane implements Initializable
 				if(gettypeaHeadtext() != null && !gettypeaHeadtext().isEmpty())
 				{
 					listView.setVisible(true);
+					listView.scrollTo(0);
 					listView.setItems(gettypeaHeadtext());	
 				}
 				else 
