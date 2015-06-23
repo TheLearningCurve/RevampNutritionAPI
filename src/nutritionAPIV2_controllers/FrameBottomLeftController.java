@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -29,6 +30,9 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 	
 	@FXML
 	ScrollPane buttonList;
+	
+	@FXML
+	Label resultLabel;
 	
 	
 	Group buttonGroup = new Group();
@@ -45,6 +49,7 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		controller = (FrameBottomLeftController) fxmlLoader.getController();
+		
 		
 		try
 		{
@@ -87,6 +92,31 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 		}
 	}
 	
+	public void getResultLabel(int limit, int offset, int total)
+	{
+		new JFXPanel();
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				if(total < 10)
+				{
+					resultLabel.setText("Showing results " + total + " out of " + total);
+				}
+				else if(offset == 0)
+				{
+					resultLabel.setText("Showing results " + limit + " out of " + total);
+				}
+				else
+				{
+					resultLabel.setText("Showing results " + (limit + offset) + " out of " + total);
+				}
+				
+			}
+		});
+	}
+	
 	public void updateButtonGroup(ItemButton but) 
 	{	
 		new JFXPanel();
@@ -110,5 +140,15 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 		buttons.add(but);	
 		updateButtonGroup(but);
 		numberOfButtons++;
+	}
+	
+	public void clearItemOpacity()
+	{
+		for(int i = 0; i < FrameBottomLeftController.buttons.size(); i++)
+		{
+			
+				FrameBottomLeftController.buttons.get(i).setOpacity(1);
+			
+		}
 	}
 }

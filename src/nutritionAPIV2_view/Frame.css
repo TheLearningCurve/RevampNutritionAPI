@@ -1,22 +1,3 @@
 /*Created by Kyle Wolff May 13 2015 */
 
-#searchPane {
-	-fx-background-color: white;
-}
 
-#searchField {
-	-fx-font-family: "Arial";
-	-fx-font-size: 25.0px;
-}
-
-#searchField:focused {
-	
-}
-
-#listView:focused {
-  -fx-background-color: transparent  /* or transparent or other preferred color */,-fx-box-border,-fx-control-inner-background;
-  -fx-background-insets: -1.4, 0, 1;
-  -fx-background-radius: 1.4, 0, 0;
-  /*....*/
-  -fx-padding: 1; /* 0.083333em; */
-}

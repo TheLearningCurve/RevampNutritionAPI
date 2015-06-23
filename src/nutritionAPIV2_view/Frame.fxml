@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.effect.*?>
@@ -17,16 +18,16 @@
  
 		<!-- Top Panel -->
 		
-      <StackPane layoutY="100.0" prefHeight="449.0" prefWidth="832.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+      <StackPane layoutY="70.0" prefHeight="479.0" prefWidth="832.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
          <children>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="473.0" prefWidth="832.0">
                <children>
                   <SplitPane fx:id="navMenuPane" dividerPositions="0.0036144578313253013" layoutY="1.0" prefHeight="442.0" prefWidth="832.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
                     <items>
                       <AnchorPane fx:id="navMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="456.0" prefWidth="71.0" SplitPane.resizableWithParent="false" />
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="489.0" prefWidth="763.0">
+                      <AnchorPane fx:id="LeftandRightAnchor" minHeight="0.0" minWidth="0.0" prefHeight="489.0" prefWidth="763.0">
                            <children>
-                              <HBox prefHeight="463.0" prefWidth="824.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <HBox fx:id="LeftAndRightPanel" alignment="CENTER" layoutY="-9.0" prefHeight="479.0" prefWidth="824.0" spacing="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-9.0">
                                  <children>
                               				<!-- Created by Brandon VanderMeyf May 20 2015 -->
                               	   	
@@ -50,24 +51,29 @@
                </children>
             </AnchorPane>
          </children></StackPane>
-      <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="93.0" prefWidth="833.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
-         <children>
-            <AnchorPane layoutX="47.0" layoutY="28.0">
+            <Pane prefHeight="64.0" prefWidth="833.0" style="-fx-background-color: #8bc34a;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button id="menuButton" fx:id="menuButton" mnemonicParsing="false" opacity="0.37" prefHeight="38.0" prefWidth="38.0">
-                     <effect>
-                        <ImageInput>
-                           <source>
-                              <Image url="/resources/menuButton.png" />
-                           </source>
-                        </ImageInput>
-                     </effect>
-                  </Button>
+               <FrameTopController fx:id="frameTopController" layoutX="450.0" layoutY="20.0" />
+                  <AnchorPane layoutX="14.0" layoutY="19.0">
+                     <children>
+                        <Button id="menuButton" fx:id="menuButton" mnemonicParsing="false" opacity="0.37" prefHeight="38.0" prefWidth="38.0">
+                           <effect>
+                              <ImageInput>
+                                 <source>
+                                    <Image url="/resources/menuButton.png" />
+                                 </source>
+                              </ImageInput>
+                           </effect>
+                        </Button>
+                        <Label layoutX="45.0" layoutY="-3.0" prefHeight="35.0" prefWidth="216.0" text="I'm A Program" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Regular" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
                </children>
-            </AnchorPane>
-         <FrameTopController fx:id="frameTopController" layoutX="250.0" layoutY="15.0" />
-         </children>
-      </Pane>
+            </Pane>
 
 	</children>
 </fx:root>

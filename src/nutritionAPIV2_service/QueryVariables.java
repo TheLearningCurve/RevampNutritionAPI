@@ -20,4 +20,8 @@ public class QueryVariables {
 	{
 		QueryVariables.offset += offset;
 	}
+	public static void clearOffset()
+	{
+		QueryVariables.offset = 0;
+	}
 }

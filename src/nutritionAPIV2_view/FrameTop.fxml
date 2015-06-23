@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
@@ -11,22 +12,26 @@
 
 <!--  Created by Kyle Wolff May 13 2015 -->
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="520.0" type="javafx.scene.layout.AnchorPane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="343.0" style="-fx-background-color: #8bc34a;" stylesheets="@ListView.css" type="javafx.scene.layout.AnchorPane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>	
-		<AnchorPane id="searchPane" layoutX="2.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="507.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="11.0">
+		<AnchorPane id="searchPane" layoutX="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="326.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="5.0">
 			<children>
-      			<TextField id="searchField" fx:id="searchField" prefHeight="49.0" prefWidth="496.0" promptText="Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      			<TextField id="searchField" fx:id="searchField" layoutY="1.0" prefHeight="33.0" prefWidth="335.0" promptText="Search" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
                <font>
-                  <Font name="SansSerif Regular" size="14.0" />
+                  <Font name="SansSerif Regular" size="15.0" />
                </font>
             </TextField>
-				<ImageView fx:id="ImageButton" fitHeight="33.0" fitWidth="34.0" layoutX="504.0" layoutY="8.0" preserveRatio="true" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="8.0">
+				<ImageView fx:id="ImageButton" fitHeight="25.0" fitWidth="26.0" layoutX="282.0" layoutY="5.0" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="5.0">
 					<image>
 						<Image url="@ic_action_search.png" />
 					</image>
 				</ImageView>
 			</children>
 		</AnchorPane>
-		<ListView id="listView" fx:id="listView" layoutX="9.0" layoutY="54.0" prefHeight="126.0" prefWidth="465.0" visible="false" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="54.0" />
+      <HBox layoutX="3.0" layoutY="33.0" prefHeight="147.0" prefWidth="334.0" style="-fx-background-color: transparent;">
+         <children>
+      		<ListView id="listView" fx:id="listView" centerShape="false" prefHeight="147.0" prefWidth="394.0" styleClass="listViewCell" visible="false" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="33.0" />
+         </children>
+      </HBox>
 	</children>
 </fx:root>
