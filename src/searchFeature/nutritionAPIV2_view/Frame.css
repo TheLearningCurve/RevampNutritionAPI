@@ -1,0 +1,27 @@
+/*Created by Kyle Wolff May 13 2015 */
+
+.split-pane .split-pane-divider {
+	-fx-background-color: transparent ;
+	-fx-cursor: null ;
+}
+
+#dimPane {
+	-fx-background-color: black;
+	-fx-opacity: 0;
+}
+
+
+
+#stackPaneAnchorPane{
+	-fx-background-color: #8bc34a;
+}
+
+#FirstTileWalkthrough{
+	-fx-background-color: derive(gray, 50%);
+}
+
+#nextButton{
+	 
+	-fx-background-radius: 10;
+	
+}
