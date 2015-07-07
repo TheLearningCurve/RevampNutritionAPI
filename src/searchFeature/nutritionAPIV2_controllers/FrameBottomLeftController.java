@@ -92,7 +92,7 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 		}
 	}
 	
-	public void getResultLabel(int limit, int offset, int total)
+	public void getResultLabel(final int limit, final int offset, final int total)
 	{
 		new JFXPanel();
 		Platform.runLater(new Runnable() {
@@ -117,7 +117,7 @@ public class FrameBottomLeftController extends AnchorPane implements Initializab
 		});
 	}
 	
-	public void updateButtonGroup(ItemButton but) 
+	public void updateButtonGroup(final ItemButton but) 
 	{	
 		new JFXPanel();
 		Platform.runLater(new Runnable() {
