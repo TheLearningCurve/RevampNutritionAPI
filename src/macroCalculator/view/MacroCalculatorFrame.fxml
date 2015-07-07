@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TextField?>
+<?import searchFeature.nutritionAPIV2_controllers.*?>
+<?import navMenu.controller.*?>
+<?import macroCalculator.controllers.*?>
+
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="832.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+ 
+		<!-- Top Panel -->
+		
+      <StackPane layoutY="70.0" prefHeight="479.0" prefWidth="832.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+         <children>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="473.0" prefWidth="832.0">
+               <children>
+                  <SplitPane fx:id="navMenuPane" dividerPositions="0.0036144578313253013" layoutY="1.0" prefHeight="442.0" prefWidth="832.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
+                    <items>
+                      <AnchorPane fx:id="navMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="456.0" prefWidth="71.0" SplitPane.resizableWithParent="false" >
+                       <children>
+	                     	<NavigationController fx:id="navigationMenu"/>
+                         </children>
+                         </AnchorPane>
+                         
+	                    
+                      <AnchorPane fx:id="LeftandRightAnchor" minHeight="0.0" minWidth="0.0" prefHeight="489.0" prefWidth="763.0">
+                          <children>
+                              <Pane fx:id="dimPane" prefHeight="470.0" prefWidth="824.0" />
+                           	  <MacroCalculatorController fx:id="macroCalculatorController"/>
+                             </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+         </children></StackPane>
+            <Pane prefHeight="71.0" prefWidth="833.0" style="-fx-background-color: #8bc34a;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+               <children>
+               <FrameTopController fx:id="frameTopController" layoutX="450.0" layoutY="20.0" />
+                  <AnchorPane layoutX="14.0" layoutY="19.0">
+                     <children>
+                        <Button id="menuButton" fx:id="menuButton" mnemonicParsing="false" opacity="0.37" prefHeight="38.0" prefWidth="38.0">
+                           <effect>
+                              <ImageInput>
+                                 <source>
+                                    <Image url="/searchFeature/resources/menuButton.png" />
+                                 </source>
+                              </ImageInput>
+                           </effect>
+                        </Button>
+                        <Label layoutX="45.0" layoutY="-3.0" prefHeight="35.0" prefWidth="216.0" text="I'm A Program" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Regular" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </Pane>
+
+	</children>
+</fx:root>
