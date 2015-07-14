@@ -4,7 +4,7 @@ var multiplier;
 function pageLoad() 
 {
 	var inputBox = Number(document.getElementById("servingInputBox").value);
-	multiplier = new Array([]);
+	multiplier = new Array();
 	numbersToChange = document.getElementsByClassName("numberToChange");
 	
 	for (i = 0; i < numbersToChange.length; i++)
