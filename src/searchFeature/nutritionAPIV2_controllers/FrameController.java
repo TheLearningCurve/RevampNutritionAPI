@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.SplitPane;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
@@ -48,6 +49,9 @@ public class FrameController extends AnchorPane implements Initializable
 	@FXML
 	HBox LeftAndRightPanel;
 	
+	@FXML
+	ProgressIndicator ItemListProgressIndicator;
+	
 	public double opacity;
 	
 	public static FrameController controller; 
@@ -55,6 +59,8 @@ public class FrameController extends AnchorPane implements Initializable
 	public Image standardButton = new Image("searchFeature/resources/menuButton.png");
 	public Image buttonClicked = new Image("searchFeature/resources/menuButtonClicked.png");
 	ImageInput image = new ImageInput();
+	
+	public boolean open = false;
 	
 	public FrameController()
 	{
@@ -124,8 +130,6 @@ public class FrameController extends AnchorPane implements Initializable
 			}
 		});
 		
-		
-		
 	}
 	
 	public void checkDividerPosition()
@@ -133,20 +137,20 @@ public class FrameController extends AnchorPane implements Initializable
 		DoubleProperty doubleProperty = navMenuPane.getDividers().get(0).positionProperty();
 		System.out.println(doubleProperty);
 		
-		if(doubleProperty.getValue() == 0.0036144578313253013)
+		if(open == false)
 		{
-			openMenu();
-		
+			open = true;
+			openMenu();		
 		}
-		else if(doubleProperty.getValue() > 0.0036144578313253013)
+		else if(open == true)
 		{
 			closeMenu();
+			open = false;
 		}
-		
 	}
 	
 	public void openMenu()
-	{
+	{		
 		DoubleProperty doubleProperty = navMenuPane.getDividers().get(0).positionProperty();
 		DoubleTransition dt = new DoubleTransition(Duration.millis(1000), doubleProperty);
 		dt.setToValue(0.1469); dt.play();	
@@ -180,4 +184,5 @@ public class FrameController extends AnchorPane implements Initializable
 			}
 		});
 	}
+	
 }

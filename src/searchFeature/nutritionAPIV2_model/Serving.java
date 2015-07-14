@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 public class Serving {
 
 	@SerializedName("qty")
-	public int quantity;
+	public float quantity;
 	
 	@SerializedName("uom")
 	public String uom;

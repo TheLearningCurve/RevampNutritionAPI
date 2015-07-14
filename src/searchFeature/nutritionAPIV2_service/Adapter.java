@@ -48,37 +48,4 @@ public class Adapter {
 	        getapicalls = restAdapter.create(GetAPICalls.class);
 	        
 		}
-     
-  
-	/*
-	 * These are the methods we call in order to make the retrofit @Get calls
-	 */
-	
-	public void getItem() {
-		
-		getapicalls.itemFacts(QueryVariables.itemId, new Callback<ItemData>() {
-
-			@Override
-			public void success(ItemData itemData, Response response)
-			{
-				if(itemData.label.nutrients != null)
-				{
-					for(Nutrients n : itemData.label.nutrients)
-					{
-						System.out.println(n.name + ": " + n.value + n.unit);
-					}
-				}
-				else
-				{
-					System.out.println(itemData.label.nutrients.size());
-				}
-			}
-
-			@Override
-			public void failure(RetrofitError retrofitError)
-			{
-				System.out.println(retrofitError.getMessage());	
-			}
-		});	
-	}
 }

@@ -25,32 +25,29 @@
                <children>
                   <SplitPane fx:id="navMenuPane" dividerPositions="0.0036144578313253013" layoutY="1.0" prefHeight="442.0" prefWidth="832.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
                     <items>
-                      <AnchorPane fx:id="navMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="456.0" prefWidth="71.0" SplitPane.resizableWithParent="false">
+                      <AnchorPane id="navMenuAnchor" fx:id="navMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="456.0" prefWidth="71.0" SplitPane.resizableWithParent="false">
                        <children>
-	                     	<NavigationController fx:id="navigationMenu" />
+	                     	<NavigationController fx:id="navigationMenu"/>
                          </children>
                          </AnchorPane>
 	                    
-                      <AnchorPane fx:id="LeftandRightAnchor" minHeight="0.0" minWidth="0.0" prefHeight="489.0" prefWidth="763.0">
+                      <AnchorPane fx:id="LeftandRightAnchor" minHeight="0.0" minWidth="0.0" prefHeight="489.0" prefWidth="763.0" >
                            <children>
-                              <Pane fx:id="dimPane" prefHeight="470.0" prefWidth="824.0" />
-                              <HBox fx:id="LeftAndRightPanel" alignment="CENTER" layoutY="-9.0" prefHeight="479.0" prefWidth="824.0" spacing="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-9.0">
-                                 <children>
+                             <Pane fx:id="dimPane" prefHeight="470.0" prefWidth="824.0" />
+                              <Pane prefHeight="470.0" prefWidth="825.0">
+                               <children>
                               				<!-- Created by Brandon VanderMeyf May 20 2015 -->
                               	   	
       			
                                     				<!-- Left Panel -->
       				
-                                    				<FrameBottomLeftController fx:id="frameBottomLeftController" />
-      				
-                                    			 	<!--  Right Panel -->
-      			 	
-                                    			 	<FrameBottomRightController fx:id="frameBottomRightController" />
+                                    				<SearchListFrameController fx:id="searchListFrameController" layoutX="200" />
+                                    				<NutritionLabelFrameController fx:id="nutritionLabelFrameController" layoutX="250" layoutY="50" visible="false" />                                    				
           			 	
                                                             		
                               	   
                                  </children>
-                              </HBox>
+                              </Pane>
                            </children>
                         </AnchorPane>
                     </items>
@@ -58,7 +55,7 @@
                </children>
             </AnchorPane>
          </children></StackPane>
-            <Pane prefHeight="71.0" prefWidth="833.0" style="-fx-background-color: #8bc34a;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+            <Pane prefHeight="71.0" prefWidth="833.0" style="-fx-background-color: #98FF42;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
                <children>
                <FrameTopController fx:id="frameTopController" layoutX="450.0" layoutY="20.0" />
                   <AnchorPane layoutX="14.0" layoutY="19.0">

@@ -1,7 +1,7 @@
 var numbersToChange;
 var multiplier;
 
-function pageLoad()
+function pageLoad() 
 {
 	var inputBox = Number(document.getElementById("servingInputBox").value);
 	multiplier = new Array();

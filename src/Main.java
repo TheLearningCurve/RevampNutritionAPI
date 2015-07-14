@@ -30,6 +30,5 @@ public class Main extends Application
 		one.getStylesheets().add(getClass().getResource("/searchFeature/nutritionAPIV2_view/Frame.css").toExternalForm());
 		primaryStage.setScene(one);
 		primaryStage.show();
-		
 	}
 }

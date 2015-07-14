@@ -23,7 +23,7 @@ public class NavigationController extends AnchorPane implements Initializable{
 	
 	public NavigationController() {
 
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/navMenu/NavigationMenu.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/navMenu/view/NavigationMenu.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		controller = (NavigationController) fxmlLoader.getController();
