@@ -16,7 +16,10 @@ import searchFeature.nutritionAPIV2_model.TypeAHead;
 public interface GetAPICalls {
 	
 	@GET("/search")
-	void searchFood(@Query("q") String searchTerm, @Query("limit") int limit, @Query("offset") int offset, Callback<SearchData> cb);
+	void searchFoodLimitAndOffset(@Query("q") String searchTerm, @Query("limit") int limit, @Query("offset") int offset, Callback<SearchData> cb);
+	
+	@GET("/search")
+	void searchFoodAllResults(@Query("q") String searchTerm, Callback<SearchData> cb);
 	
 	@GET("/item/{id}")
 	void itemFacts(@Path("id") String itemId, Callback<ItemData> cb);

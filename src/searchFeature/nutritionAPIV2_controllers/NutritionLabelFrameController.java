@@ -14,7 +14,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import leHTML.HTMLBuilder;
 
-public class FrameBottomRightController extends AnchorPane implements Initializable
+public class NutritionLabelFrameController extends AnchorPane implements Initializable
 {
 	
 	@FXML
@@ -23,14 +23,15 @@ public class FrameBottomRightController extends AnchorPane implements Initializa
 	@FXML
 	WebView webViewControl;
 	
-	public static FrameBottomRightController controller;
+	public static NutritionLabelFrameController controller;
+	public WebEngine engine;
 	
-	public FrameBottomRightController()
+	public NutritionLabelFrameController()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/searchFeature/nutritionAPIV2_view/FrameBottomRight.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/searchFeature/nutritionAPIV2_view/NutritionLabelFrame.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
-		controller = (FrameBottomRightController) fxmlLoader.getController();
+		controller = (NutritionLabelFrameController) fxmlLoader.getController();
 		
 		try
 		{
@@ -40,24 +41,14 @@ public class FrameBottomRightController extends AnchorPane implements Initializa
 		catch (IOException e)
 		{
 			throw new RuntimeException(e);
-		}
+		}	
 		
-		HTMLBuilder html = new HTMLBuilder();
-		html.setTitle("Poop Sauce");
-		html.setServing("1", "pizza", "853g");
-		html.setBar1();
-		html.setAmountPerServing();
-		html.setCalories("2270", "740");
-		html.setBar2();
-		html.setDailyValue();
-		html.setLineBold("Total fat", "83", "g", "128");
-		html.setLineIndent("Saturated Fat", "83", "g", "190");
-		
-		html.finishDocument();
-		
-		WebEngine engine = webViewControl.getEngine();
-		//engine.loadContent(html.getHTMLString());
-		engine.load("https://jsfiddle.net/");
+		engine = webViewControl.getEngine();	
+	}
+	
+	public void sendHtml(HTMLBuilder html)
+	{
+		engine.loadContent(html.getHTMLString());
 	}
 	
 	@Override
@@ -68,7 +59,7 @@ public class FrameBottomRightController extends AnchorPane implements Initializa
 
 			@Override
 			public void handle(MouseEvent event) {
-				FrameBottomLeftController.controller.clearItemOpacity();	
+				//FrameBottomLeftController.controller.clearItemOpacity();	
 			}
 		});
 		
@@ -76,7 +67,7 @@ public class FrameBottomRightController extends AnchorPane implements Initializa
 
 			@Override
 			public void handle(MouseEvent event) {
-				FrameBottomLeftController.controller.clearItemOpacity();	
+				//FrameBottomLeftController.controller.clearItemOpacity();	
 			}
 		});
 		
