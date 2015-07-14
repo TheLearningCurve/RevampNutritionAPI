@@ -21,6 +21,11 @@
                   <Font name="SansSerif Regular" size="15.0" />
                </font>
             </TextField>
+            <HBox fx:id="HBoxContainerForListView" layoutY="34.0" onMousePressed="#isthisit" prefHeight="33.0" prefWidth="334.0" style="-fx-background-color: transparent;">
+               <children>
+            		<ListView id="listView" fx:id="listView" centerShape="false" onMousePressed="#searchMouseListener" prefHeight="18.0" prefWidth="334.0" styleClass="listViewCell" visible="false" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="33.0" />
+               </children>
+            </HBox>
 				<ImageView fx:id="ImageButton" fitHeight="25.0" fitWidth="26.0" layoutX="282.0" layoutY="5.0" onMousePressed="#searchMouseListener" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="5.0">
 					<image>
 						<Image url="@ic_action_search.png" />
@@ -28,10 +33,5 @@
 				</ImageView>
 			</children>
 		</AnchorPane>
-      <HBox fx:id="HBoxContainerForListView" layoutX="2.0" layoutY="33.0" onMousePressed="#isthisit" prefHeight="18.0" prefWidth="335.0" style="-fx-background-color: transparent;">
-         <children>
-      		<ListView id="listView" fx:id="listView" centerShape="false" onMousePressed="#searchMouseListener" prefHeight="71.0" prefWidth="334.0" styleClass="listViewCell" visible="false" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="33.0" />
-         </children>
-      </HBox>
 	</children>
 </fx:root>
