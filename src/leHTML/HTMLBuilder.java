@@ -1,8 +1,29 @@
 package leHTML;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class HTMLBuilder 
 {
 	/*
+	 * 
+	 * Code:	'#css' = CSS stylesheet location
+	 * 			'##js' = JS external location
+	 * 			'##iv' = Input value for setServing() (a.k.a. defaultValue)
+	 * 			'##su' = Serving unit for setServing()
+	 * 			'###m' = Measurement for setServing()
+	 * 			'#spc' = Servings per container for setServing()
+	 * 			'###c' = Calories for setCalories()
+	 * 			'#cff' = Calories for fat for SetCalories()
+	 * 			'##nu' = Nutrition for setLineBold()
+	 * 			'###a' = Amount for setLineBold()
+	 * 			'###m' = Measurement also for setLineBold()
+	 * 			'###p' = percent for setLineBold, Indent, and Extras
+	 * 
+	 * */
+	
+	/*	Tutorial copied and pasted from old version:
 	 *
 	 * HOW TO USE:
 	 * 		Instantiate object first, the constructor will call the 'startDocument' method by default.
@@ -56,21 +77,46 @@ public class HTMLBuilder
 	 * 		Please use numbers that are rounded to the tenth place if they aren't integers.  It will minimize possible bugs.
 	 * 
 	 */
-	StringBuilder html = new StringBuilder();
+	
+	private StringBuilder html;
+	private int lastIndexUsed;
 	
 	public HTMLBuilder()
 	{
-		this.startDocument();
+		html = new StringBuilder();
+		
+		startDocument();
 	}
 	
-	public void startDocument()
+	private void startDocument()
 	{
-		String styleSheet = getClass().getResource("/leHTML/nutritionLabelStyles.css").toString();
-		String javascript = getClass().getResource("/leHTML/nutritionLabelScripts.js").toString();
+		File file = new File(getClass().getResource("StartDocument.txt").getPath());
 		
-		html.append("<html><head><link rel=\"stylesheet\" href=\"" + styleSheet + "\"/><script type=\"text/javascript\" "
-				+ "src=\"" + javascript + "\"></script></head><body onload=\"pageLoad()\"><div class=\"nutritionLabel\" "
-				+ "style=\"width: 283px;\"><div class=\"title\">Nutrition Facts</div>");
+		try 
+		{
+			Scanner scanner = new Scanner(file);
+			String cssPath = getClass().getResource("nutritionLabelStyles.css").toString();
+//			String jsPath = getClass().getResource("testJS.js").toString();
+			int cssIndex;
+//			int jsIndex;
+			
+			html.append(scanner.useDelimiter("//A").next());
+			
+			cssIndex = html.indexOf("#css", 0);
+			html.replace(cssIndex, cssIndex + 4, cssPath);
+			
+//			jsIndex = html.indexOf("##js", cssIndex);
+//			html.replace(jsIndex, jsIndex + 4, jsPath);
+			
+			lastIndexUsed = cssIndex;
+			
+			scanner.close();
+		} 
+		
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void setTitle(String title)
@@ -80,64 +126,134 @@ public class HTMLBuilder
 	
 	public void setServing(String defaultValue, String serving)
 	{
-		html.append("<div class=\"serving\"><div class=\"cf\"><div class=\"servingSizeText fl\">Serving Size:</div><div class="
-				+ "\"rel servingSizeField fl\"><div class=\"setter\"><a href=\"javascript:increase()\" class=\"unitQuantityUp\""
-				+ " rel=\"nofollow\"></a><a href=\"javascript:decrease()\" class=\"unitQuantityDown\" rel=\"nofollow\"></a></di"
-				+ "v><input value=\"" + defaultValue + "\" id=\"servingInputBox\" class=\"unitQuantityBox\" type=\"text\" onkey"
-				+ "press=\"enter(event)\"></div><div class=\"servingUnit fl unitHasTextbox\">" + serving + "</div></div></div>");
+		File file = new File(getClass().getResource("Serving_DvS.txt").getPath());
+		
+		try
+		{
+			Scanner scanner = new Scanner(file);
+			int ivIndex;
+			int servingIndex;
+			
+			html.append(scanner.useDelimiter("//A").next());
+			
+			ivIndex = html.indexOf("##iv", lastIndexUsed);
+			html.replace(ivIndex, ivIndex + 4, defaultValue);
+			
+			servingIndex = html.indexOf("##su",  ivIndex);
+			html.replace(servingIndex, servingIndex + 4, serving);
+			
+			lastIndexUsed = servingIndex;
+			
+			scanner.close();
+		}
+		
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
-	public void setServing(String defaultValue, String serving, String measurement)
+	public void setServing(String defaultValue, String serving, String weightPerServing)
 	{
-		html.append("<div class=\"serving\"><div class=\"cf\"><div class=\"servingSizeText fl\">Serving Size:</div><div class="
-				+ "\"rel servingSizeField fl\"><div class=\"setter\"><a href=\"javascript:increase()\" class=\"unitQuantityUp"
-				+ "\" rel=\"nofollow\"></a><a href=\"javascript:decrease()\" class=\"unitQuantityDown\" rel=\"nofollow\"></a><"
-				+ "/div><input value=\"" + defaultValue + "\" id=\"servingInputBox\" class=\"unitQuantityBox\" type=\"text\" on"
-				+ "keypress=\"enter(event)\"></div><div class=\"servingUnit fl unitHasTextbox\">" + serving + "</div><d"
-				+ "iv class=\"servingWeightGrams fl gramsHasTextbox\">(" + measurement + ")</div></div></div>\r\n");
+		File file = new File(getClass().getResource("Serving_DvSM.txt").getPath());
+		
+		try
+		{
+			Scanner scanner = new Scanner(file);
+			int ivIndex;
+			int servingIndex;
+			int measurementIndex;
+			
+			html.append(scanner.useDelimiter("//A").next());
+			
+			ivIndex = html.indexOf("##iv", lastIndexUsed);
+			html.replace(ivIndex, ivIndex + 4, defaultValue);
+			
+			servingIndex = html.indexOf("##su", ivIndex);
+			html.replace(servingIndex, servingIndex + 4, serving);
+			
+			measurementIndex = html.indexOf("###m", servingIndex);
+			html.replace(measurementIndex, measurementIndex + 4, weightPerServing);
+			
+			lastIndexUsed = measurementIndex;
+			
+			scanner.close();
+		}
+		
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
-	//	Incase we have a label that has a 'serving per container' but not a 'measurement'.
 	public void setServing(String defaultValue, String serving, int servingsPerContainer)
 	{
-		html.append("<div class=\"serving\"><div class=\"cf\"><div class=\"servingSizeText fl\">Serving Size:</div><div class=\"rel "
-				+ "servingSizeField fl\"><div class=\"setter\"><a href=\"javascript:increase()\" class=\"unitQuantityUp\" rel=\"nofo"
-				+ "llow\"></a><a href=\"javascript:decrease()\" class=\"unitQuantityDown\" rel=\"nofollow\"></a></div><input value=\""
-				+ "" + defaultValue + "\" id=\"servingInputBox\" class=\"unitQuantityBox\" type=\"text\" onkeypress=\"enter(event)\">"
-				+ "</div><div class=\"servingUnit fl unitHasTextbox\">" + serving + "</div></div><div>ServingPerContainer " 
-				+ servingsPerContainer + "</div></div>");
+		File file = new File(getClass().getResource("Serving_DvSSpc.txt").getPath());
+		
+		try
+		{
+			Scanner scanner = new Scanner(file);
+			int ivIndex;
+			int servingIndex;
+			int servingsPerContainerIndex;
+			
+			html.append(scanner.useDelimiter("//A").next());
+			
+			ivIndex = html.indexOf("##iv", lastIndexUsed);
+			html.replace(ivIndex, ivIndex + 4, defaultValue);
+			
+			servingIndex = html.indexOf("##su",  ivIndex);
+			html.replace(servingIndex, servingIndex + 4, serving);
+			
+			servingsPerContainerIndex = html.indexOf("#spc", servingIndex);
+			html.replace(servingsPerContainerIndex, servingsPerContainerIndex + 4, String.valueOf(servingsPerContainer));
+			
+			lastIndexUsed = servingsPerContainerIndex;
+			
+			scanner.close();
+		}
+		
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
-	public void setServing(String defaultValue, String serving, String measurement, String servingsPerContainer)
+	public void setServing(String defaultValue, String serving, String weightPerServing, String servingsPerContainer)
 	{
-		html.append("<div class=\"serving\"><div class=\"cf\"><div class=\"servingSizeText fl\">Serving Size:</div><div class=\""
-				+ "rel servingSizeField fl\"><div class=\"setter\"><a href=\"javascript:increase()\" class=\"unitQuantityUp\" rel"
-				+ "=\"nofollow\"></a><a href=\"javascript:decrease()\" class=\"unitQuantityDown\" rel=\"nofollow\"></a></div><inp"
-				+ "ut value=\"" + defaultValue + "\" id=\"servingInputBox\" class=\"unitQuantityBox\" type=\"text\" onkeypress=\""
-				+ "enter(event)\"></div><div class=\"servingUnit fl unitHasTextbox\">" + serving + "</div><div class=\"se"
-				+ "rvingWeightGrams fl gramsHasTextbox\">(" + measurement + ")</div></div><div>Servings Per Conta"
-				+ "iner " + servingsPerContainer + "</div></div>");
-	}
-	
-	public void setAmountPerServing()
-	{
-		html.append("<div class=\"line m\"><b>Amount Per Serving</b></div>");
-	}
-	
-	public void setCalories(String calories)
-	{
-		html.append("<div class=\"line\"><div><b>Calories</b>" + calories + "</div></div>");
-	}
-	
-	public void setCalories(String calories, String caloriesFromFat)
-	{
-		html.append("<div class=\"line\"><div class=\"fr\">Calories from Fat <span class=\"numberToChange\">" + caloriesFromFat 
-				+ "</span></div><div><b>Calories</b> <span class=\"numberToChange\">" + calories + "</span></div></div>");
-	}
-	
-	public void setDailyValue()
-	{
-		html.append("<div class=\"line ar\"><b>% Daily Value<sup>*</sup></b></div>");
+		File file = new File(getClass().getResource("Serving_DvSMSpc.txt").getPath());
+		
+		try
+		{
+			Scanner scanner = new Scanner(file);
+			int ivIndex;
+			int servingIndex;
+			int measurementIndex;
+			int servingsPerContainerIndex;
+			
+			html.append(scanner.useDelimiter("//A").next());
+			
+			ivIndex = html.indexOf("##iv", lastIndexUsed);
+			html.replace(ivIndex, ivIndex + 4, defaultValue);
+			
+			servingIndex = html.indexOf("##su", ivIndex);
+			html.replace(servingIndex, servingIndex + 4, serving);
+			
+			measurementIndex = html.indexOf("###m", servingIndex);
+			html.replace(measurementIndex, measurementIndex + 4, weightPerServing);
+			
+			servingsPerContainerIndex = html.indexOf("#spc", measurementIndex);
+			html.replace(servingsPerContainerIndex, servingsPerContainerIndex + 4, servingsPerContainer);
+			
+			lastIndexUsed = servingsPerContainerIndex;
+			
+			scanner.close();
+		}
+		
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void setBar1()
@@ -150,54 +266,272 @@ public class HTMLBuilder
 		html.append("<div class=\"bar2\"></div>");
 	}
 	
+	public void setAmountPerServing()
+	{
+		html.append("<div class=\"line m\"><b>Amount Per Serving</b></div>");
+	}
+	
+	public void setDailyValue()
+	{
+		html.append("<div class=\"line ar\"><b>% Daily Value<sup>*</sup></b></div>");
+	}
+	
+	public void setCalories(String calories)
+	{
+		File file = new File(getClass().getResource("Calories_C.txt").getPath());
+		
+		try
+		{
+			Scanner scanner = new Scanner(file);
+			int caloriesIndex;
+			
+			html.append(scanner.useDelimiter("//A").next());
+			
+			caloriesIndex = html.indexOf("###c", lastIndexUsed);
+			html.replace(caloriesIndex, caloriesIndex + 4, calories);
+			
+			lastIndexUsed = caloriesIndex;
+			
+			scanner.close();
+		}
+		
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public void setCalories(String calories, String caloriesFromFat)
+	{
+		File file = new File(getClass().getResource("Calories_CCff.txt").getPath());
+		
+		try
+		{
+			Scanner scanner = new Scanner(file);
+			int caloriesIndex;
+			int caloriesFromFatIndex;
+			
+			html.append(scanner.useDelimiter("//A").next());
+			
+			caloriesFromFatIndex = html.indexOf("#cff", lastIndexUsed);
+			html.replace(caloriesFromFatIndex, caloriesFromFatIndex + 4, caloriesFromFat);
+			
+			caloriesIndex = html.indexOf("###c", caloriesFromFatIndex);
+			html.replace(caloriesIndex, caloriesIndex + 4, calories);
+			
+		
+			
+			lastIndexUsed = caloriesIndex;
+			
+			scanner.close();
+		}
+		
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	public void setLineBold(String nutrition, String amount, String measurement)
 	{
-		html.append("<div class=\"line\"><b>" + nutrition + "</b> <span class=\"numberToChange\"> " + amount + "</span>" 
-				+ measurement + "</div>");
+		File file = new File(getClass().getResource("LineBold_NAM.txt").getPath());
+		
+		try
+		{
+			Scanner scanner = new Scanner(file);
+			int nutritionIndex;
+			int amountIndex;
+			int measurementIndex;
+			
+			html.append(scanner.useDelimiter("//A").next());
+			
+			nutritionIndex = html.indexOf("##nu", lastIndexUsed);
+			html.replace(nutritionIndex, nutritionIndex + 4, nutrition);
+			
+			amountIndex = html.indexOf("###a", nutritionIndex);
+			html.replace(amountIndex, amountIndex + 4, amount);
+			
+			measurementIndex = html.indexOf("###m", amountIndex);
+			html.replace(measurementIndex, measurementIndex + 4, measurement);
+			
+			lastIndexUsed = measurementIndex;
+			
+			scanner.close();
+		}
+		
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void setLineBold(String nutrition, String amount, String measurement, String percent)
 	{
-		html.append("<div class=\"line\"><div class=\"dv\"><b><span class=\"numberToChange\">" + percent + "</span></b>%</div><b>" 
-				+ nutrition + "</b><span class=\"numberToChange\"> " + amount + "</span>" + measurement + "</div>");
+		File file = new File(getClass().getResource("LineBold_NAMP.txt").getPath());
+		
+		try
+		{
+			Scanner scanner = new Scanner(file);
+			int nutritionIndex;
+			int amountIndex;
+			int measurementIndex;
+			int percentIndex;
+			
+			html.append(scanner.useDelimiter("//A").next());
+			
+			percentIndex = html.indexOf("###p", lastIndexUsed);
+			html.replace(percentIndex, percentIndex + 4, percent);
+			
+			nutritionIndex = html.indexOf("##nu", percentIndex);
+			html.replace(nutritionIndex, nutritionIndex + 4, nutrition);
+			
+			amountIndex = html.indexOf("###a", nutritionIndex);
+			html.replace(amountIndex, amountIndex + 4, amount);
+			
+			measurementIndex = html.indexOf("###m", amountIndex);
+			html.replace(measurementIndex, measurementIndex + 4, measurement);
+			
+			lastIndexUsed = measurementIndex;
+			
+			scanner.close();
+		}
+		
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void setLineIndent(String nutrition, String amount, String measurement)
 	{
-		html.append("<div class=\"line indent\">" + nutrition + "<span class=\"numberToChange\"> " + amount + "</span>" 
-				+ measurement + "</div>");
+		File file = new File(getClass().getResource("LineIndent_NAM.txt").getPath());
+		
+		try
+		{
+			Scanner scanner = new Scanner(file);
+			int nutritionIndex;
+			int amountIndex;
+			int measurementIndex;
+			
+			html.append(scanner.useDelimiter("//A").next());
+			
+			nutritionIndex = html.indexOf("##nu", lastIndexUsed);
+			html.replace(nutritionIndex, nutritionIndex + 4, nutrition);
+			
+			amountIndex = html.indexOf("###a", nutritionIndex);
+			html.replace(amountIndex, amountIndex + 4, amount);
+			
+			measurementIndex = html.indexOf("###m", amountIndex);
+			html.replace(measurementIndex, measurementIndex + 4, measurement);
+			
+			lastIndexUsed = measurementIndex;
+			
+			scanner.close();
+		}
+		
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void setLineIndent(String nutrition, String amount, String measurement, String percent)
 	{
-		html.append("<div class=\"line indent\"><div class=\"dv\"><b><span class=\"numberToChange\">" + percent + "</span></b>%</div>" 
-				+ nutrition + "<span class=\"numberToChange\"> " + amount + "</span>" + measurement + "</div>");
+		File file = new File(getClass().getResource("LineIndent_NAMP.txt").getPath());
+		
+		try
+		{
+			Scanner scanner = new Scanner(file);
+			int nutritionIndex;
+			int amountIndex;
+			int measurementIndex;
+			int percentIndex;
+			
+			html.append(scanner.useDelimiter("//A").next());
+			
+			percentIndex = html.indexOf("###p", lastIndexUsed);
+			html.replace(percentIndex, percentIndex + 4, percent);
+			
+			nutritionIndex = html.indexOf("##nu", percentIndex);
+			html.replace(nutritionIndex, nutritionIndex + 4, nutrition);
+			
+			amountIndex = html.indexOf("###a", nutritionIndex);
+			html.replace(amountIndex, amountIndex + 4, amount);
+			
+			measurementIndex = html.indexOf("###m", amountIndex);
+			html.replace(measurementIndex, measurementIndex + 4, measurement);
+			
+			lastIndexUsed = measurementIndex;
+			
+			scanner.close();
+		}
+		
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
-	public void setTransFat(String amount, String measurement)
+	public void setTransFat(String transFat, String measurement)
 	{
-		html.append("<div class=\"line indent\"><i>Trans</i>Fat " + amount + measurement + "</div>");
+		html.append("<div class=\"line indent\"><i>Trans </i>Fat " + transFat + measurement + "</div>");
 	}
 	
-	public void setExtra(String title, String percent)
+	public void setExtras(String nutrition, String percent)
 	{
-		html.append("<div class=\"line\"><div class=\"dv\"><span class=\"numberToChange\">60\\" + percent + "</span>%</div>" 
-				+ title + "</div>");
+		File file = new File(getClass().getResource("Extra_NP.txt").getPath());
+		
+		try
+		{
+			Scanner scanner = new Scanner(file);
+			int nutritionIndex;
+			int percentIndex;
+			
+			html.append(scanner.useDelimiter("//A").next());
+			
+			percentIndex = html.indexOf("###p", lastIndexUsed);
+			html.replace(percentIndex, percentIndex + 4, percent);
+			
+			nutritionIndex = html.indexOf("##nu", percentIndex);
+			html.replace(nutritionIndex, nutritionIndex + 4, nutrition);
+			
+			lastIndexUsed = nutritionIndex;
+			
+			scanner.close();
+		}
+		
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
-	public void finishDocument()
+	public void endDocument()
 	{
-		html.append("<div class=\"dvCalorieDiet line\"><div class=\"calorieNote\"><span class=\"star\">*</span>Percent Daily Values "
-				+ "are based on a 2000 calorie diet.</div></div></div></body></html>");
-	}
-	
-	public StringBuilder getHTMLStringBuilder()
-	{
-		return html;
+		File file = new File(getClass().getResource("EndDocument.txt").getPath());
+		
+		try
+		{
+			Scanner scanner = new Scanner(file);
+			
+			html.append(scanner.useDelimiter("//A").next());
+			
+			scanner.close();
+		}
+		
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public String getHTMLString()
 	{
 		return html.toString();
+	}
+	
+	public StringBuilder getHTMLStringBuilder()
+	{
+		return html;
 	}
 }
