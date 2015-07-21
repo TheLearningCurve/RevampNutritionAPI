@@ -110,24 +110,13 @@ public class NavigationController extends AnchorPane implements Initializable{
 		Stage stage;
 		
 		stage = (Stage) this.getScene().getWindow();
-//		MacroFrameController macroController = new MacroFrameController();
 		FrameController frameController = new FrameController();
-		FrameController Root_frameController = FrameController.controller;
-		
-//		Scene Macroscene = new Scene(macroController);
-
-		if(sceneProperty().equals(Root_frameController))
-		{
-			System.out.println(getScene());
-		}
-		else 
-		{
-			System.out.println(getScene());
-			Scene SearchScene = new Scene(frameController);
-			stage.setScene(SearchScene);
-		}
 		
 		
+		Scene SearchScene = new Scene(frameController);
+		stage.setScene(SearchScene);
+		
+			
 	    stage.show();
 		FrameController.controller.keepMenuOpen();
 
