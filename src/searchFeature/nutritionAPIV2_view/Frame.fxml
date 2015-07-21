@@ -34,7 +34,7 @@
                       <AnchorPane fx:id="LeftandRightAnchor" minHeight="0.0" minWidth="0.0" prefHeight="489.0" prefWidth="763.0">
                            <children>
                              <Pane fx:id="dimPane" prefHeight="470.0" prefWidth="824.0" />
-                              <Pane fx:id="Pane_Controller_Container" prefHeight="470.0" prefWidth="825.0">
+                              <Pane fx:id="Pane_Controller_Container" prefHeight="470.0" prefWidth="825.0" style="-fx-background-color: ;">
                                <children>
                                     <ImageView fx:id="LargeLogo" fitHeight="364.0" fitWidth="370.0" layoutX="225.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
