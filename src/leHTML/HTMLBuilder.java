@@ -87,16 +87,11 @@ public class HTMLBuilder
 		html = new StringBuilder();
 		
 		startDocument();
-		
-		File f = new File(getClass().getResource("StartDocument.txt").getPath());
-		
-		System.out.println(f);
-
 	}
 	
 	private void startDocument()
 	{
-		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\StartDocument.txt");
+		File file = new File(getClass().getResource("StartDocument.txt").getPath());
 		
 		
 		try 
@@ -133,7 +128,7 @@ public class HTMLBuilder
 	
 	public void setServing(String defaultValue, String serving)
 	{
-		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\Serving_DvS.txt");
+		File file = new File(getClass().getResource("Serving_DvS.txt").getPath());
 		
 		try
 		{
@@ -162,7 +157,7 @@ public class HTMLBuilder
 	
 	public void setServing(String defaultValue, String serving, String weightPerServing)
 	{
-		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\Serving_DvSM.txt");
+		File file = new File(getClass().getResource("Serving_DvSM.txt").getPath());
 		
 		try
 		{
@@ -195,7 +190,7 @@ public class HTMLBuilder
 	
 	public void setServing(String defaultValue, String serving, int servingsPerContainer)
 	{
-		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\Serving_DvSSpc.txt");
+		File file = new File(getClass().getResource("Serving_DvSSpc.txt").getPath());
 		
 		try
 		{
@@ -228,7 +223,7 @@ public class HTMLBuilder
 	
 	public void setServing(String defaultValue, String serving, String weightPerServing, String servingsPerContainer)
 	{
-		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\Serving_DvSMSpc.txt");
+		File file = new File(getClass().getResource("Serving_DvSMSpc.txt").getPath());
 		
 		try
 		{
@@ -285,7 +280,7 @@ public class HTMLBuilder
 	
 	public void setCalories(String calories)
 	{
-		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\Calories_C.txt");
+		File file = new File(getClass().getResource("alories_C.txt").getPath());
 		
 		try
 		{
@@ -310,7 +305,7 @@ public class HTMLBuilder
 	
 	public void setCalories(String calories, String caloriesFromFat)
 	{
-		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\Calories_CCff.txt");
+		File file = new File(getClass().getResource("Calories_CCff.txt").getPath());
 		
 		try
 		{
@@ -341,7 +336,7 @@ public class HTMLBuilder
 	
 	public void setLineBold(String nutrition, String amount, String measurement)
 	{
-		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\LineBold_NAM.txt");
+		File file = new File(getClass().getResource("LineBold_NAM.txt").getPath());
 		
 		try
 		{
@@ -374,7 +369,7 @@ public class HTMLBuilder
 	
 	public void setLineBold(String nutrition, String amount, String measurement, String percent)
 	{
-		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\LineBold_NAMP.txt");
+		File file = new File(getClass().getResource("LineBold_NAMP.txt").getPath());
 		
 		try
 		{
@@ -411,7 +406,7 @@ public class HTMLBuilder
 	
 	public void setLineIndent(String nutrition, String amount, String measurement)
 	{
-		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\LineIndent_NAM.txt");
+		File file = new File(getClass().getResource("LineIndent_NAM.txt").getPath());
 		
 		try
 		{
@@ -444,7 +439,7 @@ public class HTMLBuilder
 	
 	public void setLineIndent(String nutrition, String amount, String measurement, String percent)
 	{
-		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\LineIndent_NAMP.txt");
+		File file = new File(getClass().getResource("LineIndent_NAMP.txt").getPath());
 		
 		try
 		{
@@ -486,7 +481,7 @@ public class HTMLBuilder
 	
 	public void setExtras(String nutrition, String percent)
 	{
-		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\Extra_NP.txt");
+		File file = new File(getClass().getResource("Extra_NP.txt").getPath());
 		
 		try
 		{
@@ -515,7 +510,7 @@ public class HTMLBuilder
 	
 	public void endDocument()
 	{
-		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\EndDocument.txt");
+		File file = new File(getClass().getResource("EndDocument.txt").getPath());
 		
 		try
 		{
