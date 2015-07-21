@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -47,13 +49,7 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 	VBox ButtonListContainer;
 	
 	@FXML
-	Label resultLabel;
-	
-	@FXML
-	Button buttonLabel;
-	
-	@FXML 
-	Pane dimPane;
+	Label resultLabel, buttonLabel;
 	
 	@FXML 
 	ScrollPane ListContainerScrollPane;
@@ -62,9 +58,11 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 	ImageView progressIndicatorImageView;
 	
 	public static SearchListFrameController controller;
+	public SingleLabelController singleLabelController;
+	public final ExpandedLabelController expandedLabelController;
 	public int previousIndex = -1;
+	public int ResponseListSize;
 	public Node previousItem;
-
 	
 	public SearchListFrameController()
 	{
@@ -73,7 +71,7 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		controller = (SearchListFrameController) fxmlLoader.getController();
-		
+		expandedLabelController = new ExpandedLabelController();
 		
 		try
 		{
@@ -84,88 +82,65 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 		{
 			throw new RuntimeException(e);
 		}
-		
-		/*
-		buttonList.vvalueProperty().addListener(new ChangeListener<Number>()
-		{
-			@Override
-			public void changed(ObservableValue<? extends Number> observable,
-					Number oldValue, Number newValue)
-			{
-			
-				if(newValue.intValue() == 1)
-				{
-					finishedScroll();
-				}
-			}		
-		});*/
-		
-		
 		  
 	}
+	
+	public void createListItem(String itemname, String brandname, String nutrientName, float nValue, String nUoM, float sQty, String sUoM, String id, String thumbI)
+	{	
+    	singleLabelController = new SingleLabelController(itemname);
+    	
+    	
+    	ButtonListContainer.getChildren().add(singleLabelController);	   
+	    
+	    singleLabelController.setOnMousePressed(new EventHandler<MouseEvent>() {
+
+		    @Override
+		    public void handle(MouseEvent  event) {
+		    	
+			    expandedLabelController.updateExpandableCellData(itemname, brandname, nutrientName ,nValue,thumbI,id);
+
+		    	if(previousIndex != -1 ) 
+		        {
+		        	setItem( previousIndex, previousItem );
+		        }
+		    	
+		    	  int currentIndex = getIndexFromEvent(event);
+			      Node currentItem = getItem(currentIndex);
+			      
+			      setItem( currentIndex, expandedLabelController );
+
+		       previousIndex = currentIndex;
+		       previousItem = currentItem;     
+		             
+		       }
+		    });			
+	    
+    		setListViewVisible(); 
+ }
 	
 	private void setItem(int previousIndex, Node previousItem) {
 		ButtonListContainer.getChildren().set(previousIndex, previousItem);	
 	}
 	
-	int getIndexFromEvent(MouseEvent event) {
+	private int getIndexFromEvent(MouseEvent event) {
 	     return ButtonListContainer.getChildren().indexOf(event.getSource());
 	}
 	
-	Node getItem(int index) {
+	private Node getItem(int index) {
 		   return ButtonListContainer.getChildren().get(index);
 	}
+			
 	
-	public void createList(String itemname, String brandname, String nutrientName, float nValue, String nUoM, float sQty, String sUoM, String id, String thumbI)
-	{	
-		
-		new Thread(()->{
-		Platform.runLater(new Runnable()
-		{
-            @Override public void run() 
-            {
-	        	SingleLabelController singleLabelController = new SingleLabelController(itemname);
-	    	    ExpandedLabelController expandedLabelController = new ExpandedLabelController();
-        			
-				ButtonListContainer.getChildren().add(singleLabelController);
-				singleLabelController.setOnMousePressed(new EventHandler<MouseEvent>() {
-
-        		    @Override
-        		    public void handle(MouseEvent  event) {
-        		    	
-        		    	if(previousIndex != -1 ) 
-        		        {
-        		        	setItem( previousIndex, previousItem );
-        		        }
-        		    	
-        		    	  int currentIndex = getIndexFromEvent(event);
-        			      Node currentItem = getItem(currentIndex);
-        			      
-        			      expandedLabelController.updateExpandableCellData(itemname, brandname, nutrientName ,nValue,thumbI,id);
-        			      setItem( currentIndex, expandedLabelController );
-
-        		       previousIndex = currentIndex;
-        		       previousItem = currentItem;     
-        		       
-        		       }
-        		    });
-        		   }
-            });
-			        try 
-			        {
-			        	Thread.sleep(1000);
-					}
-			        catch (Exception e) 
-			        {
-						e.printStackTrace();
-					}
-			        
-		}).start();
-	}
-	
-	public void setListContainerScrollPaneVisible()
+	public void setListViewVisible()
 	{
 		ListContainerScrollPane.setVisible(true);
+		resultLabel.setVisible(true);
+		setprogressIndicatorImageView_NotVisible();
+	}
+	 
+	public void setResponseListSize(int ResponseListSize)
+	{
+		this.ResponseListSize = ResponseListSize;
 	}
 	
 	
@@ -198,6 +173,11 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 		});
 	}
 	
+	public void setPreviousIndex(int previousIndex)
+	{
+		this.previousIndex = previousIndex;
+	}
+	
 	public void setprogressIndicatorImageViewVisible()
 	{
 		progressIndicatorImageView.setVisible(true);
@@ -207,4 +187,6 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 	{
 		progressIndicatorImageView.setVisible(false);
 	}
+				
+	
 }

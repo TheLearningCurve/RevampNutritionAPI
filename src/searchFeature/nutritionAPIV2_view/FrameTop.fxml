@@ -21,7 +21,7 @@
                   <Font name="SansSerif Regular" size="15.0" />
                </font>
             </TextField>
-            <HBox fx:id="HBoxContainerForListView" layoutY="34.0" onMousePressed="#isthisit" prefHeight="33.0" prefWidth="334.0" style="-fx-background-color: transparent;">
+            <HBox fx:id="HBoxContainerForListView" layoutY="34.0" prefHeight="33.0" prefWidth="334.0" style="-fx-background-color: transparent;">
                <children>
             		<ListView id="listView" fx:id="listView" centerShape="false" onMousePressed="#searchMouseListener" prefHeight="18.0" prefWidth="334.0" styleClass="listViewCell" visible="false" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="33.0" />
                </children>

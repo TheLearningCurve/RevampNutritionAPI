@@ -32,7 +32,7 @@ public class FrameController extends AnchorPane implements Initializable
 	/* TopPanel Variables */
 	
 	@FXML
-	Pane dimPane;
+	Pane dimPane, Pane_Controller_Container, dim_Pane_Container;
 	
 	@FXML
 	Button menuButton;
@@ -41,10 +41,7 @@ public class FrameController extends AnchorPane implements Initializable
 	SplitPane navMenuPane;
 	
 	@FXML
-	AnchorPane navMenu;
-	
-	@FXML
-	AnchorPane LeftandRightAnchor;
+	AnchorPane navMenu, LeftandRightAnchor;
 	
 	@FXML
 	HBox LeftAndRightPanel;
@@ -84,7 +81,6 @@ public class FrameController extends AnchorPane implements Initializable
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) 
 	{
-		
 		opacity = menuButton.getOpacity();
 	
 		navMenu.setMaxWidth(158);
@@ -133,10 +129,7 @@ public class FrameController extends AnchorPane implements Initializable
 	}
 	
 	public void checkDividerPosition()
-	{
-		DoubleProperty doubleProperty = navMenuPane.getDividers().get(0).positionProperty();
-		System.out.println(doubleProperty);
-		
+	{		
 		if(open == false)
 		{
 			open = true;
@@ -153,15 +146,14 @@ public class FrameController extends AnchorPane implements Initializable
 	{		
 		DoubleProperty doubleProperty = navMenuPane.getDividers().get(0).positionProperty();
 		DoubleTransition dt = new DoubleTransition(Duration.millis(1000), doubleProperty);
-		dt.setToValue(0.1469); dt.play();	
+		dt.setToValue(0.19); dt.play();	
 		
 		dimPane.toFront();
 		
 		FadeTransition ft = new FadeTransition(Duration.millis(1000), dimPane);
 		ft.setFromValue(0.0);
 		ft.setToValue(.45);
-		ft.play();
-		
+		ft.play();		
 	}
 	
 	public void closeMenu()
@@ -179,10 +171,26 @@ public class FrameController extends AnchorPane implements Initializable
 			
 			@Override
 			public void handle(ActionEvent event) {
-				dimPane.toBack();
-				
+				dimPane.toBack();			
 			}
 		});
 	}
 	
+	public void keepMenuOpen()
+	{
+		navMenuPane.setDividerPositions(0.19);
+		dimPane.toFront();
+		dimPane.setOpacity(.45);
+		open = true;
+	}
+	
+	public void dim_Pane_ContainerSetOpacity()
+	{
+		dim_Pane_Container.setOpacity(.50);
+	}
+	
+	public void dim_Pane_Container_SetOpacityZero()
+	{
+		dim_Pane_Container.setOpacity(0);
+	}
 }

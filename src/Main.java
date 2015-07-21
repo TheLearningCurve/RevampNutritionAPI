@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 public class Main extends Application
 {
 	public FrameController frameController;
+	public Scene one; 
 	
 	Stage primaryStage;
 	
@@ -25,10 +26,10 @@ public class Main extends Application
 		
 		FrameController frameController = new FrameController();
 	
-		Scene one = new Scene(frameController);
+		one = new Scene(frameController);
 		
-		one.getStylesheets().add(getClass().getResource("/searchFeature/nutritionAPIV2_view/Frame.css").toExternalForm());
 		primaryStage.setScene(one);
 		primaryStage.show();
+		
 	}
 }

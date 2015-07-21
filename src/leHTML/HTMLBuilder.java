@@ -2,6 +2,7 @@ package leHTML;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class HTMLBuilder 
@@ -92,10 +93,11 @@ public class HTMLBuilder
 	{
 		File file = new File(getClass().getResource("StartDocument.txt").getPath());
 		
+		
 		try 
 		{
 			Scanner scanner = new Scanner(file);
-			String cssPath = getClass().getResource("nutritionLabelStyles.css").toString();
+			String cssPath = getClass().getResource("/leHTML/nutritionLabelStyles.css").toString();
 //			String jsPath = getClass().getResource("testJS.js").toString();
 			int cssIndex;
 //			int jsIndex;
@@ -278,7 +280,7 @@ public class HTMLBuilder
 	
 	public void setCalories(String calories)
 	{
-		File file = new File(getClass().getResource("Calories_C.txt").getPath());
+		File file = new File(getClass().getResource("alories_C.txt").getPath());
 		
 		try
 		{

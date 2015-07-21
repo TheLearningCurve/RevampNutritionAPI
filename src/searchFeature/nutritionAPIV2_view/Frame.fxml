@@ -14,7 +14,7 @@
 <?import searchFeature.nutritionAPIV2_controllers.*?>
 <?import navMenu.controller.*?>
 
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="832.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="832.0" stylesheets="@Frame.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
  
 		<!-- Top Panel -->
@@ -27,14 +27,14 @@
                     <items>
                       <AnchorPane id="navMenuAnchor" fx:id="navMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="456.0" prefWidth="71.0" SplitPane.resizableWithParent="false">
                        <children>
-	                     	<NavigationController fx:id="navigationMenu"/>
+	                     	<NavigationController fx:id="navigationMenu" />
                          </children>
                          </AnchorPane>
 	                    
-                      <AnchorPane fx:id="LeftandRightAnchor" minHeight="0.0" minWidth="0.0" prefHeight="489.0" prefWidth="763.0" >
+                      <AnchorPane fx:id="LeftandRightAnchor" minHeight="0.0" minWidth="0.0" prefHeight="489.0" prefWidth="763.0">
                            <children>
                              <Pane fx:id="dimPane" prefHeight="470.0" prefWidth="824.0" />
-                              <Pane prefHeight="470.0" prefWidth="825.0">
+                              <Pane fx:id="Pane_Controller_Container" prefHeight="470.0" prefWidth="825.0">
                                <children>
                               				<!-- Created by Brandon VanderMeyf May 20 2015 -->
                               	   	
@@ -42,7 +42,8 @@
                                     				<!-- Left Panel -->
       				
                                     				<SearchListFrameController fx:id="searchListFrameController" layoutX="200" />
-                                    				<NutritionLabelFrameController fx:id="nutritionLabelFrameController" layoutX="250" layoutY="50" visible="false" />                                    				
+                                    <Pane fx:id="dim_Pane_Container" mouseTransparent="true" opacity="0.0" prefHeight="470.0" prefWidth="824.0" style="-fx-background-color: black;" />
+                                    				<NutritionLabelFrameController fx:id="nutritionLabelFrameController" layoutX="250" layoutY="10" visible="false" />                                    				
           			 	
                                                             		
                               	   
