@@ -14,4 +14,7 @@ public class Serving {
 	
 	@SerializedName("per_container")
 	public int perContainer;
+	
+	@SerializedName("metric")
+	public Metric metric;
 }

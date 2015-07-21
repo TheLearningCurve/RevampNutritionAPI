@@ -14,9 +14,6 @@ import searchFeature.nutritionAPIV2_model.TypeAHead;
 import searchFeature.nutritionAPIV2_service.Adapter;
 import searchFeature.nutritionAPIV2_service.QueryVariables;
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
@@ -32,7 +29,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 
 public class FrameTopController extends AnchorPane implements Initializable
 {
@@ -93,20 +89,18 @@ public class FrameTopController extends AnchorPane implements Initializable
 				}
 				else if(event.getCode() == KeyCode.ENTER)
 				{
-					searchButtonPress(); // If the enter key is pressed we want to search for Item Results
+				    searchingLogicForSearchField();
+				    // If the enter key is pressed we want to search for Item Results
 				}
 		    } 
 	    });	
-	}
-	
-	protected void searchButtonPress() 
-	{
-	    searchingLogicForSearchField();
 	}
 
 	@FXML 
 	public void searchMouseListener(MouseEvent event)
 	{
+		System.out.println(getScene());
+
 		if(event.getSource().equals(listView))
 		{
 			QueryVariables.setSearchTerm(listView.getSelectionModel().getSelectedItem());
@@ -215,22 +209,17 @@ public class FrameTopController extends AnchorPane implements Initializable
 	}
 	
 	public void requestSearchData()
-	{		
+	{				
 		adapter.getapicalls.searchFoodAllResults(QueryVariables.searchTerm, new Callback<SearchData>() {
-			
+						
 			@Override
-			public void success(SearchData searchData, Response response) 
-			{		
+			public void success(final SearchData searchData, Response response) 
+			{				
+				SearchListFrameController.controller.setPreviousIndex(-1);
 				SearchListFrameController.controller.getResultLabel(searchData.total,QueryVariables.searchTerm);
+				SearchListFrameController.controller.setResponseListSize(searchData.results.size());
 
-				for(Results results : searchData.results )
-				{			
-					SearchListFrameController.controller.createList(results.itemName, results.brandName, results.nutruentName,
-							results.nutrientValue, results.nutrientUom, results.servingQty, results.servingUom, results.resourceId, results.thumbnail);	
-				}	
-				
-				SearchListFrameController.controller.setListContainerScrollPaneVisible();
-				SearchListFrameController.controller.setprogressIndicatorImageView_NotVisible();
+				createList(searchData);							
 			}
 			
 			@Override
@@ -256,6 +245,7 @@ public class FrameTopController extends AnchorPane implements Initializable
 					listView.setItems(gettypeaHeadtext());
 					listView.scrollTo(0);
 				}
+				
 			}
 		});
 	}
@@ -289,10 +279,18 @@ public class FrameTopController extends AnchorPane implements Initializable
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1){}
-	
-	@FXML
-	public void isthisit()
-	{
-		
+
+	private void createList(final SearchData searchData) {
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				for(Results results : searchData.results )
+				{			
+					SearchListFrameController.controller.createListItem(results.itemName, results.brandName, results.nutruentName,
+							results.nutrientValue, results.nutrientUom, results.servingQty, results.servingUom, results.resourceId, results.thumbnail);
+				}	
+			}
+		});
 	}
 }

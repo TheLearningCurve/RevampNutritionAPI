@@ -2,6 +2,7 @@ package searchFeature.nutritionAPIV2_controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 import retrofit.Callback;
@@ -9,10 +10,12 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import searchFeature.nutritionAPIV2_model.FoodItem;
 import searchFeature.nutritionAPIV2_model.ItemData;
+import searchFeature.nutritionAPIV2_model.NutrientStrings;
 import searchFeature.nutritionAPIV2_model.Nutrients;
 import searchFeature.nutritionAPIV2_service.Adapter;
 import searchFeature.nutritionAPIV2_service.QueryVariables;
 import javafx.application.Platform;
+import javafx.beans.binding.StringExpression;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,22 +34,15 @@ class ExpandedLabelController extends AnchorPane implements Initializable {
 	public static ExpandedLabelController controller;
 	
 	@FXML
-	Label calorieLabel;
+	Label calorieLabel, ItemNameLabel, BrandNameLabel;
 	
 	@FXML
-	Label ItemNameLabel;
-	
-	@FXML
-	Label BrandNameLabel;
-	
-	@FXML
-	ImageView Thumbnail;
-	
-	@FXML
-	ImageView NutritionLabelIcon;
+	ImageView Thumbnail, NutritionLabelIcon;
 	
 	public Tooltip tooltip = new Tooltip();
     public Adapter adapter = new Adapter();
+	public NutrientStrings nutrientStrings = new NutrientStrings();
+	private DecimalFormat df = new DecimalFormat("#,###.00");
 	
 	public ExpandedLabelController()
 	{
@@ -73,9 +69,7 @@ class ExpandedLabelController extends AnchorPane implements Initializable {
 			public void handle(MouseEvent mousevent) {
 				
 				NutritionLabelFrameController.controller.setVisible(true);
-				SearchListFrameController.controller.dimPane.setVisible(true);
-				SearchListFrameController.controller.dimPane.setOpacity(.50);
-				
+				FrameController.controller.dim_Pane_ContainerSetOpacity();
 			}
 		});
 		
@@ -86,8 +80,6 @@ class ExpandedLabelController extends AnchorPane implements Initializable {
 		// Making the call to get the Item Label so the label is populated quicker
 		QueryVariables.setItemId(resourceId);
 		getItem();
-		 
-		createHtml();
 		
 		this.calorieLabel.setText(String.valueOf(nutrientName + " " + calorieLabel.intValue()));
 		this.ItemNameLabel.setText(ItemNameLabel);
@@ -111,13 +103,59 @@ class ExpandedLabelController extends AnchorPane implements Initializable {
 			@Override
 			public void success(ItemData itemData, Response response)
 			{
-				if(itemData.label.nutrients != null)
+				HTMLBuilder html = new HTMLBuilder();
+				
+				boolean servingPercontainerIsNotZero = String.valueOf(itemData.label.serving.quantity) != null && itemData.label.serving.uom != null && 
+						itemData.label.serving.perContainer != 0 &&
+						(String.valueOf(itemData.label.serving.metric.qty) + itemData.label.serving.metric.uom) != null;
+				
+				boolean servingPercontainerIsNull = String.valueOf(itemData.label.serving.quantity) != null && itemData.label.serving.uom != null && 
+						itemData.label.serving.perContainer == 0 && itemData.label.serving.metric.qty == 0 && itemData.label.serving.metric.uom == null;
+				
+				boolean servingWeightIsNotNull = String.valueOf(itemData.label.serving.quantity) != null && itemData.label.serving.uom != null && 
+						itemData.label.serving.perContainer == 0 && itemData.label.serving.metric.qty != 0 && itemData.label.serving.metric.uom != null;							
+				
+				html.setTitle(itemData.name);
+				
+				if(servingPercontainerIsNotZero)
 				{
+					html.setServing(String.valueOf(df.format(itemData.label.serving.quantity)), itemData.label.serving.uom,
+							String.valueOf(itemData.label.serving.metric.qty) + itemData.label.serving.metric.uom, 
+							String.valueOf(itemData.label.serving.perContainer));
+				}
+				else if(servingPercontainerIsNull)
+				{
+					html.setServing(String.valueOf(df.format(itemData.label.serving.quantity)), itemData.label.serving.uom);
+				}
+				else if(servingWeightIsNotNull)
+				{
+					html.setServing(String.valueOf(df.format(itemData.label.serving.quantity)), itemData.label.serving.uom,
+							String.valueOf(itemData.label.serving.metric.qty) + itemData.label.serving.metric.uom);
+				}
+				
+				if(itemData.label.nutrients != null)
+				{	
 					for(Nutrients n : itemData.label.nutrients)
-					{
-						System.out.println(n.name + ": " + n.value + n.unit);
+					{					  
+						if(itemData.brand.brandName.compareTo("USDA") == 0)
+						{
+							USDA_IFStatements(n);
+						}
+						else 
+						{
+							Non_USDA_IFStatements(n);
+						}				 
 					}
-				}			
+				}
+				
+				if(itemData.brand.brandName.compareTo("USDA") == 0)
+				{				
+					createHtml(USDA_Label(html));
+				}
+				else 
+				{
+					createHtml(NON_USDA_Label(html));
+				}
 			}
 
 			@Override
@@ -128,24 +166,294 @@ class ExpandedLabelController extends AnchorPane implements Initializable {
 		});	
 	}
 	
-	public void createHtml()
+	public void Non_USDA_IFStatements(Nutrients n)
+	{
+		if(n.name != null && n.name.compareTo("Calories") == 0)
+		  {							  
+			  nutrientStrings.setCalories(n.name, n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Total Fat") == 0)
+		  {
+			  nutrientStrings.setTotalFatContents(n.name, n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Saturated Fat") == 0)
+		  {
+			  nutrientStrings.setSaturatedFatContents(n.name, n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Trans Fat") == 0)
+		  {
+			  nutrientStrings.setTransFatContents(n.name, n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Monounsaturated Fat") == 0)
+		  {
+			  nutrientStrings.setMonoSatFatContents(n.name, n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Polyunsaturated Fat") == 0)
+		  {
+			  nutrientStrings.setPolySatFatContents(n.name, n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Cholesterol") == 0)
+		  {
+			  nutrientStrings.setCholesterol(n.name, n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Potassium") == 0)
+		  {
+			  nutrientStrings.setPotassium(n.name, n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Sodium") == 0)
+		  {
+			  nutrientStrings.setSodium(n.name, n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Dietary Fiber") == 0)
+		  {
+			  nutrientStrings.setDietaryFiber(n.name, n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Total Carbohydrate") == 0)
+		  {
+			  nutrientStrings.setCarbohydrate(n.name, n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Sugars") == 0)
+		  {
+			  nutrientStrings.setSugars(n.name, n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Protein") == 0)
+		  {
+			  nutrientStrings.setProtein(n.name, n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Vitamin A %") == 0)
+		  {
+			  nutrientStrings.setVitaminA("Vitamin A", n.value, "%");
+		  }
+		  else if(n.name != null && n.name.compareTo("Vitamin C %") == 0)
+		  {
+			  nutrientStrings.setVitaminC("Vitamin C", n.value, "%");
+		  }
+		  else if(n.name != null && n.name.compareTo("Calcium %") == 0)
+		  {
+			  nutrientStrings.setCalcium("Calcium", n.value, "%");
+		  }
+		  else if(n.name != null && n.name.compareTo("Iron %") == 0)
+		  {
+			  nutrientStrings.setIron("Iron", n.value, "%");
+		  }
+	}
+	
+	public void USDA_IFStatements(Nutrients n)
+	{
+		if(n.name != null && n.name.compareTo("Energy") == 0 && n.unit == "kcal")
+		  {							  
+			  nutrientStrings.setCalories("Calories", n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Total lipid (fat)") == 0)
+		  {
+			  nutrientStrings.setTotalFatContents("Total Fat", n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Fatty acids, total saturated") == 0)
+		  {
+			  nutrientStrings.setSaturatedFatContents("Saturated Fat", n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Fatty acids, total trans") == 0)
+		  {
+			  nutrientStrings.setTransFatContents("Trans Fat", n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Fatty acids, total monounsaturated") == 0)
+		  {
+			  nutrientStrings.setMonoSatFatContents("Monounsaturated Fat", n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Fatty acids, total polyunsaturated") == 0)
+		  {
+			  nutrientStrings.setPolySatFatContents("Polyunsaturated Fat", n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Cholesterol") == 0)
+		  {
+			  nutrientStrings.setCholesterol(n.name, n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Potassium, K") == 0)
+		  {
+			  nutrientStrings.setPotassium("Potassium", n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Sodium, Na") == 0)
+		  {
+			  nutrientStrings.setSodium("Sodium", n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Fiber, total dietary") == 0)
+		  {
+			  nutrientStrings.setDietaryFiber("Dietary Fiber", n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Carbohydrate, by difference") == 0)
+		  {
+			  nutrientStrings.setCarbohydrate("Total Carbohydrate", n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Sugars, total") == 0)
+		  {
+			  nutrientStrings.setSugars("Sugars", n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Protein") == 0)
+		  {
+			  nutrientStrings.setProtein(n.name, n.value, n.unit);
+		  }
+		  else if(n.name != null && n.name.compareTo("Vitamin A, IU") == 0)
+		  {
+			  nutrientStrings.setVitaminA("Vitamin A", n.value, "%");
+		  }
+		  else if(n.name != null && n.name.compareTo("Vitamin C, total ascorbic acid") == 0)
+		  {
+			  nutrientStrings.setVitaminC("Vitamin C", n.value, "%");
+		  }
+		  else if(n.name != null && n.name.compareTo("Calcium, Ca") == 0)
+		  {
+			  nutrientStrings.setCalcium("Calcium", n.value, "%");
+		  }
+		  else if(n.name != null && n.name.compareTo("Iron, Fe") == 0)
+		  {
+			  nutrientStrings.setIron("Iron", n.value, "%");
+		  }
+	}
+	
+	public HTMLBuilder NON_USDA_Label(HTMLBuilder html)
+	{
+		html.setBar2();
+		html.setAmountPerServing();
+
+		if(nutrientStrings.getCalories_value() != null)
+		{
+			html.setCalories(nutrientStrings.getCalories_value());
+		}
+		html.setBar1();
+		html.setDailyValue();
+		html.setLineBold(nutrientStrings.getTotalFat(), nutrientStrings.getTotalFat_value(),nutrientStrings.getTotalFat_unit(), nutrientStrings.getTotalFat_Percent());
+		
+		if(nutrientStrings.getTotalFat_value().compareTo("0") != 0)
+		{
+			html.setLineIndent(nutrientStrings.getSatFat(), nutrientStrings.getSatFat_value(), nutrientStrings.getSatFat_unit(), nutrientStrings.getSatFat_percent());
+			html.setLineIndent(nutrientStrings.getTransFat(), nutrientStrings.getTransFat_value(), nutrientStrings.getTransFat_unit());
+			html.setLineIndent(nutrientStrings.getMonoSatFat(), nutrientStrings.getMonoSatFat_value(), nutrientStrings.getMonoSatFat_unit());
+			html.setLineIndent(nutrientStrings.getPolySatFat(), nutrientStrings.getPolySatFat_value(), nutrientStrings.getPolySatFat_unit());
+		}				
+		if(nutrientStrings.getCholesterol_value().compareTo("0") != 0)
+		{
+			html.setLineBold(nutrientStrings.getCholesterol(), nutrientStrings.getCholesterol_value(), nutrientStrings.getCholesterol_unit(), nutrientStrings.getCholesterol_percent());
+		}
+		if(nutrientStrings.getPotassium_value().compareTo("0") != 0)
+		{
+			html.setLineBold(nutrientStrings.getPotassium(), nutrientStrings.getPotassium_value(), nutrientStrings.getPotassium_unit(), nutrientStrings.getPotassium_percent());
+		}
+		if(nutrientStrings.getSodium_value().compareTo("0") != 0);
+		{
+			html.setLineBold(nutrientStrings.getSodium(), nutrientStrings.getSodium_value(), nutrientStrings.getSodium_unit(), nutrientStrings.getSodium_percent());
+		}	
+		
+			html.setLineBold(nutrientStrings.getCarbohydrate(), nutrientStrings.getCarbohydrate_value(), nutrientStrings.getCarbohydrate_unit(), nutrientStrings.getCarbohydrate_percent());
+		
+		if(nutrientStrings.getCarbohydrate_value().compareTo("0") != 0)
+		{
+			html.setLineIndent(nutrientStrings.getDietaryFiber(), nutrientStrings.getDietaryFiber_value(), nutrientStrings.getDietaryFiber_unit(), nutrientStrings.getDietaryFiber_percent());
+			html.setLineIndent(nutrientStrings.getSugars(), nutrientStrings.getSatFat_value(), nutrientStrings.getSugars_unit());
+		}
+		if(nutrientStrings.getProtein_value().compareTo("0") != 0)
+		{
+		    html.setLineBold(nutrientStrings.getProtein(), nutrientStrings.getProtein_value(), nutrientStrings.getProtein_unit());
+		}
+		html.setBar2();
+		if(nutrientStrings.getVitaminA_value() != null)
+		{
+		    html.setExtras(nutrientStrings.getVitaminA(),  nutrientStrings.getVitaminA_value());
+		}
+		if(nutrientStrings.getVitaminC_value() != null)
+		{
+		    html.setExtras(nutrientStrings.getVitaminC(),  nutrientStrings.getVitaminC_value());
+		}
+		if(nutrientStrings.getCalcium_value() != null)
+		{
+		    html.setExtras(nutrientStrings.getCalcium(),  nutrientStrings.getCalcium_value());
+		}
+		if(nutrientStrings.getIron_value() != null)
+		{
+		    html.setExtras(nutrientStrings.getIron(),  nutrientStrings.getIron_value());
+		}
+		html.endDocument();
+		return html;
+	}
+	
+	public HTMLBuilder USDA_Label(HTMLBuilder html)
+	{
+		html.setBar2();
+		html.setAmountPerServing();
+
+		if(nutrientStrings.getCalories_value() != null)
+		{
+			html.setCalories(nutrientStrings.getCalories_value());
+		}
+		html.setBar1();
+		html.setDailyValue();
+		html.setLineBold(nutrientStrings.getTotalFat(), nutrientStrings.getTotalFat_value(),nutrientStrings.getTotalFat_unit(), nutrientStrings.getTotalFat_Percent());
+		
+		if(nutrientStrings.getTotalFat_value().compareTo("0") != 0)
+		{
+			html.setLineIndent(nutrientStrings.getSatFat(), nutrientStrings.getSatFat_value(), nutrientStrings.getSatFat_unit(), nutrientStrings.getSatFat_percent());
+			if(nutrientStrings.getTransFat_value() != null)
+			{
+				html.setLineIndent(nutrientStrings.getTransFat(), nutrientStrings.getTransFat_value(), nutrientStrings.getTransFat_unit());
+			}
+			if(nutrientStrings.getMonoSatFat_value() != null)
+			{
+				html.setLineIndent(nutrientStrings.getMonoSatFat(), nutrientStrings.getMonoSatFat_value(), nutrientStrings.getMonoSatFat_unit());
+			}
+			if(nutrientStrings.getPolySatFat_value() != null)
+			{
+				html.setLineIndent(nutrientStrings.getPolySatFat(), nutrientStrings.getPolySatFat_value(), nutrientStrings.getPolySatFat_unit());
+			}
+		}				
+		if(nutrientStrings.getCholesterol_value().compareTo("0") != 0)
+		{
+			html.setLineBold(nutrientStrings.getCholesterol(), nutrientStrings.getCholesterol_value(), nutrientStrings.getCholesterol_unit(), nutrientStrings.getCholesterol_percent());
+		}
+		if(nutrientStrings.getPotassium_value().compareTo("0") != 0)
+		{
+			html.setLineBold(nutrientStrings.getPotassium(), nutrientStrings.getPotassium_value(), nutrientStrings.getPotassium_unit(), nutrientStrings.getPotassium_percent());
+		}
+		if(nutrientStrings.getSodium_value().compareTo("0") != 0)
+		{
+			html.setLineBold(nutrientStrings.getSodium(), nutrientStrings.getSodium_value(), nutrientStrings.getSodium_unit(), nutrientStrings.getSodium_percent());
+		}	
+		
+			html.setLineBold(nutrientStrings.getCarbohydrate(), nutrientStrings.getCarbohydrate_value(), nutrientStrings.getCarbohydrate_unit(), nutrientStrings.getCarbohydrate_percent());
+		
+		if(nutrientStrings.getCarbohydrate_value().compareTo("0") != 0)
+		{
+			html.setLineIndent(nutrientStrings.getDietaryFiber(), nutrientStrings.getDietaryFiber_value(), nutrientStrings.getDietaryFiber_unit(), nutrientStrings.getDietaryFiber_percent());
+			html.setLineIndent(nutrientStrings.getSugars(), nutrientStrings.getSatFat_value(), nutrientStrings.getSugars_unit());
+		}
+		if(nutrientStrings.getProtein_value().compareTo("0") != 0)
+		{
+		    html.setLineBold(nutrientStrings.getProtein(), nutrientStrings.getProtein_value(), nutrientStrings.getProtein_unit());
+		}
+		html.setBar2();
+		if(nutrientStrings.getVitaminA_percent() != null)
+		{
+			html.setExtras(nutrientStrings.getVitaminA(),  nutrientStrings.getVitaminA_percent());
+		}
+		if(nutrientStrings.getVitaminC_percent() != null)
+		{
+		    html.setExtras(nutrientStrings.getVitaminC(),  nutrientStrings.getVitaminC_percent());
+		}
+		if(nutrientStrings.getCalcium_percent() != null)
+		{
+		    html.setExtras(nutrientStrings.getCalcium(),  nutrientStrings.getCalcium_percent());
+		}
+		if(nutrientStrings.getIron_percent() != null)
+		{
+		    html.setExtras(nutrientStrings.getIron(),  nutrientStrings.getIron_percent());
+		}
+		html.endDocument();
+		return html;
+	}
+	
+	public void createHtml(HTMLBuilder html)
 	{
 		Platform.runLater(new Runnable() {
 			@Override public void run() 
-			{
-				HTMLBuilder html = new HTMLBuilder();
-				html.setTitle("Poop Sauce");
-				html.setServing("1", "pizza", "853g");
-				html.setBar1();
-				html.setAmountPerServing();
-				html.setCalories("2270", "740");
-				html.setBar2();
-				html.setDailyValue();
-				html.setLineBold("Total fat", "83", "g", "128");
-				html.setLineIndent("Saturated Fat", "83", "g", "190");
-				
-				html.finishDocument();
-				
+			{			
 				NutritionLabelFrameController.controller.sendHtml(html);
 			}
 		});

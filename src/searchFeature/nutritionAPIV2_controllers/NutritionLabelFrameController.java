@@ -8,6 +8,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
@@ -23,9 +25,14 @@ public class NutritionLabelFrameController extends AnchorPane implements Initial
 	@FXML
 	WebView webViewControl;
 	
+	@FXML
+	ImageView Close_Icon;
+	
 	public static NutritionLabelFrameController controller;
 	public WebEngine engine;
-	
+	public Image close_Black = new Image("searchFeature/resources/close_Black.png");
+	public Image close_White = new Image("searchFeature/resources/close_White.png");
+
 	public NutritionLabelFrameController()
 	{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/searchFeature/nutritionAPIV2_view/NutritionLabelFrame.fxml"));
@@ -67,10 +74,26 @@ public class NutritionLabelFrameController extends AnchorPane implements Initial
 
 			@Override
 			public void handle(MouseEvent event) {
-				//FrameBottomLeftController.controller.clearItemOpacity();	
+
 			}
 		});
 		
+		Close_Icon.setOnMousePressed(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				Close_Icon.setImage(close_Black);
+			}
+		});
 		
+		Close_Icon.setOnMouseReleased(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				Close_Icon.setImage(close_White);
+				NutritionLabelFrameController.controller.setVisible(false);
+				FrameController.controller.dim_Pane_Container_SetOpacityZero();
+			}
+		});
 	}
 }

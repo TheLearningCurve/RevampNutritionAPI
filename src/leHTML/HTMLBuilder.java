@@ -2,6 +2,7 @@ package leHTML;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class HTMLBuilder 
@@ -86,16 +87,22 @@ public class HTMLBuilder
 		html = new StringBuilder();
 		
 		startDocument();
+		
+		File f = new File(getClass().getResource("StartDocument.txt").getPath());
+		
+		System.out.println(f);
+
 	}
 	
 	private void startDocument()
 	{
-		File file = new File(getClass().getResource("StartDocument.txt").getPath());
+		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\StartDocument.txt");
+		
 		
 		try 
 		{
 			Scanner scanner = new Scanner(file);
-			String cssPath = getClass().getResource("nutritionLabelStyles.css").toString();
+			String cssPath = getClass().getResource("/leHTML/nutritionLabelStyles.css").toString();
 //			String jsPath = getClass().getResource("testJS.js").toString();
 			int cssIndex;
 //			int jsIndex;
@@ -126,7 +133,7 @@ public class HTMLBuilder
 	
 	public void setServing(String defaultValue, String serving)
 	{
-		File file = new File(getClass().getResource("Serving_DvS.txt").getPath());
+		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\Serving_DvS.txt");
 		
 		try
 		{
@@ -155,7 +162,7 @@ public class HTMLBuilder
 	
 	public void setServing(String defaultValue, String serving, String weightPerServing)
 	{
-		File file = new File(getClass().getResource("Serving_DvSM.txt").getPath());
+		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\Serving_DvSM.txt");
 		
 		try
 		{
@@ -188,7 +195,7 @@ public class HTMLBuilder
 	
 	public void setServing(String defaultValue, String serving, int servingsPerContainer)
 	{
-		File file = new File(getClass().getResource("Serving_DvSSpc.txt").getPath());
+		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\Serving_DvSSpc.txt");
 		
 		try
 		{
@@ -221,7 +228,7 @@ public class HTMLBuilder
 	
 	public void setServing(String defaultValue, String serving, String weightPerServing, String servingsPerContainer)
 	{
-		File file = new File(getClass().getResource("Serving_DvSMSpc.txt").getPath());
+		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\Serving_DvSMSpc.txt");
 		
 		try
 		{
@@ -278,7 +285,7 @@ public class HTMLBuilder
 	
 	public void setCalories(String calories)
 	{
-		File file = new File(getClass().getResource("Calories_C.txt").getPath());
+		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\Calories_C.txt");
 		
 		try
 		{
@@ -303,7 +310,7 @@ public class HTMLBuilder
 	
 	public void setCalories(String calories, String caloriesFromFat)
 	{
-		File file = new File(getClass().getResource("Calories_CCff.txt").getPath());
+		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\Calories_CCff.txt");
 		
 		try
 		{
@@ -334,7 +341,7 @@ public class HTMLBuilder
 	
 	public void setLineBold(String nutrition, String amount, String measurement)
 	{
-		File file = new File(getClass().getResource("LineBold_NAM.txt").getPath());
+		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\LineBold_NAM.txt");
 		
 		try
 		{
@@ -367,7 +374,7 @@ public class HTMLBuilder
 	
 	public void setLineBold(String nutrition, String amount, String measurement, String percent)
 	{
-		File file = new File(getClass().getResource("LineBold_NAMP.txt").getPath());
+		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\LineBold_NAMP.txt");
 		
 		try
 		{
@@ -404,7 +411,7 @@ public class HTMLBuilder
 	
 	public void setLineIndent(String nutrition, String amount, String measurement)
 	{
-		File file = new File(getClass().getResource("LineIndent_NAM.txt").getPath());
+		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\LineIndent_NAM.txt");
 		
 		try
 		{
@@ -437,7 +444,7 @@ public class HTMLBuilder
 	
 	public void setLineIndent(String nutrition, String amount, String measurement, String percent)
 	{
-		File file = new File(getClass().getResource("LineIndent_NAMP.txt").getPath());
+		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\LineIndent_NAMP.txt");
 		
 		try
 		{
@@ -479,7 +486,7 @@ public class HTMLBuilder
 	
 	public void setExtras(String nutrition, String percent)
 	{
-		File file = new File(getClass().getResource("Extra_NP.txt").getPath());
+		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\Extra_NP.txt");
 		
 		try
 		{
@@ -508,7 +515,7 @@ public class HTMLBuilder
 	
 	public void endDocument()
 	{
-		File file = new File(getClass().getResource("EndDocument.txt").getPath());
+		File file = new File("C:\\Users\\Kyle Wolff\\Documents\\RevampNutritionAPI\\bin\\leHTML\\EndDocument.txt");
 		
 		try
 		{
