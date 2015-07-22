@@ -38,6 +38,10 @@
 	-fx-background-color: derive(black,90%);
 }
 
+.list-view .scroll-bar:vertical .thumb:hover {
+	-fx-background-color: derive(black,50%);
+}
+
 #searchField {
 	-fx-background-color: white;
 	-fx-border-insets: 0;
