@@ -36,6 +36,11 @@
                              <Pane fx:id="dimPane" prefHeight="470.0" prefWidth="824.0" />
                               <Pane fx:id="Pane_Controller_Container" prefHeight="470.0" prefWidth="825.0">
                                <children>
+                                    <ImageView fx:id="LargeLogo" fitHeight="364.0" fitWidth="370.0" layoutX="225.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/NutritionLargeLogo.png" />
+                                       </image>
+                                    </ImageView>
                               				<!-- Created by Brandon VanderMeyf May 20 2015 -->
                               	   	
       			

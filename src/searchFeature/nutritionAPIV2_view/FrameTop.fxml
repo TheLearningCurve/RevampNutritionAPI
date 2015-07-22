@@ -31,6 +31,11 @@
 						<Image url="@ic_action_search.png" />
 					</image>
 				</ImageView>
+            <TextField fx:id="SearchField_ErrorMessgae" editable="false" layoutX="114.0" layoutY="26.0" prefHeight="34.0" prefWidth="174.0" style="-fx-text-fill: red; -fx-background-color: black; -fx-border-color: red transparent transparent transparent; -fx-background-insets: 0; -fx-border-width: 4,0,0,0;" text="Please Enter in a search term" visible="false">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
 			</children>
 		</AnchorPane>
 	</children>

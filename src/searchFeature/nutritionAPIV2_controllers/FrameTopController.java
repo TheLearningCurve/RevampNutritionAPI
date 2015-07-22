@@ -33,7 +33,7 @@ import javafx.scene.layout.HBox;
 public class FrameTopController extends AnchorPane implements Initializable
 {
 	@FXML
-	TextField searchField;	
+	TextField searchField, SearchField_ErrorMessgae;	
 	
 	@FXML
 	ListView<String> listView;
@@ -68,29 +68,37 @@ public class FrameTopController extends AnchorPane implements Initializable
 			throw new RuntimeException(e);
 		}
 		
+		
 		/*This is the Key Listener for the search field*/
 		searchField.setOnKeyReleased(new EventHandler<KeyEvent>() 
 		{
 			@Override
 			public void handle(KeyEvent event) 
-			{					
+			{	
 				if(event.getCode() != KeyCode.ENTER)
-				{
-					if(searchField.getText().length() != 0) // If the text is at least on Char long we want to search for type a head
+				{			
+					if(searchField.getText().length() != 0 && !searchField.getText().trim().isEmpty()) // If the text is at least on Char long we want to search for type a head
 					{
 						QueryVariables.setText(searchField.getText());
 						requestTypeAHeadData();
+						SearchField_ErrorMessgae.setVisible(false);			
 					}
 					else if(searchField.getText().length() == 0) // If the text in the search field is empty we do not want the listView to display
-
 					{
 						setListViewVisibleFalse(); 
 					}
 				}
 				else if(event.getCode() == KeyCode.ENTER)
 				{
-				    searchingLogicForSearchField();
-				    // If the enter key is pressed we want to search for Item Results
+					if(searchField.getText().length() != 0 && !searchField.getText().trim().isEmpty()) // If the text is at least on Char long we want to search for type a head
+					{
+						searchingLogicForSearchField();
+					    // If the enter key is pressed we want to search for Item Results
+					}
+					else
+					{
+						SearchField_ErrorMessgae.setVisible(true);
+					}
 				}
 		    } 
 	    });	
@@ -106,7 +114,7 @@ public class FrameTopController extends AnchorPane implements Initializable
 			QueryVariables.setSearchTerm(listView.getSelectionModel().getSelectedItem());
 			searchField.setText(listView.getSelectionModel().getSelectedItem());
 			
-			if(SearchListFrameController.controller.ButtonListContainer.getChildren().isEmpty())
+			if(SearchListFrameController.controller.ButtonListContainer.getChildren().isEmpty() && searchField.getText().length() != 0 && !searchField.getText().trim().isEmpty())
 			{
 				FirstSearchCall();
 			}
@@ -130,11 +138,12 @@ public class FrameTopController extends AnchorPane implements Initializable
 	{
 		QueryVariables.setSearchTerm(searchField.getText());
 		
-		if(SearchListFrameController.controller.ButtonListContainer.getChildren().isEmpty())
+		if(SearchListFrameController.controller.ButtonListContainer.getChildren().isEmpty() && searchField.getText().length() != 0 && !searchField.getText().trim().isEmpty())
 		{
 			FirstSearchCall();
 		}
-		else if(!SearchListFrameController.controller.ButtonListContainer.getChildren().isEmpty() && searchField.getText().compareTo(searchFieldText) != 0)
+		else if(!SearchListFrameController.controller.ButtonListContainer.getChildren().isEmpty() && searchField.getText().compareTo(searchFieldText) != 0
+				&& searchField.getText().length() != 0 && !searchField.getText().trim().isEmpty())
 		{
 			ClearListSearchCall();
 
@@ -142,12 +151,17 @@ public class FrameTopController extends AnchorPane implements Initializable
 		else if(searchField.getText().compareTo(searchFieldText) == 0)
 		{
 			// Do Nothing
-		}			
+		}	
+		else
+		{
+			SearchField_ErrorMessgae.setVisible(true);
+		}
 	}
 	
 	public void FirstSearchCall()
 	{
 		requestSearchData();
+		FrameController.controller.set_LargeLogo_Non_Visible();
 		setListViewVisibleFalse();
 		rememberTextField(searchField.getText());	
 		SearchListFrameController.controller.setprogressIndicatorImageViewVisible();
@@ -155,6 +169,7 @@ public class FrameTopController extends AnchorPane implements Initializable
 	
 	public void ClearListSearchCall()
 	{
+		FrameController.controller.set_LargeLogo_Non_Visible();
 		SearchListFrameController.controller.ButtonListContainer.getChildren().clear();
 		requestSearchData();
 		setListViewVisibleFalse();

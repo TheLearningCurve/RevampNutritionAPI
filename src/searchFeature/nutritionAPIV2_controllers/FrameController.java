@@ -16,6 +16,7 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.SplitPane;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -48,6 +49,9 @@ public class FrameController extends AnchorPane implements Initializable
 	
 	@FXML
 	ProgressIndicator ItemListProgressIndicator;
+	
+	@FXML
+	ImageView LargeLogo;
 	
 	public double opacity;
 	
@@ -192,5 +196,15 @@ public class FrameController extends AnchorPane implements Initializable
 	public void dim_Pane_Container_SetOpacityZero()
 	{
 		dim_Pane_Container.setOpacity(0);
+	}
+	
+	public void set_LargeLogo_Visible()
+	{
+		LargeLogo.setVisible(true);
+	}
+	
+	public void set_LargeLogo_Non_Visible()
+	{
+		LargeLogo.setVisible(false);
 	}
 }
