@@ -234,7 +234,8 @@ public class FrameTopController extends AnchorPane implements Initializable
 				SearchListFrameController.controller.getResultLabel(searchData.total,QueryVariables.searchTerm);
 				SearchListFrameController.controller.setResponseListSize(searchData.results.size());
 
-				createList(searchData);							
+				createList(searchData);	
+				setListViewVisibleFalse();
 			}
 			
 			@Override
