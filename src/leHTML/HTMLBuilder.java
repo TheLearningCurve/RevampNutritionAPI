@@ -2,6 +2,7 @@ package leHTML;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
@@ -91,11 +92,12 @@ public class HTMLBuilder
 	
 	private void startDocument()
 	{
-		File file = new File(getClass().getResource("StartDocument.txt").getPath());
+		
 		
 		
 		try 
 		{
+			File file = new File(getClass().getResource("StartDocument.txt").toURI());
 			Scanner scanner = new Scanner(file);
 			String cssPath = getClass().getResource("/leHTML/nutritionLabelStyles.css").toString();
 //			String jsPath = getClass().getResource("testJS.js").toString();
@@ -119,6 +121,11 @@ public class HTMLBuilder
 		{
 			e.printStackTrace();
 		}
+		
+		catch (URISyntaxException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void setTitle(String title)
@@ -128,10 +135,11 @@ public class HTMLBuilder
 	
 	public void setServing(String defaultValue, String serving)
 	{
-		File file = new File(getClass().getResource("Serving_DvS.txt").getPath());
+		
 		
 		try
 		{
+			File file = new File(getClass().getResource("Serving_DvS.txt").toURI());
 			Scanner scanner = new Scanner(file);
 			int ivIndex;
 			int servingIndex;
@@ -153,14 +161,20 @@ public class HTMLBuilder
 		{
 			e.printStackTrace();
 		}
+		
+		catch (URISyntaxException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void setServing(String defaultValue, String serving, String weightPerServing)
 	{
-		File file = new File(getClass().getResource("Serving_DvSM.txt").getPath());
+		
 		
 		try
 		{
+			File file = new File(getClass().getResource("Serving_DvSM.txt").toURI());
 			Scanner scanner = new Scanner(file);
 			int ivIndex;
 			int servingIndex;
@@ -186,14 +200,20 @@ public class HTMLBuilder
 		{
 			e.printStackTrace();
 		}
+		
+		catch (URISyntaxException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void setServing(String defaultValue, String serving, int servingsPerContainer)
 	{
-		File file = new File(getClass().getResource("Serving_DvSSpc.txt").getPath());
+		
 		
 		try
 		{
+			File file = new File(getClass().getResource("Serving_DvSSpc.txt").toURI());
 			Scanner scanner = new Scanner(file);
 			int ivIndex;
 			int servingIndex;
@@ -219,14 +239,20 @@ public class HTMLBuilder
 		{
 			e.printStackTrace();
 		}
+		
+		catch (URISyntaxException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void setServing(String defaultValue, String serving, String weightPerServing, String servingsPerContainer)
 	{
-		File file = new File(getClass().getResource("Serving_DvSMSpc.txt").getPath());
+		
 		
 		try
 		{
+			File file = new File(getClass().getResource("Serving_DvSMSpc.txt").toURI());
 			Scanner scanner = new Scanner(file);
 			int ivIndex;
 			int servingIndex;
@@ -256,6 +282,11 @@ public class HTMLBuilder
 		{
 			e.printStackTrace();
 		}
+		
+		catch (URISyntaxException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void setBar1()
@@ -280,10 +311,11 @@ public class HTMLBuilder
 	
 	public void setCalories(String calories)
 	{
-		File file = new File(getClass().getResource("alories_C.txt").getPath());
+		
 		
 		try
 		{
+			File file = new File(getClass().getResource("Calories_C.txt").toURI());
 			Scanner scanner = new Scanner(file);
 			int caloriesIndex;
 			
@@ -301,14 +333,19 @@ public class HTMLBuilder
 		{
 			e.printStackTrace();
 		}
+		
+		catch (URISyntaxException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void setCalories(String calories, String caloriesFromFat)
 	{
-		File file = new File(getClass().getResource("Calories_CCff.txt").getPath());
 		
 		try
 		{
+			File file = new File(getClass().getResource("Calories_CCff.txt").toURI());
 			Scanner scanner = new Scanner(file);
 			int caloriesIndex;
 			int caloriesFromFatIndex;
@@ -332,14 +369,18 @@ public class HTMLBuilder
 		{
 			e.printStackTrace();
 		}
+		
+		catch (URISyntaxException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void setLineBold(String nutrition, String amount, String measurement)
 	{
-		File file = new File(getClass().getResource("LineBold_NAM.txt").getPath());
-		
 		try
 		{
+			File file = new File(getClass().getResource("LineBold_NAM.txt").toURI());
 			Scanner scanner = new Scanner(file);
 			int nutritionIndex;
 			int amountIndex;
@@ -362,6 +403,11 @@ public class HTMLBuilder
 		}
 		
 		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		
+		catch (URISyntaxException e)
 		{
 			e.printStackTrace();
 		}
@@ -369,10 +415,11 @@ public class HTMLBuilder
 	
 	public void setLineBold(String nutrition, String amount, String measurement, String percent)
 	{
-		File file = new File(getClass().getResource("LineBold_NAMP.txt").getPath());
+		
 		
 		try
 		{
+			File file = new File(getClass().getResource("LineBold_NAMP.txt").toURI());
 			Scanner scanner = new Scanner(file);
 			int nutritionIndex;
 			int amountIndex;
@@ -402,14 +449,20 @@ public class HTMLBuilder
 		{
 			e.printStackTrace();
 		}
+		
+		catch (URISyntaxException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void setLineIndent(String nutrition, String amount, String measurement)
 	{
-		File file = new File(getClass().getResource("LineIndent_NAM.txt").getPath());
+		
 		
 		try
 		{
+			File file = new File(getClass().getResource("LineIndent_NAM.txt").toURI());
 			Scanner scanner = new Scanner(file);
 			int nutritionIndex;
 			int amountIndex;
@@ -435,14 +488,20 @@ public class HTMLBuilder
 		{
 			e.printStackTrace();
 		}
+		
+		catch (URISyntaxException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void setLineIndent(String nutrition, String amount, String measurement, String percent)
 	{
-		File file = new File(getClass().getResource("LineIndent_NAMP.txt").getPath());
+		
 		
 		try
 		{
+			File file = new File(getClass().getResource("LineIndent_NAMP.txt").toURI());
 			Scanner scanner = new Scanner(file);
 			int nutritionIndex;
 			int amountIndex;
@@ -469,6 +528,11 @@ public class HTMLBuilder
 		}
 		
 		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		
+		catch (URISyntaxException e)
 		{
 			e.printStackTrace();
 		}
@@ -481,10 +545,11 @@ public class HTMLBuilder
 	
 	public void setExtras(String nutrition, String percent)
 	{
-		File file = new File(getClass().getResource("Extra_NP.txt").getPath());
+		
 		
 		try
 		{
+			File file = new File(getClass().getResource("Extra_NP.txt").toURI());
 			Scanner scanner = new Scanner(file);
 			int nutritionIndex;
 			int percentIndex;
@@ -506,14 +571,20 @@ public class HTMLBuilder
 		{
 			e.printStackTrace();
 		}
+		
+		catch (URISyntaxException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void endDocument()
 	{
-		File file = new File(getClass().getResource("EndDocument.txt").getPath());
+		
 		
 		try
 		{
+			File file = new File(getClass().getResource("EndDocument.txt").toURI());
 			Scanner scanner = new Scanner(file);
 			
 			html.append(scanner.useDelimiter("//A").next());
@@ -522,6 +593,11 @@ public class HTMLBuilder
 		}
 		
 		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		
+		catch (URISyntaxException e)
 		{
 			e.printStackTrace();
 		}
