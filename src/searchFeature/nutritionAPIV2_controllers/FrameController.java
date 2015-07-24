@@ -157,7 +157,16 @@ public class FrameController extends AnchorPane implements Initializable
 		ft.setToValue(.45);
 		ft.play();		
 		
-		dimPane.setMouseTransparent(false);
+		ft.setOnFinished(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				SearchFieldFrame.controller.searchField.setDisable(true);
+				dimPane.setMouseTransparent(false);
+			}
+			
+		});
+		
 	}
 	
 	public void closeMenu()
@@ -176,6 +185,7 @@ public class FrameController extends AnchorPane implements Initializable
 			@Override
 			public void handle(ActionEvent event) {
 				dimPane.setMouseTransparent(true);
+				SearchFieldFrame.controller.searchField.setDisable(false);
 			}
 		});
 	}

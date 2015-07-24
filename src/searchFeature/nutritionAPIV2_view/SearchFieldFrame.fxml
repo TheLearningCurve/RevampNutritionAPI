@@ -16,18 +16,18 @@
 	<children>	
 		<AnchorPane id="searchAnchorPane" layoutX="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="326.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="5.0">
 			<children>
-      			<TextField id="searchField" fx:id="searchField" focusTraversable="false" layoutY="1.0" prefHeight="33.0" prefWidth="335.0" promptText="Search For Food" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0"/>
+      			<TextField id="searchField" fx:id="searchField" focusTraversable="false" layoutY="1.0" prefHeight="33.0" prefWidth="335.0" promptText="Search For Food" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0" />
             <HBox id="HBoxContainerForListView" fx:id="HBoxContainerForListView" layoutY="34.0" prefHeight="33.0" prefWidth="334.0">
                <children>
             		<ListView id="listView" fx:id="listView" centerShape="false" onMousePressed="#searchMouseListener" prefHeight="18.0" prefWidth="334.0" visible="false" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="33.0" />
                </children>
             </HBox>
-				<ImageView fx:id="ImageButton" fitHeight="25.0" fitWidth="26.0" layoutX="282.0" layoutY="5.0" onMousePressed="#searchMouseListener" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="5.0">
+				<ImageView id="ImageButton" fx:id="ImageButton" fitHeight="33.0" fitWidth="32.0" layoutX="288.0" layoutY="2.0" onMousePressed="#searchMouseListener" preserveRatio="true" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="2.0">
 					<image>
-						<Image url="@ic_action_search.png" />
+						<Image url="@../resources/SearchButton.png" />
 					</image>
 				</ImageView>
-            <TextField id="SearchField_ErrorMessgae" fx:id="SearchField_ErrorMessgae" editable="false" layoutX="114.0" layoutY="26.0" prefHeight="34.0" prefWidth="174.0" text="Please Enter in a search term" visible="false"/>
+            <TextField id="SearchField_ErrorMessgae" fx:id="SearchField_ErrorMessgae" editable="false" layoutX="114.0" layoutY="26.0" prefHeight="34.0" prefWidth="174.0" text="Please Enter in a search term" visible="false" />
 			</children>
 		</AnchorPane>
 	</children>
