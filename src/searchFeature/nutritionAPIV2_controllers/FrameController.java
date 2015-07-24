@@ -152,12 +152,12 @@ public class FrameController extends AnchorPane implements Initializable
 		DoubleTransition dt = new DoubleTransition(Duration.millis(1000), doubleProperty);
 		dt.setToValue(0.19); dt.play();	
 		
-		dimPane.toFront();
-		
 		FadeTransition ft = new FadeTransition(Duration.millis(1000), dimPane);
 		ft.setFromValue(0.0);
 		ft.setToValue(.45);
 		ft.play();		
+		
+		dimPane.setMouseTransparent(false);
 	}
 	
 	public void closeMenu()
@@ -175,7 +175,7 @@ public class FrameController extends AnchorPane implements Initializable
 			
 			@Override
 			public void handle(ActionEvent event) {
-				dimPane.toBack();			
+				dimPane.setMouseTransparent(true);
 			}
 		});
 	}
