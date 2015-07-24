@@ -161,6 +161,7 @@ public class FrameController extends AnchorPane implements Initializable
 
 			@Override
 			public void handle(ActionEvent event) {
+				SearchFieldFrame.controller.changeSearchFieldImageClear();
 				SearchFieldFrame.controller.searchField.setDisable(true);
 				dimPane.setMouseTransparent(false);
 			}
@@ -184,8 +185,9 @@ public class FrameController extends AnchorPane implements Initializable
 			
 			@Override
 			public void handle(ActionEvent event) {
-				dimPane.setMouseTransparent(true);
+				SearchFieldFrame.controller.changeSearchFieldImageStandard();
 				SearchFieldFrame.controller.searchField.setDisable(false);
+				dimPane.setMouseTransparent(true);
 			}
 		});
 	}
