@@ -100,17 +100,17 @@ public class HTMLBuilder
 			File file = new File(getClass().getResource("StartDocument.txt").toURI());
 			Scanner scanner = new Scanner(file);
 			String cssPath = getClass().getResource("/leHTML/nutritionLabelStyles.css").toString();
-//			String jsPath = getClass().getResource("testJS.js").toString();
+			String jsPath = getClass().getResource("/leHTML/nutritionLabelScripts.js").toString();
 			int cssIndex;
-//			int jsIndex;
+			int jsIndex;
 			
 			html.append(scanner.useDelimiter("//A").next());
 			
 			cssIndex = html.indexOf("#css", 0);
 			html.replace(cssIndex, cssIndex + 4, cssPath);
 			
-//			jsIndex = html.indexOf("##js", cssIndex);
-//			html.replace(jsIndex, jsIndex + 4, jsPath);
+			jsIndex = html.indexOf("##js", cssIndex);
+			html.replace(jsIndex, jsIndex + 4, jsPath);
 			
 			lastIndexUsed = cssIndex;
 			
