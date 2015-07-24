@@ -3,8 +3,7 @@
 	-fx-font-family: SansSerif;
 }
 
-#SingleTextCell{
-	
+#SingleTextCell{	
 	-fx-border-color: derive(black, 80%);
 	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );	
 	-fx-border-insets: 0;
@@ -45,11 +44,11 @@
 
 #NutritionLabelIcon:hover {
 	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );	
-
 }
 
 #IngrediantStatementLabel {
-		-fx-font-size: 12;	
-	
+	-fx-font-size: 12;	
+	-fx-font-family: 'sans-serif';
+	-fx-font-style: normal;
 }
 			

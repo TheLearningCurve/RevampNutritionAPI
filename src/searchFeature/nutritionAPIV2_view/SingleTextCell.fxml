@@ -9,9 +9,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root prefHeight="35.0" prefWidth="400.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root stylesheets="@CustomCell.css" prefHeight="35.0" prefWidth="400.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 <children>
-<HBox id="SingleTextCell" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="400.0" stylesheets="@CustomCell.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="SingleTextCell" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
          <children>
             <Label id="label" fx:id="label" mouseTransparent="true" prefHeight="20.0" prefWidth="329.0" text="Label" />
          </children>

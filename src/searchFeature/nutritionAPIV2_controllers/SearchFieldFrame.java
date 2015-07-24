@@ -30,7 +30,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
-public class FrameTopController extends AnchorPane implements Initializable
+public class SearchFieldFrame extends AnchorPane implements Initializable
 {
 	@FXML
 	TextField searchField, SearchField_ErrorMessgae;	
@@ -46,17 +46,17 @@ public class FrameTopController extends AnchorPane implements Initializable
 	
 	public ObservableList<String> typeaHeadtext = FXCollections.observableArrayList();
     public Adapter adapter = new Adapter();
-    public static FrameTopController controller;
+    public static SearchFieldFrame controller;
     public int buttonPress = 0;
     public String searchFieldText = "Empty String";
 
 	
-	public FrameTopController()
+	public SearchFieldFrame()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/searchFeature/nutritionAPIV2_view/FrameTop.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/searchFeature/nutritionAPIV2_view/SearchFieldFrame.fxml"));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
-		controller = (FrameTopController) fxmlLoader.getController();
+		controller = (SearchFieldFrame) fxmlLoader.getController();
 		
 		try
 		{

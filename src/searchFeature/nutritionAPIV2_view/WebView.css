@@ -1,5 +1,5 @@
 #WebViewControl {
-		-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
 #WebViewControl .scroll-bar:vertical .increment-button,  
@@ -18,7 +18,6 @@
 #WebViewControl .scroll-bar:vertical .decrement-arrow {
 	-fx-shape: " ";
 	-fx-padding: 1 5 0 0;
-	
 }
 
 #WebViewControl .scroll-bar:vertical .thumb {
@@ -38,7 +37,6 @@
 #WebViewControl .scroll-bar:horizontal .decrement-arrow {
 	-fx-shape: " ";
 	-fx-padding: 1 5 0 0;
-	
 }
 
 #WebViewControl .scroll-bar:horizontal .increment-button,  
