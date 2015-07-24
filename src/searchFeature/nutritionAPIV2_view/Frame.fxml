@@ -47,11 +47,9 @@
                                     				<!-- Left Panel -->
       				
                                     				<SearchListFrameController fx:id="searchListFrameController" layoutX="200" />
-                                    <Pane fx:id="dim_Pane_Container" mouseTransparent="true" opacity="0.0" prefHeight="470.0" prefWidth="824.0" style="-fx-background-color: black;" />
+                                    <Pane fx:id="NutritionLabel_DimPane" id="NutritionLabel_DimPane" mouseTransparent="true" prefHeight="470.0" prefWidth="824.0" />
                                     				<NutritionLabelFrameController fx:id="nutritionLabelFrameController" layoutX="250" layoutY="10" visible="false" />                                    				
-          			 	
-                                                            		
-                              	   
+          			 	                            	   
                                  </children>
                               </Pane>
                            </children>
@@ -61,9 +59,9 @@
                </children>
             </AnchorPane>
          </children></StackPane>
-            <Pane prefHeight="71.0" prefWidth="833.0" style="-fx-background-color: #98FF42;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+            <Pane id="Frame_Top_Container" prefHeight="71.0" prefWidth="833.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
                <children>
-               <FrameTopController fx:id="frameTopController" layoutX="450.0" layoutY="20.0" />
+               <SearchFieldFrame fx:id="SearchFieldFrame" layoutX="450.0" layoutY="20.0" />
                   <AnchorPane layoutX="14.0" layoutY="19.0">
                      <children>
                         <Button id="menuButton" fx:id="menuButton" mnemonicParsing="false" opacity="0.37" prefHeight="38.0" prefWidth="38.0">
@@ -75,11 +73,7 @@
                               </ImageInput>
                            </effect>
                         </Button>
-                        <Label layoutX="45.0" layoutY="-3.0" prefHeight="35.0" prefWidth="216.0" text="I'm A Program" textFill="WHITE">
-                           <font>
-                              <Font name="SansSerif Regular" size="24.0" />
-                           </font>
-                        </Label>
+                        <Label id="Title" layoutX="45.0" layoutY="-3.0" prefHeight="35.0" prefWidth="216.0" text="I'm A Program"/>
                      </children>
                   </AnchorPane>
                </children>

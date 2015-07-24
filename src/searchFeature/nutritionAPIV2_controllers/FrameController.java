@@ -33,7 +33,7 @@ public class FrameController extends AnchorPane implements Initializable
 	/* TopPanel Variables */
 	
 	@FXML
-	Pane dimPane, Pane_Controller_Container, dim_Pane_Container;
+	Pane dimPane, Pane_Controller_Container, NutritionLabel_DimPane;
 	
 	@FXML
 	Button menuButton;
@@ -190,12 +190,12 @@ public class FrameController extends AnchorPane implements Initializable
 	
 	public void dim_Pane_ContainerSetOpacity()
 	{
-		dim_Pane_Container.setOpacity(.50);
+		NutritionLabel_DimPane.setOpacity(.50);
 	}
 	
 	public void dim_Pane_Container_SetOpacityZero()
 	{
-		dim_Pane_Container.setOpacity(0);
+		NutritionLabel_DimPane.setOpacity(0);
 	}
 	
 	public void set_LargeLogo_Visible()

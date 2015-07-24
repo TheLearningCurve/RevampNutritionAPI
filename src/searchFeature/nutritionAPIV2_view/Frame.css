@@ -6,14 +6,22 @@
 }
 
 /* This is the Pane that acts as the Dimmer when the Nav Menu opens  */
-#dimPane {
+#dimPane, #NutritionLabel_DimPane {
 	-fx-background-color: black;
 	-fx-opacity: 0;
 }
-#stackPaneAnchorPane{
-	-fx-background-color: #8bc34a;
+#stackPaneAnchorPane, #Frame_Top_Container{
+	-fx-background-color: #98FF42;
 }
 
 #navMenuPane {
 	-fx-background-color: white;
+}
+
+#Title {
+	-fx-font-family: 'sans-serif';
+	-fx-font-size: 24px;
+	-fx-font-style: normal;
+	-fx-text-fill: white;
+	-fx-font-weight: 600;
 }

@@ -39,3 +39,7 @@
 #dimPane {
 	-fx-background-color: black;
 }
+
+#ButtonListContainer, #anchor, #ListContainerScrollPane {
+	-fx-background-color: white;
+}
