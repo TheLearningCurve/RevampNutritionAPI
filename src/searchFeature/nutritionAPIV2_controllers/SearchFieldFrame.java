@@ -150,7 +150,7 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
 		}
 		else if(searchField.getText().compareTo(searchFieldText) == 0)
 		{
-			// Do Nothing
+			setListViewVisibleFalse();
 		}	
 		else
 		{
@@ -203,13 +203,13 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
 						}	
 						
 						settypeaHeadtext(typeAheadText);
-						updateListViewVisibleUITrue(); // Display the ListView
+						setListViewVisibleUITrue(); // Display the ListView
 					}
 					
 					if(typeAhead.isEmpty())
 					{
 						settypeaHeadtext(typeAheadText);
-						updateListViewVisibleUITrue(); // Display the ListView
+						setListViewVisibleUITrue(); // Display the ListView
 					}
 				}
 			}
@@ -246,7 +246,7 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
 		});		
 	}
 	
-	protected void updateListViewVisibleUITrue() 
+	protected void setListViewVisibleUITrue() 
 	{
 		new JFXPanel();
 		Platform.runLater(new Runnable() {
