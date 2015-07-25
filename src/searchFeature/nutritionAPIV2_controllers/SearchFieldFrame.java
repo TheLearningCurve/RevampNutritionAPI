@@ -23,6 +23,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -49,6 +50,8 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
     public static SearchFieldFrame controller;
     public int buttonPress = 0;
     public String searchFieldText = "Empty String";
+    Image SearchButtonClearImage = new Image("searchFeature/resources/SearchButton_Black_Clear.png");
+    Image SearchButtonStandardImage = new Image("searchFeature/resources/SearchButton_Black.png");
 
 	
 	public SearchFieldFrame()
@@ -291,6 +294,18 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
     	{
     		this.typeaHeadtext = typeaHeadtext;
     	}
+	}
+	
+	public void changeSearchFieldImageClear()
+	{
+		   ImageButton.setOpacity(.05);
+	       ImageButton.setImage(SearchButtonClearImage);
+	}
+	
+	public void changeSearchFieldImageStandard()
+	{
+		   ImageButton.setOpacity(1);
+	       ImageButton.setImage(SearchButtonStandardImage);
 	}
 
 	@Override
