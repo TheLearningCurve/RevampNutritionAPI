@@ -119,9 +119,17 @@ class ExpandedLabelController extends AnchorPane implements Initializable {
 				
 				if(servingPercontainerIsNotZero)
 				{
-					html.setServing(String.valueOf(df.format(itemData.label.serving.quantity)), itemData.label.serving.uom,
+					if(itemData.label.serving.metric.uom == null)
+					{
+						html.setServing(String.valueOf(df.format(itemData.label.serving.quantity)), itemData.label.serving.uom,
+								String.valueOf(itemData.label.serving.perContainer));
+					}
+					else 
+					{
+						html.setServing(String.valueOf(df.format(itemData.label.serving.quantity)), itemData.label.serving.uom,
 							String.valueOf(itemData.label.serving.metric.qty) + itemData.label.serving.metric.uom, 
 							String.valueOf(itemData.label.serving.perContainer));
+					}
 				}
 				else if(servingPercontainerIsNull)
 				{
