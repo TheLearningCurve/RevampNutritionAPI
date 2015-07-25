@@ -110,7 +110,6 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
 	@FXML 
 	public void searchMouseListener(MouseEvent event)
 	{
-		System.out.println(getScene());
 
 		if(event.getSource().equals(listView))
 		{
