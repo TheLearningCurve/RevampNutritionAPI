@@ -1,5 +1,6 @@
 package searchFeature.nutritionAPIV2_controllers;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -37,6 +38,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 
 
@@ -81,8 +83,7 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 		catch (IOException e)
 		{
 			throw new RuntimeException(e);
-		}
-		  
+		}	  
 	}
 	
 	public void createListItem(String itemname, String brandname, String nutrientName, float nValue, String nUoM, float sQty, String sUoM, String id, String thumbI)
@@ -145,19 +146,22 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 	
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources){}
-	
-	
-	/*
-	public void finishedScroll() // Change to your liking.
-	{
-		if (buttonList.getVvalue() == 1)
-		{
-			QueryVariables.setOffset(10);
-			FrameTopController.controller.requestSearchData();
-		}
-	}*/
-	
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		ListContainerScrollPane.vvalueProperty().addListener(new ChangeListener<Number>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Number> observable,
+					Number oldValue, Number newValue) {		
+					
+				if (newValue.intValue() == 1)
+				{
+					QueryVariables.setOffset(10);
+					SearchFieldFrame.controller.requestSearchData();
+				}
+			}
+		});
+	}
 	
 	public void getResultLabel(int total, String searchTerm)
 	{
