@@ -172,6 +172,7 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
 	
 	public void ClearListSearchCall()
 	{
+		QueryVariables.clearOffset();
 		FrameController.controller.set_LargeLogo_Non_Visible();
 		SearchListFrameController.controller.ButtonListContainer.getChildren().clear();
 		requestSearchData();
@@ -228,7 +229,7 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
 	
 	public void requestSearchData()
 	{				
-		adapter.getapicalls.searchFoodAllResults(QueryVariables.searchTerm, new Callback<SearchData>() {
+		adapter.getapicalls.searchFoodLimitAndOffset(QueryVariables.searchTerm, 50, QueryVariables.offset, new Callback<SearchData>() {
 						
 			@Override
 			public void success(final SearchData searchData, Response response) 
