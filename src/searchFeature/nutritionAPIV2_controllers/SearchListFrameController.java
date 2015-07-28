@@ -51,7 +51,7 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 	VBox ButtonListContainer;
 	
 	@FXML
-	Label resultLabel, buttonLabel;
+	Label resultLabel, buttonLabel, ErrorMessageLabel;
 	
 	@FXML 
 	ScrollPane ListContainerScrollPane;
@@ -135,7 +135,6 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 	public void setListViewVisible()
 	{
 		ListContainerScrollPane.setVisible(true);
-		resultLabel.setVisible(true);
 		setprogressIndicatorImageView_NotVisible();
 	}
 	 
@@ -173,6 +172,7 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 				DecimalFormat df = new DecimalFormat("#,###");
 
 					resultLabel.setText(String.valueOf(df.format(total)) + " Results for " + searchTerm);
+					resultLabel.setVisible(true);
 			}
 		});
 	}
@@ -191,6 +191,32 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 	{
 		progressIndicatorImageView.setVisible(false);
 	}
-				
 	
+	public void setErrorMessageLabel(String error)
+	{
+		ErrorMessageLabel.setText(error);
+	}
+	
+	public void setErrorMessageUI_NotVisible()
+	{
+		ErrorMessageLabel.setVisible(false);
+	}
+
+	public void updateErrorMessageUI(String errorMessage) {
+		
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				if(errorMessage == "NETWORK")
+				{
+					resultLabel.setVisible(false);
+					ErrorMessageLabel.setText(errorMessage + " Error. Please connect to the Internet");
+					ErrorMessageLabel.setVisible(true);
+					setprogressIndicatorImageView_NotVisible();
+				}					
+			}
+		});
+	}			
 }

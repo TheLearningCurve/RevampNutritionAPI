@@ -43,3 +43,7 @@
 #ButtonListContainer, #anchor, #ListContainerScrollPane {
 	-fx-background-color: white;
 }
+
+#ErrorMessageLabel {
+	-fx-text-fill: red;
+}

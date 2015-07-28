@@ -110,7 +110,6 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
 	@FXML 
 	public void searchMouseListener(MouseEvent event)
 	{
-		System.out.println(getScene());
 
 		if(event.getSource().equals(listView))
 		{
@@ -163,6 +162,7 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
 	
 	public void FirstSearchCall()
 	{
+		SearchListFrameController.controller.setErrorMessageUI_NotVisible();
 		requestSearchData();
 		FrameController.controller.set_LargeLogo_Non_Visible();
 		setListViewVisibleFalse();
@@ -174,6 +174,7 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
 	{
 		QueryVariables.clearOffset();
 		FrameController.controller.set_LargeLogo_Non_Visible();
+		SearchListFrameController.controller.setErrorMessageUI_NotVisible();
 		SearchListFrameController.controller.ButtonListContainer.getChildren().clear();
 		requestSearchData();
 		setListViewVisibleFalse();
@@ -237,15 +238,28 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
 				SearchListFrameController.controller.setPreviousIndex(-1);
 				SearchListFrameController.controller.getResultLabel(searchData.total,QueryVariables.searchTerm);
 				SearchListFrameController.controller.setResponseListSize(searchData.results.size());
+				
+				if(!searchData.results.isEmpty())
+				{
+					createList(searchData);	
+				}
+				else 
+				{
+					SearchListFrameController.controller.setprogressIndicatorImageView_NotVisible();
+				}
 
-				createList(searchData);	
+				
 				setListViewVisibleFalse();
 			}
 			
 			@Override
 			public void failure(RetrofitError retrofitError) 
 			{
-				System.out.println(retrofitError);
+				if(retrofitError.getKind().name() == "NETWORK")
+				{
+					SearchListFrameController.controller.updateErrorMessageUI(retrofitError.getKind().name());
+				}
+									
 			}
 		});		
 	}

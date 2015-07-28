@@ -135,8 +135,7 @@ public class HTMLBuilder
 	
 	public void setServing(String defaultValue, String serving)
 	{
-		
-		
+				
 		try
 		{
 			File file = new File(getClass().getResource("Serving_DvS.txt").toURI());
