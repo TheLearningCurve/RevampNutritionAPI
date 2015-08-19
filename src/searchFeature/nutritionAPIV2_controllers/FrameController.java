@@ -23,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import javafx.animation.*;
+import com.macrocalculator.controllers.*;
 
 
 public class FrameController extends AnchorPane implements Initializable
@@ -218,5 +219,11 @@ public class FrameController extends AnchorPane implements Initializable
 	public void set_LargeLogo_Non_Visible()
 	{
 		LargeLogo.setVisible(false);
+	}
+	
+	public void addMacroCalc()
+	{
+		MainController mainController = new MainController();
+		LeftandRightAnchor.getChildren().add(mainController);
 	}
 }

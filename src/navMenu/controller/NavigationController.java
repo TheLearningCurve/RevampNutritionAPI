@@ -40,7 +40,7 @@ public class NavigationController extends AnchorPane implements Initializable{
 	public Image FitactiveImage = new Image("navMenu/resource/fitTrackerActiveIcon.png");
 	public Image FitstandardImage = new Image("navMenu/resource/fitTrackerIcon.png");
 
-	
+	private FrameController frameController = FrameController.controller;
 	
 	public NavigationController() {
 
@@ -175,7 +175,7 @@ public class NavigationController extends AnchorPane implements Initializable{
 	
 	public void macroCalculatorClick()
 	{
-		System.out.println("macro calc click");
+		frameController.addMacroCalc();
 	}
 	
 	public void fitnessTrackerClick()
