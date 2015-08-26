@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import searchFeature.nutritionAPIV2_controllers.FrameController;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -39,7 +40,7 @@ public class NavigationController extends AnchorPane implements Initializable{
 	public Image FitactiveImage = new Image("navMenu/resource/fitTrackerActiveIcon.png");
 	public Image FitstandardImage = new Image("navMenu/resource/fitTrackerIcon.png");
 
-	
+	private FrameController frameController = FrameController.controller;
 	
 	public NavigationController() {
 
@@ -103,8 +104,85 @@ public class NavigationController extends AnchorPane implements Initializable{
 	}
 	
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {}
+	public void initialize(URL arg0, ResourceBundle arg1) 
+	{
+		searchImageView.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent> () {
+
+			@Override
+			public void handle(MouseEvent arg0) 
+			{
+				nutritionLabelClick();
+			}
+			
+		});
+		
+		SearchIconLabel.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent> () {
+
+			@Override
+			public void handle(MouseEvent arg0) 
+			{
+				nutritionLabelClick();
+			}
+			
+		});
+		
+		macorCalcImageView.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent> () {
+
+			@Override
+			public void handle(MouseEvent arg0) 
+			{
+				macroCalculatorClick();
+			}
+			
+		});
+		
+		MacroCalcLabel.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent> () {
+
+			@Override
+			public void handle(MouseEvent arg0) 
+			{
+				macroCalculatorClick();
+			}
+			
+		});
+		
+		fitTrackerImageView.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent> () {
+
+			@Override
+			public void handle(MouseEvent arg0) 
+			{
+				fitnessTrackerClick();
+			}
+			
+		});
+		
+		FitTrackerLabel.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent> () {
+
+			@Override
+			public void handle(MouseEvent arg0) 
+			{
+				fitnessTrackerClick();
+			}
+			
+		});
+	}
 	
+	//	When navMenu items are clicked, use these three methods for the Mouse Press event:
+	public void nutritionLabelClick()
+	{
+		System.out.println("nutrition label clicked");
+	}
+	
+	public void macroCalculatorClick()
+	{
+		frameController.addMacroCalc();
+	}
+	
+	public void fitnessTrackerClick()
+	{
+		System.out.println("fitness tracker click");
+	}
+	//	END OF METHODS
 
 	public void changeScenes() throws IOException{
 		Stage stage;

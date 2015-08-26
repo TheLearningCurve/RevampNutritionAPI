@@ -45,7 +45,7 @@
                                     				<NutritionLabelFrameController fx:id="nutritionLabelFrameController" layoutX="250" layoutY="10" visible="false" />
                                     <ImageView fx:id="LargeLogo" fitHeight="364.0" fitWidth="370.0" layoutX="225.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../resources/NutritionLargeLogo.png" />
+                                          <Image fx:id="nutritionLargeLogo" url="@../resources/NutritionLargeLogo.png" />
                                        </image>
                                     </ImageView>                                    				
           			 	                            	   
