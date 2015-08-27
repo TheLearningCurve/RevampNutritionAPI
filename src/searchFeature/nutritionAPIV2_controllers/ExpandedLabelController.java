@@ -169,7 +169,7 @@ class ExpandedLabelController extends AnchorPane implements Initializable {
 			@Override
 			public void failure(RetrofitError retrofitError)
 			{
-				System.out.println(retrofitError.getMessage());	
+				SearchListFrameController.controller.updateErrorMessageUI(retrofitError.getKind().name());
 			}
 		});	
 	}
@@ -471,5 +471,3 @@ class ExpandedLabelController extends AnchorPane implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {}
 	
 }
-
-

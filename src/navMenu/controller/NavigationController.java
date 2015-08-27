@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Manager.ScreenManager;
+import fitTracker.controllers.FitTrack_FrameController;
 import searchFeature.nutritionAPIV2_controllers.FrameController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -62,63 +64,49 @@ public class NavigationController extends AnchorPane implements Initializable{
 	@FXML
 	public void changeToIconActive(MouseEvent mouseevent) throws IOException
 	{
+		ScreenManager sm = ScreenManager.getInstance();
+
+		
 		if(mouseevent.getSource().equals(SearchIconContainer))
 		{
 			searchImageView.setImage(SearchactiveImage);
 			SearchIconLabel.setStyle("-fx-text-fill: #98FF42");
+			sm.searchFeature();
+
 		}
 		else if(mouseevent.getSource().equals(macroCalculatorContainer))
 		{
 			macorCalcImageView.setImage(MacroactiveImage);
 			MacroCalcLabel.setStyle("-fx-text-fill: #98FF42");
+			sm.macroCalc();
+
 		}
 		else if(mouseevent.getSource().equals(FitTrackerContainer))
 		{
 			fitTrackerImageView.setImage(FitactiveImage);
 			FitTrackerLabel.setStyle("-fx-text-fill: #98FF42");
+			sm.fitTracker();
 		}
 	}
 
 	@FXML
 	public void changeToIconStandard(MouseEvent mouseevent) throws IOException
 	{
-		String textFill = "-fx-text-fill: #000";
 		
 		if(mouseevent.getSource().equals(SearchIconContainer))
 		{
-			searchImageView.setImage(SearchstandardImage);
-			SearchIconLabel.setStyle(textFill);
-			changeScenes();
+			searchImageView.setImage(SearchstandardImage);			
 		}
 		else if(mouseevent.getSource().equals(macroCalculatorContainer))
 		{
 			macorCalcImageView.setImage(MacrostandardImage);
-			MacroCalcLabel.setStyle(textFill);
 		}
 		else if(mouseevent.getSource().equals(FitTrackerContainer))
 		{
 			fitTrackerImageView.setImage(FitstandardImage);
-			FitTrackerLabel.setStyle(textFill);
 		}
 	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {}
-	
-
-	public void changeScenes() throws IOException{
-		Stage stage;
-		
-		stage = (Stage) this.getScene().getWindow();
-		FrameController frameController = new FrameController();
-		
-		
-		Scene SearchScene = new Scene(frameController);
-		stage.setScene(SearchScene);
-		
-			
-	    stage.show();
-		FrameController.controller.keepMenuOpen();
-
-	}
 }

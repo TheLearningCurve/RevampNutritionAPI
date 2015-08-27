@@ -59,7 +59,10 @@ public class FrameController extends AnchorPane implements Initializable
 	
 	public Image standardButton = new Image("searchFeature/resources/menuButton.png");
 	public Image buttonClicked = new Image("searchFeature/resources/menuButtonClicked.png");
+	public Image BackButton = new Image("searchFeature/resources/MenuBackButton.png");
 	ImageInput image = new ImageInput();
+	public final double imageX = image.getX();
+	public final double imageY = image.getY();
 	
 	public boolean open = false;
 	
@@ -112,24 +115,23 @@ public class FrameController extends AnchorPane implements Initializable
 			@Override
 			public void handle(MouseEvent event)
 			{
+				if(open == false)
+				{
+					image.setSource(BackButton);
+					image.setX(8.0);
+					image.setY(4.0);
+				}
+				else 
+				{
+					image.setSource(standardButton);
+					image.setX(imageX);
+					image.setY(imageY);
+				}
 				
-				image.setSource(buttonClicked);
 				menuButton.setEffect(image);
 				checkDividerPosition();
-
 			}
-		});
-		
-		menuButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
-			
-			@Override
-			public void handle(MouseEvent event)
-			{
-				image.setSource(standardButton);
-				menuButton.setEffect(image);
-			}
-		});
-		
+		});		
 	}
 	
 	public void checkDividerPosition()
@@ -147,7 +149,7 @@ public class FrameController extends AnchorPane implements Initializable
 	}
 	
 	public void openMenu()
-	{		
+	{				
 		DoubleProperty doubleProperty = navMenuPane.getDividers().get(0).positionProperty();
 		DoubleTransition dt = new DoubleTransition(Duration.millis(1000), doubleProperty);
 		dt.setToValue(0.19); dt.play();	
@@ -171,7 +173,7 @@ public class FrameController extends AnchorPane implements Initializable
 	}
 	
 	public void closeMenu()
-	{
+	{	
 		DoubleProperty doubleProperty = navMenuPane.getDividers().get(0).positionProperty();
 		DoubleTransition dt = new DoubleTransition(Duration.millis(1000), doubleProperty);
 		dt.setToValue(0); dt.play();

@@ -2,17 +2,13 @@
 
 
 
-import searchFeature.nutritionAPIV2_controllers.*;
+import Manager.ScreenManager;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application
 {
-	public FrameController frameController;
-	public Scene one; 
-	
-	Stage primaryStage;
+	public ScreenManager screenManager;
 	
 	public static void main(String[] args) 
 	{
@@ -22,14 +18,9 @@ public class Main extends Application
 	@Override
 	public void start(Stage stage) 
 	{		
-		primaryStage = stage;
-		
-		FrameController frameController = new FrameController();
-	
-		one = new Scene(frameController);
-		
-		primaryStage.setScene(one);
-		primaryStage.show();
-		
+		ScreenManager sm = ScreenManager.getInstance();
+		sm.setStage(stage);
+		sm.instaniateControllers();
+		sm.initialLogin();
 	}
 }
