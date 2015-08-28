@@ -127,7 +127,7 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
 			}
 			else if(listView.getSelectionModel().getSelectedItem().compareTo(searchFieldText) == 0)
 			{
-				// Do Nothing
+				setListViewVisibleFalse();
 			}
 		}
 		else if(event.getSource().equals(ImageButton))
@@ -165,9 +165,9 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
 		SearchListFrameController.controller.setErrorMessageUI_NotVisible();
 		requestSearchData();
 		FrameController.controller.set_LargeLogo_Non_Visible();
-		setListViewVisibleFalse();
 		rememberTextField(searchField.getText());	
 		SearchListFrameController.controller.setprogressIndicatorImageViewVisible();
+		setListViewVisibleFalse();
 	}
 	
 	public void ClearListSearchCall()
