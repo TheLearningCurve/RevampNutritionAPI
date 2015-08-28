@@ -1,0 +1,32 @@
+/*Created by Kyle Wolff May 13 2015 */
+
+.split-pane .split-pane-divider {
+	-fx-background-color: transparent;
+	-fx-cursor: null;
+}
+
+/* This is the Pane that acts as the Dimmer when the Nav Menu opens  */
+#dimPane, #NutritionLabel_DimPane {
+	-fx-background-color: black;
+	-fx-opacity: 0;
+}
+#stackPaneAnchorPane, #Frame_Top_Container{
+	-fx-background-color: #98FF42;
+}
+
+#navMenuPane {
+	-fx-background-color: white;
+}
+
+#Title {
+	-fx-font-family: 'sans-serif';
+	-fx-font-size: 24px;
+	-fx-font-style: normal;
+	-fx-text-fill: white;
+	-fx-font-weight: 600;
+}
+
+#Pane_Controller_Container, #AnchorPaneRightSide {
+	
+	-fx-background-color: #76FF03;
+}
