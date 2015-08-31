@@ -1,6 +1,7 @@
 package signOn.service;
 
 import Manager.ScreenManager;
+import signOn.controllers.CreateAccountController;
 import signOn.controllers.SignInFormController;
 import signOn.model.authData;
 
@@ -20,6 +21,8 @@ public class GetUser {
 			public void onAuthenticated(AuthData authData) {							
 				ScreenManager sm = ScreenManager.getInstance();
 				sm.loggedIn();
+				
+				CreateAccountController.controller.setLoggingIn_gif_NonVisible();
 			}
 
 			@Override

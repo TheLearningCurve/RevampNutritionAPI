@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import resource.Strings;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -50,13 +51,16 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
     public static SearchFieldFrame controller;
     public int buttonPress = 0;
     public String searchFieldText = "Empty String";
+    public Strings strings;
     Image SearchButtonClearImage = new Image("searchFeature/resources/SearchButton_Black_Clear.png");
     Image SearchButtonStandardImage = new Image("searchFeature/resources/SearchButton_Black.png");
 
 	
 	public SearchFieldFrame()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/searchFeature/nutritionAPIV2_view/SearchFieldFrame.fxml"));
+		strings = new Strings();
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(strings.getSearchFieldFrame_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		controller = (SearchFieldFrame) fxmlLoader.getController();

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import resource.Strings;
 import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import javafx.animation.*;
+
 import com.macrocalculator.controllers.*;
 
 
@@ -64,13 +66,15 @@ public class FrameController extends AnchorPane implements Initializable
 	ImageInput image = new ImageInput();
 	public final double imageX = image.getX();
 	public final double imageY = image.getY();
+	public Strings strings;
 	
 	public boolean open = false;
 	
 	public FrameController()
 	{
+		strings = new Strings();
 		
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/searchFeature/nutritionAPIV2_view/Frame.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(strings.getFrame_fxml()));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 		controller = (FrameController) fxmlLoader.getController();

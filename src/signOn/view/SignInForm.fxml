@@ -22,14 +22,10 @@
                   <Button fx:id="SignInButton" layoutX="33.0" layoutY="204.0" mnemonicParsing="false" text="Sign In" />
                   <Button id="createAccountButton" fx:id="CreateAccountButton" layoutX="97.0" layoutY="204.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Create Account" />
                   <Label id="errorLabel" fx:id="errorLabel" alignment="CENTER" layoutX="6.0" layoutY="87.0" prefHeight="36.0" prefWidth="222.0" text="Label" textAlignment="CENTER" visible="false" wrapText="true" />
-                  <ImageView fx:id="signIn_loading_icon" fitHeight="25.0" fitWidth="43.0" layoutX="104.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                     <image>
-                        <Image url="@../../resource/sign_in_loader.gif" />
-                     </image>
-                  </ImageView>
+                  <ImageView id="signIn_loading_icon" fx:id="signIn_loading_icon" fitHeight="25.0" fitWidth="43.0" layoutX="104.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" visible="false"/>
                </children>
             </Pane>
-            <ImageView id="signInImage" fitHeight="84.0" fitWidth="104.0" layoutX="143.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="signInImage" fitHeight="84.0" fitWidth="104.0" layoutX="143.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true"/>
          </children>
       </Pane>
    </children>

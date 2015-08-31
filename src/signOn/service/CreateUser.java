@@ -3,15 +3,18 @@ package signOn.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import signOn.controllers.SignInFormController;
+
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
 public class CreateUser {
 	
-
+	public GetUser getUser;
+	
 	public CreateUser() {
 		
-		
+		getUser = new GetUser();
 	}
 	
 	
@@ -29,8 +32,9 @@ public class CreateUser {
 		    	accountMap.put("last_name", last_name);
 		    	accountMap.put("email", email);
 		    	
-		    	user.setValue(accountMap);
+		    	user.setValue(accountMap);   
 		    	
+		    	getUser.getUser(firebase, email, password, SignInFormController.controller);
 		    	
 		    }
 		    

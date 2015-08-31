@@ -1,5 +1,7 @@
 package Manager;
 
+import com.macrocalculator.controllers.MainController;
+
 import fitTracker.controllers.FitTrack_FrameController;
 import macroCalculator.controllers.MacroCalculatorController;
 import searchFeature.nutritionAPIV2_controllers.FrameController;
@@ -19,7 +21,7 @@ public class ScreenManager {
 	public SignInFormController signInFormController;
 	public FrameController frameController;
 	public CreateAccountController createAccountController;
-	public MacroCalculatorController macroCalculatorController;
+	public MainController macroCalculatorController;
 	public FitTrack_FrameController fitTrack_FrameController;
 	
 	// Makes sure the ScreenManager class cannot be instantiated 
@@ -31,7 +33,7 @@ public class ScreenManager {
 		signInFormController = new SignInFormController();
 		createAccountController = new CreateAccountController();
 		frameController = new FrameController();
-		macroCalculatorController = new MacroCalculatorController();
+		macroCalculatorController = new MainController();
 		fitTrack_FrameController = new FitTrack_FrameController();
 		
 		

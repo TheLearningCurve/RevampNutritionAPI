@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+import resource.Strings;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -28,10 +29,12 @@ public class MainController extends AnchorPane implements Initializable
 {
 	public static MainController controller;
 	
-	ScrollPane sbScrollBarOne;
+	public ScrollPane sbScrollBarOne;
 	
-	Button btnNext;
-	Button btnPrevious;
+	public Button btnNext;
+	public Button btnPrevious;
+	
+	public Strings strings;
 	
 	int animationDurationMillis = 1000;
 	double animationDurationSecs = (double)animationDurationMillis / 1000.0;
@@ -44,7 +47,9 @@ public class MainController extends AnchorPane implements Initializable
 	
 	public MainController()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/macrocalculator/fxml/MainFrame.fxml"));
+		strings = new Strings();
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(strings.getMacroCalculator_fxml()));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 		
