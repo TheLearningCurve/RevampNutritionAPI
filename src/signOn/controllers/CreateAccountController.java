@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -35,6 +36,9 @@ public class CreateAccountController extends AnchorPane implements Initializable
 	
 	@FXML 
 	ImageView email_Error_Icon, password_Error_Icon, confirm_Email_Icon, confirm_Password_Icon, loggingIn_gif;
+	
+	@FXML
+	Label error_Password_Label, confirm_Password_Label;
 	
 	public CreateUser createUser;
 	public FireBase fireBase;
@@ -179,6 +183,37 @@ public class CreateAccountController extends AnchorPane implements Initializable
 				sm.initialLogin();
 			}
 		});
+	}
+	
+	public void updateProgressBar(double d)
+	{
+		password_Progress.setProgress(d);
+		
+		if(d == .25)
+		{
+			password_Progress.setStyle("-fx-accent: red");
+			password_Progress.setProgress(d);
+		}
+		else if(d == .5)
+		{
+			password_Progress.setStyle("-fx-accent: orange");
+			password_Progress.setProgress(d);
+		}
+		else if(d == 1)
+		{
+			password_Progress.setStyle("-fx-accent: green");
+			password_Progress.setProgress(d);
+		}
+	}
+	
+	public void seterror_Password_Label_Visible(String errorMessage)
+	{
+		error_Password_Label.setVisible(true);
+		error_Password_Label.setText(errorMessage);
+		
+		confirm_Password.setLayoutY(255);
+		confirm_Password_Label.setLayoutY(245);
+		createAccount_Button.setLayoutY(280);
 	}
 	
 	public void create_Button_Enable()
