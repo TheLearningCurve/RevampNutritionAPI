@@ -21,20 +21,21 @@
                   <Label alignment="CENTER" layoutX="90.0" layoutY="61.0" text="Email" />
                   <Label layoutX="35.0" layoutY="102.0" prefHeight="16.0" prefWidth="90.0" text="Confirm Email" />
                   <Label layoutX="59.0" layoutY="176.0" text="Password" />
-                  <Label layoutX="12.0" layoutY="232.0" text="Confirm Password" />
+                  <Label fx:id="confirm_Password_Label" layoutX="12.0" layoutY="232.0" text="Confirm Password" />
                   <TextField fx:id="firstName_Field" layoutX="133.0" layoutY="14.0" prefHeight="25.0" prefWidth="102.0" />
                   <TextField fx:id="lastName_Field" layoutX="247.0" layoutY="14.0" prefHeight="25.0" prefWidth="111.0" />
                   <TextField fx:id="email_Field" layoutX="133.0" layoutY="56.0" prefHeight="25.0" prefWidth="220.0" />
                   <TextField fx:id="email_confirm_Field" layoutX="133.0" layoutY="97.0" prefHeight="25.0" prefWidth="220.0" />
                   <PasswordField fx:id="password_Field" layoutX="132.0" layoutY="171.0" prefHeight="25.0" prefWidth="220.0" />
                   <PasswordField fx:id="confirm_Password" layoutX="132.0" layoutY="228.0" prefHeight="25.0" prefWidth="220.0" />
-                  <ProgressBar fx:id="password_Progress" layoutX="137.0" layoutY="204.0" prefHeight="18.0" prefWidth="211.0" progress="0.0" />
-                  <Label id="password_Message" layoutX="14.0" layoutY="136.0" prefHeight="39.0" prefWidth="351.0" text="Password must contain one uppercase letter, one lowercase letter and one number." textAlignment="CENTER" wrapText="true" />
+                  <ProgressBar id="progressBar" fx:id="password_Progress" layoutX="137.0" layoutY="204.0" prefHeight="18.0" prefWidth="211.0" progress="0.0" />
+                  <Label id="password_Message" layoutY="132.0" prefHeight="39.0" prefWidth="379.0" text="Password must contain one uppercase letter, one lowercase letter and one number. It must be at least 6 - 15 characters long" textAlignment="CENTER" wrapText="true" />
                   <ImageView id="createAccount_Error_Icon" fx:id="confirm_Password_Icon" fitHeight="18.0" fitWidth="18.0" layoutX="334.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true" visible="false" />
                   <ImageView id="createAccount_Error_Icon" fx:id="confirm_Email_Icon" fitHeight="18.0" fitWidth="18.0" layoutX="334.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" visible="false" />
                   <ImageView id="createAccount_Error_Icon" fx:id="email_Error_Icon" fitHeight="18.0" fitWidth="20.0" layoutX="334.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" visible="false" />
                   <ImageView id="createAccount_Error_Icon" fx:id="password_Error_Icon" fitHeight="18.0" fitWidth="18.0" layoutX="334.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true" visible="false" />
                   <ImageView id="loggingIn_gif" fx:id="loggingIn_gif" fitHeight="75.0" fitWidth="79.0" layoutX="152.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+                  <Label id="error_Password_Label" fx:id="error_Password_Label" alignment="CENTER" layoutX="8.0" layoutY="220.0" mouseTransparent="true" prefHeight="28.0" prefWidth="363.0" visible="false" wrapText="true" />
                </children>
             </Pane>
             <Line endX="250.0" layoutX="117.0" layoutY="127.0" startX="-100.0" />

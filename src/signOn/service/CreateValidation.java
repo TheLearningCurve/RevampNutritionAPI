@@ -22,11 +22,11 @@ public class CreateValidation implements ChangeListener<String> {
 	public Strings strings;
 	public String first_name, last_name, emailAddress, confirm_emailAddress, password, confirm_Password;
 	
-	public boolean firstName_Filled, lastName_Filled, password_Filled, email_Filled, allFieldsFilled;
+	public boolean firstName_Filled, lastName_Filled, password_Filled, email_Filled, allFieldsFilled, containsDigit;
 
-	private Pattern email_Pattern, password_Pattern;
+	private Pattern email_Pattern, password_Pattern, upperCase_Pattern, lowerCase_Pattern, digit_Pattern;
 
-	private Matcher email_Matcher, password_Matcher;
+	private Matcher email_Matcher, password_Matcher, upperCase_Matcher, lowerCase_Matcher, digit_Matcher;
 
 	
 	public CreateValidation()
@@ -35,6 +35,17 @@ public class CreateValidation implements ChangeListener<String> {
 		EmailValidator();
 		PasswordValidator();
 	}
+	
+	public String upperCase;
+	public boolean upperCase_Passed;
+	
+	public String lowerCase;
+	public boolean lowerCase_Passed;
+	
+	private static final String UPPERCASE_PATTERN = "^(?=.*[A-Z])[A-Za-z0-9]+$";
+	private static final String LOWERCASE_PATTERN = "^(?=.*[a-z])[A-Za-z0-9]+$";
+	private static final String DIGIT_PATTERN = "^(?=.*[0-9])[A-Za-z0-9]+$";
+
 
 	private static final String EMAIL_PATTERN = 
 		"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -58,19 +69,36 @@ public class CreateValidation implements ChangeListener<String> {
 	
 	public void PasswordValidator() {
 		password_Pattern = Pattern.compile(PASSWORD_PATTERN);
+		upperCase_Pattern = Pattern.compile(UPPERCASE_PATTERN);
+		lowerCase_Pattern = Pattern.compile(LOWERCASE_PATTERN);
+		digit_Pattern = Pattern.compile(DIGIT_PATTERN);
 	}
 
 	public boolean validateEmail(String email) {
-
 		email_Matcher = email_Pattern.matcher(email);
 		return email_Matcher.matches();
 	}
 	
 	public boolean validatePassword(String password) {
-
 		password_Matcher = password_Pattern.matcher(password);
 		return password_Matcher.matches();
 	}
+	
+	public boolean validateUpperCase(String password) {
+		upperCase_Matcher = upperCase_Pattern.matcher(password);
+		return upperCase_Matcher.matches();
+	}
+	
+	public boolean validateLowerCase(String password) {
+		lowerCase_Matcher= lowerCase_Pattern.matcher(password);
+		return lowerCase_Matcher.matches();
+	}
+	
+	public boolean validateDigit(String password) {
+		digit_Matcher= digit_Pattern.matcher(password);
+		return digit_Matcher.matches();
+	}
+	
 
 	@Override
 	public void changed(ObservableValue<? extends String> observable,
@@ -150,10 +178,17 @@ public class CreateValidation implements ChangeListener<String> {
 		{
 			password = newValue;
 			
+			upperCase = password.toLowerCase();
+			upperCase_Passed = !password.equals(upperCase);
+			
+			lowerCase = password.toUpperCase();
+			lowerCase_Passed = !password.equals(lowerCase);
+			
 			if(emailAddress == null && validatePassword(newValue) == true)
 			{
 				CreateAccountController.controller.setPassword_Error_nonVisible();
 				getallfieldsFilled();
+				passwordProgessBar(1);
 				
 				if(newValue != null)
 				{
@@ -164,6 +199,7 @@ public class CreateValidation implements ChangeListener<String> {
 			{
 				CreateAccountController.controller.setPassword_Error_nonVisible();
 				getallfieldsFilled();
+				passwordProgessBar(1);
 				
 				if(newValue != null)
 				{
@@ -174,6 +210,32 @@ public class CreateValidation implements ChangeListener<String> {
 			{
 				CreateAccountController.controller.setPassword_Error_Icon();
 				password_Filled = false;
+				containsDigit(password);
+				
+				if(validateUpperCase(newValue) == true && validateLowerCase(newValue) == true || 
+						validateLowerCase(newValue) == true && validateDigit(newValue) == true || 
+						validateUpperCase(newValue) == true && validateDigit(newValue) == true)
+				{
+					passwordProgessBar(.50);
+				}
+				else if(validateUpperCase(newValue) == true || validateLowerCase(newValue) == true || validateDigit(newValue) == true)
+				{
+					passwordProgessBar(.25);
+					
+					if(validateUpperCase(newValue) == true)
+					{
+						CreateAccountController.controller.seterror_Password_Label_Visible("Must contain a lower case letter and a digit");
+					}
+					else if(validateLowerCase(newValue) == true)
+					{
+						CreateAccountController.controller.seterror_Password_Label_Visible("Must contain an upper case letter and a digit");
+					}
+					else if(validateDigit(newValue) == true)
+					{
+						CreateAccountController.controller.seterror_Password_Label_Visible("Must contain a lower case letter and upper case letter");
+					}
+				}
+				
 				getallfieldsFilled();
 				
 				if(newValue != null)
@@ -200,6 +262,24 @@ public class CreateValidation implements ChangeListener<String> {
 			}
 		}
 		
+	}
+	
+	public final boolean containsDigit(String string) {
+
+	    if (string != null) {
+	        for (char character : string.toCharArray()) {
+	            if (containsDigit = Character.isDigit(character)) {
+	                break;
+	            }
+	        }
+	    }
+
+	    return containsDigit;
+	}
+	
+	public void passwordProgessBar(double d)
+	{
+		CreateAccountController.controller.updateProgressBar(d);
 	}
 	
 	public void comPareConfrimField(String string)

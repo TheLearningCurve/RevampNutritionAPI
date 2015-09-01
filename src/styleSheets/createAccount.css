@@ -41,6 +41,12 @@
 	-fx-background-color: linear-gradient(transparent, #BDBDBD);
 }
 
+#error_Password_Label {
+	-fx-text-fill: red;
+	-fx-font-size: 13px;
+	-fx-font-weight: bold;
+}
+
 #createAccount_Error_Icon {
 		-fx-image: url("../resource/images/error.png");
 }
@@ -54,3 +60,6 @@
 	-fx-text-fill:  derive(black, 80%);
 	-fx-font-size: 12px;
 }
+
+
+
