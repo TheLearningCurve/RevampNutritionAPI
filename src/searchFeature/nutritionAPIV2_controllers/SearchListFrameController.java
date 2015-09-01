@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import com.google.gson.annotations.SerializedName;
 import com.sun.prism.paint.Color;
 
+import resource.Strings;
 import searchFeature.nutritionAPIV2_model.FoodItem;
 import searchFeature.nutritionAPIV2_service.QueryVariables;
 import javafx.application.Platform;
@@ -65,9 +66,11 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 	public int previousIndex = -1;
 	public int ResponseListSize;
 	public Node previousItem;
+	public Strings strings;
 	
 	public SearchListFrameController()
 	{
+		strings = new Strings();
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/searchFeature/nutritionAPIV2_view/SearchListFrame.fxml"));
 		fxmlLoader.setController(this);

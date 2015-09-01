@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import resource.Strings;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,10 +33,13 @@ public class NutritionLabelFrameController extends AnchorPane implements Initial
 	public WebEngine engine;
 	public Image close_Black = new Image("searchFeature/resources/close_Black.png");
 	public Image close_White = new Image("searchFeature/resources/close_White.png");
+	public Strings strings;
 
 	public NutritionLabelFrameController()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/searchFeature/nutritionAPIV2_view/NutritionLabelFrame.fxml"));
+		strings = new Strings();
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(strings.getNutritionLabel_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		controller = (NutritionLabelFrameController) fxmlLoader.getController();

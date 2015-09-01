@@ -5,6 +5,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
+import resource.Strings;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -43,10 +44,13 @@ class ExpandedLabelController extends AnchorPane implements Initializable {
     public Adapter adapter = new Adapter();
 	public NutrientStrings nutrientStrings = new NutrientStrings();
 	private DecimalFormat df = new DecimalFormat("#,###.00");
+	public Strings strings;
 	
 	public ExpandedLabelController()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/searchFeature/nutritionAPIV2_view/ExpandableTextCell.fxml"));
+		strings = new Strings();
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(strings.getExpandedLabel_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		controller = (ExpandedLabelController) fxmlLoader.getController();

@@ -7,7 +7,7 @@
 .label {	
 	-fx-font-family: SansSerif;
 	-fx-text-fill:  #76FF03;
-	-fx-font-size: 15px;
+	-fx-font-size: 13px;
 	-fx-font-weight: bold;
 }
 
@@ -33,10 +33,24 @@
 }
 
 #backButton {	
-	-fx-background-image: url("../resource/MenuBackButton.png");
+	-fx-background-image: url("../resource/images/MenuBackButton.png");
 	-fx-background-color: transparent;
 }
 
 #backButton:hover {
 	-fx-background-color: linear-gradient(transparent, #BDBDBD);
+}
+
+#createAccount_Error_Icon {
+		-fx-image: url("../resource/images/error.png");
+}
+
+#loggingIn_gif {
+	
+	-fx-image: url("../resource/images/loadingIcon.gif");
+}
+
+#password_Message {
+	-fx-text-fill:  derive(black, 80%);
+	-fx-font-size: 12px;
 }

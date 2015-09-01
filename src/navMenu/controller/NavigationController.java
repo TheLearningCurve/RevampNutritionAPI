@@ -5,18 +5,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Manager.ScreenManager;
-import fitTracker.controllers.FitTrack_FrameController;
-import searchFeature.nutritionAPIV2_controllers.FrameController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 
 public class NavigationController extends AnchorPane implements Initializable{
 	
@@ -79,7 +75,6 @@ public class NavigationController extends AnchorPane implements Initializable{
 			macorCalcImageView.setImage(MacroactiveImage);
 			MacroCalcLabel.setStyle("-fx-text-fill: #98FF42");
 			sm.macroCalc();
-
 		}
 		else if(mouseevent.getSource().equals(FitTrackerContainer))
 		{
@@ -96,14 +91,19 @@ public class NavigationController extends AnchorPane implements Initializable{
 		if(mouseevent.getSource().equals(SearchIconContainer))
 		{
 			searchImageView.setImage(SearchstandardImage);			
+			SearchIconLabel.setStyle("-fx-text-fill: black");
+
 		}
 		else if(mouseevent.getSource().equals(macroCalculatorContainer))
 		{
 			macorCalcImageView.setImage(MacrostandardImage);
+			MacroCalcLabel.setStyle("-fx-text-fill: black");
+
 		}
 		else if(mouseevent.getSource().equals(FitTrackerContainer))
 		{
 			fitTrackerImageView.setImage(FitstandardImage);
+			FitTrackerLabel.setStyle("-fx-text-fill: black");
 		}
 	}
 	

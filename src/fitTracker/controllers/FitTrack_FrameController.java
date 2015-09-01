@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import resource.Strings;
 import searchFeature.nutritionAPIV2_controllers.DoubleTransition;
 import searchFeature.nutritionAPIV2_controllers.SearchFieldFrame;
 import javafx.beans.property.DoubleProperty;
@@ -61,7 +62,8 @@ public class FitTrack_FrameController extends AnchorPane implements Initializabl
 		public Image standardButton = new Image("searchFeature/resources/menuButton.png");
 		public Image buttonClicked = new Image("searchFeature/resources/menuButtonClicked.png");
 		public Image BackButton = new Image("searchFeature/resources/MenuBackButton.png");
-		ImageInput image = new ImageInput();
+		public ImageInput image = new ImageInput();
+		public Strings strings;
 		public final double imageX = image.getX();
 		public final double imageY = image.getY();
 		
@@ -70,8 +72,9 @@ public class FitTrack_FrameController extends AnchorPane implements Initializabl
 		
 		public FitTrack_FrameController()
 		{
+			strings = new Strings();
 			
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fitTracker/fitracker_view/Tracker_Frame.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(strings.getFitTracker_fxml()));
 			fxmlLoader.setRoot(this);
 			fxmlLoader.setController(this);
 			controller = (FitTrack_FrameController) fxmlLoader.getController();
