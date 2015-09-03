@@ -1,20 +1,22 @@
-package searchFeature.nutritionAPIV2_controllers;
+package com.kandb_nutrition.searchFeature.controllers;
 
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
-import resource.Strings;
+import com.kandb_nutrition.leHTML.HTMLBuilder;
+import com.kandb_nutrition.resource.Strings;
+import com.kandb_nutrition.searchFeature.model.FoodItem;
+import com.kandb_nutrition.searchFeature.model.ItemData;
+import com.kandb_nutrition.searchFeature.model.NutrientStrings;
+import com.kandb_nutrition.searchFeature.model.Nutrients;
+import com.kandb_nutrition.searchFeature.service.Adapter;
+import com.kandb_nutrition.searchFeature.service.QueryVariables;
+
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import searchFeature.nutritionAPIV2_model.FoodItem;
-import searchFeature.nutritionAPIV2_model.ItemData;
-import searchFeature.nutritionAPIV2_model.NutrientStrings;
-import searchFeature.nutritionAPIV2_model.Nutrients;
-import searchFeature.nutritionAPIV2_service.Adapter;
-import searchFeature.nutritionAPIV2_service.QueryVariables;
 import javafx.application.Platform;
 import javafx.beans.binding.StringExpression;
 import javafx.event.EventHandler;
@@ -28,7 +30,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import leHTML.HTMLBuilder;
 
 class ExpandedLabelController extends AnchorPane implements Initializable {
 
@@ -44,13 +45,13 @@ class ExpandedLabelController extends AnchorPane implements Initializable {
     public Adapter adapter = new Adapter();
 	public NutrientStrings nutrientStrings = new NutrientStrings();
 	private DecimalFormat df = new DecimalFormat("#,###.00");
-	public Strings strings;
+	public Strings string;
 	
 	public ExpandedLabelController()
 	{
-		strings = new Strings();
+		string = new Strings();
 		
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(strings.getExpandedLabel_fxml()));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getExpandedLabel_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		controller = (ExpandedLabelController) fxmlLoader.getController();

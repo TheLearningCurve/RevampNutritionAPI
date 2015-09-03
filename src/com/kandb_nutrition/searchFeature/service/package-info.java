@@ -5,4 +5,4 @@
  * @author Brandon
  *
  */
-package searchFeature.nutritionAPIV2_service;
+package com.kandb_nutrition.searchFeature.service;

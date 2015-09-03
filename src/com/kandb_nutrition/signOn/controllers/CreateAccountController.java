@@ -1,14 +1,15 @@
-package signOn.controllers;
+package com.kandb_nutrition.signOn.controllers;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import resource.Strings;
-import signOn.service.CreateUser;
-import signOn.service.CreateValidation;
-import signOn.service.FireBase;
-import Manager.ScreenManager;
+import com.kandb_nutrition.manager.ScreenManager;
+import com.kandb_nutrition.resource.Strings;
+import com.kandb_nutrition.signOn.service.CreateUser;
+import com.kandb_nutrition.signOn.service.CreateValidation;
+import com.kandb_nutrition.signOn.service.FireBase;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -42,7 +43,7 @@ public class CreateAccountController extends AnchorPane implements Initializable
 	
 	public CreateUser createUser;
 	public FireBase fireBase;
-	public Strings strings;
+	public Strings string;
 	public CreateValidation createValidation;
 	public int enableCreateAccount;
 	public boolean valid_Email;
@@ -52,10 +53,10 @@ public class CreateAccountController extends AnchorPane implements Initializable
 
 	public CreateAccountController()
 	{		
-		strings = new Strings();
+		string = new Strings();
 		createValidation = new CreateValidation();
 		
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(strings.getCreatAccountForm_fxml()));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getCreatAccountForm_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		controller = (CreateAccountController) fxmlLoader.getController();
@@ -191,17 +192,17 @@ public class CreateAccountController extends AnchorPane implements Initializable
 		
 		if(d == .25)
 		{
-			password_Progress.setStyle("-fx-accent: red");
+			password_Progress.setStyle(string.getFx_accent_red());
 			password_Progress.setProgress(d);
 		}
 		else if(d == .5)
 		{
-			password_Progress.setStyle("-fx-accent: orange");
+			password_Progress.setStyle(string.getFx_accent_orange());
 			password_Progress.setProgress(d);
 		}
 		else if(d == 1)
 		{
-			password_Progress.setStyle("-fx-accent: green");
+			password_Progress.setStyle(string.getFx_accent_green());
 			password_Progress.setProgress(d);
 		}
 	}
@@ -211,7 +212,7 @@ public class CreateAccountController extends AnchorPane implements Initializable
 		error_Password_Label.setVisible(true);
 		error_Password_Label.setText(errorMessage);
 		
-		confirm_Password.setLayoutY(255);
+		confirm_Password.setLayoutY(250);
 		confirm_Password_Label.setLayoutY(245);
 		createAccount_Button.setLayoutY(280);
 	}

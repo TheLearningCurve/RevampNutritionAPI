@@ -2,7 +2,8 @@
 
 
 
-import Manager.ScreenManager;
+import com.kandb_nutrition.manager.ScreenManager;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 

@@ -1,13 +1,14 @@
-package signOn.controllers;
+package com.kandb_nutrition.signOn.controllers;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import Manager.ScreenManager;
-import resource.Strings;
-import signOn.service.FireBase;
-import signOn.service.GetUser;
+import com.kandb_nutrition.manager.ScreenManager;
+import com.kandb_nutrition.resource.Strings;
+import com.kandb_nutrition.signOn.service.FireBase;
+import com.kandb_nutrition.signOn.service.GetUser;
+
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -37,7 +38,7 @@ public class SignInFormController extends AnchorPane implements Initializable {
 	ImageView signIn_loading_icon;
 	
 	public static SignInFormController controller;
-	public Strings strings;
+	public Strings string;
 	public FireBase fireBase;
 	public GetUser getUser;
 
@@ -50,10 +51,10 @@ public class SignInFormController extends AnchorPane implements Initializable {
 	
 	public SignInFormController() {
 		
-		strings = new Strings();
+		string = new Strings();
 		fireBase = new FireBase();
 
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(strings.getSignInForm_fxml()));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getSignInForm_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		controller = (SignInFormController) fxmlLoader.getController();
@@ -83,15 +84,15 @@ public class SignInFormController extends AnchorPane implements Initializable {
 					
 					if(EmailField.getText().isEmpty() && PasswordField.getText().isEmpty())
 					{
-						textFieldError("Please fill in both fields");
+						textFieldError(string.getEmptySignInField_Message());
 					}
 					else if(EmailField.getText().isEmpty())
 					{
-						textFieldError("Email field cannot be empty");
+						textFieldError(string.getEmptyEmailField_Message());
 					}
 					else if(PasswordField.getText().isEmpty())
 					{
-						textFieldError("Password field cannot be empty");
+						textFieldError(string.getEmptyPasswordField_Message());
 					}
 				}
 			}

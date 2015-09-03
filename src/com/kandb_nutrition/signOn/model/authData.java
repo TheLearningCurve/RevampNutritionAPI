@@ -1,4 +1,4 @@
-package signOn.model;
+package com.kandb_nutrition.signOn.model;
 
 public class authData {
 	

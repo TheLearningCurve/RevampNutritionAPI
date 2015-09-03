@@ -31,12 +31,12 @@
 
 #signInImage {
 	
-	-fx-image: url("../resource/images/NutritionLogo.png");
+	-fx-image: url("../images/NutritionLogo.png");
 }
 
 #signIn_loading_icon {
 	
-	-fx-image: url("../resource/images/loadingIcon.gif");
+	-fx-image: url("../images/loadingIcon.gif");
 }
 
 .pane {

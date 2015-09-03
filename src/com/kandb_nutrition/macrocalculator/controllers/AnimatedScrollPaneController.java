@@ -1,7 +1,9 @@
-package com.macrocalculator.controllers;
+package com.kandb_nutrition.macrocalculator.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.kandb_nutrition.resource.Strings;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,10 +16,13 @@ public class AnimatedScrollPaneController extends ScrollPane implements Initiali
 	
 	private double width;
 	private double height;
+	public Strings string;
 	
 	public AnimatedScrollPaneController(double width, double height)
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/macrocalculator/fxml/AnimatedScrollPane.fxml"));
+		string = new Strings();
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getAnimatedScrollPane_fxml()));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 		

@@ -1,4 +1,4 @@
-package com.macrocalculator.controllers;
+package com.kandb_nutrition.macrocalculator.controllers;
 
 
 //	Using equation y = ax^2

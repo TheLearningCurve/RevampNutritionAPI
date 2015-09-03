@@ -1,11 +1,10 @@
-package signOn.service;
-
-import Manager.ScreenManager;
-import signOn.controllers.CreateAccountController;
-import signOn.controllers.SignInFormController;
-import signOn.model.authData;
+package com.kandb_nutrition.signOn.service;
 
 import com.firebase.client.*;
+import com.kandb_nutrition.manager.ScreenManager;
+import com.kandb_nutrition.signOn.controllers.CreateAccountController;
+import com.kandb_nutrition.signOn.controllers.SignInFormController;
+import com.kandb_nutrition.signOn.model.authData;
 
 public class GetUser {
 

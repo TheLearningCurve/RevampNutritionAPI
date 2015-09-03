@@ -1,4 +1,4 @@
-package searchFeature.nutritionAPIV2_model;
+package com.kandb_nutrition.searchFeature.model;
 
 /*
  * Created by Kyle Wolff May 8 2015

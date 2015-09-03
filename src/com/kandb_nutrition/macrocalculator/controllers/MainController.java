@@ -1,11 +1,12 @@
-package com.macrocalculator.controllers;
+package com.kandb_nutrition.macrocalculator.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import resource.Strings;
+import com.kandb_nutrition.resource.Strings;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

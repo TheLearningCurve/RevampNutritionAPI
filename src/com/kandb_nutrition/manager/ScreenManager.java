@@ -1,12 +1,13 @@
-package Manager;
+package com.kandb_nutrition.manager;
 
-import com.macrocalculator.controllers.MainController;
+import com.kandb_nutrition.fitTracker.controllers.FitTrack_FrameController;
+import com.kandb_nutrition.macrocalculator.controllers.MainController;
+import com.kandb_nutrition.resource.Strings;
+import com.kandb_nutrition.searchFeature.controllers.FrameController;
+import com.kandb_nutrition.searchFeature.controllers.SearchFieldFrame;
+import com.kandb_nutrition.signOn.controllers.CreateAccountController;
+import com.kandb_nutrition.signOn.controllers.SignInFormController;
 
-import fitTracker.controllers.FitTrack_FrameController;
-import macroCalculator.controllers.MacroCalculatorController;
-import searchFeature.nutritionAPIV2_controllers.FrameController;
-import signOn.controllers.CreateAccountController;
-import signOn.controllers.SignInFormController;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -24,12 +25,16 @@ public class ScreenManager {
 	public MainController macroCalculatorController;
 	public FitTrack_FrameController fitTrack_FrameController;
 	
+	public Strings strings;
+	
 	// Makes sure the ScreenManager class cannot be instantiated 
 	protected ScreenManager() {}
 	
 	// Creates the controller objects. We call this once on the Main
 	public void instaniateControllers()
 	{
+		strings = new Strings();
+		
 		signInFormController = new SignInFormController();
 		createAccountController = new CreateAccountController();
 		frameController = new FrameController();
@@ -37,9 +42,10 @@ public class ScreenManager {
 		fitTrack_FrameController = new FitTrack_FrameController();
 		
 		
+		
 		signOnScene = new Scene(signInFormController);
-		createAccountScene = new Scene(createAccountController);
 		searchScene = new Scene(frameController);
+		createAccountScene = new Scene(createAccountController);
 		macroCalcScene = new Scene(macroCalculatorController);
 		fitTrackScene = new Scene(fitTrack_FrameController);
 		
@@ -92,7 +98,7 @@ public class ScreenManager {
 	
 	public void searchFeature()
 	{
-		primaryStage.setScene(searchScene);
+		primaryStage.setScene(searchScene);	
 		primaryStage.show();
 	}
 	
@@ -106,6 +112,11 @@ public class ScreenManager {
 	public void setStage(Stage stage)
 	{
 		primaryStage = stage;
+	}
+	
+	public void resetSearchField()
+	{
+		SearchFieldFrame.controller.resetSearchScene();
 	}
 
 }

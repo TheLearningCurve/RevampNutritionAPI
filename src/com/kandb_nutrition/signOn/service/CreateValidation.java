@@ -1,4 +1,4 @@
-package signOn.service;
+package com.kandb_nutrition.signOn.service;
 
 /*
  * This is the createValidation Class. This class is implemented in the CreateAccountController.
@@ -10,8 +10,9 @@ package signOn.service;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import resource.Strings;
-import signOn.controllers.CreateAccountController;
+import com.kandb_nutrition.resource.Strings;
+import com.kandb_nutrition.signOn.controllers.CreateAccountController;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;

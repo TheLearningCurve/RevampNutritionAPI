@@ -33,7 +33,7 @@
 }
 
 #backButton {	
-	-fx-background-image: url("../resource/images/MenuBackButton.png");
+	-fx-background-image: url("../images/MenuBackButton.png");
 	-fx-background-color: transparent;
 }
 
@@ -48,12 +48,12 @@
 }
 
 #createAccount_Error_Icon {
-		-fx-image: url("../resource/images/error.png");
+		-fx-image: url("../images/error.png");
 }
 
 #loggingIn_gif {
 	
-	-fx-image: url("../resource/images/loadingIcon.gif");
+	-fx-image: url("../images/loadingIcon.gif");
 }
 
 #password_Message {

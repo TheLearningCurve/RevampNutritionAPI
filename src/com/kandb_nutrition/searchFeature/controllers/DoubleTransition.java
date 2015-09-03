@@ -1,4 +1,4 @@
-package searchFeature.nutritionAPIV2_controllers;
+package com.kandb_nutrition.searchFeature.controllers;
 
 import javafx.animation.Transition;
 import javafx.beans.property.*;

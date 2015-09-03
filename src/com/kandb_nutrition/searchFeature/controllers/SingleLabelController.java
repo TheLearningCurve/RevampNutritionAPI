@@ -1,10 +1,11 @@
-package searchFeature.nutritionAPIV2_controllers;
+package com.kandb_nutrition.searchFeature.controllers;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import resource.Strings;
+import com.kandb_nutrition.resource.Strings;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

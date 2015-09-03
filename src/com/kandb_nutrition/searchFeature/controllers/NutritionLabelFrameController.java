@@ -1,10 +1,12 @@
-package searchFeature.nutritionAPIV2_controllers;
+package com.kandb_nutrition.searchFeature.controllers;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import resource.Strings;
+import com.kandb_nutrition.leHTML.HTMLBuilder;
+import com.kandb_nutrition.resource.Strings;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +17,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import leHTML.HTMLBuilder;
 
 public class NutritionLabelFrameController extends AnchorPane implements Initializable
 {
@@ -31,15 +32,15 @@ public class NutritionLabelFrameController extends AnchorPane implements Initial
 	
 	public static NutritionLabelFrameController controller;
 	public WebEngine engine;
-	public Image close_Black = new Image("searchFeature/resources/close_Black.png");
-	public Image close_White = new Image("searchFeature/resources/close_White.png");
-	public Strings strings;
+	public Image xButton_black;
+	public Image xButton_white;
+	public Strings string;
 
 	public NutritionLabelFrameController()
 	{
-		strings = new Strings();
+		string = new Strings();
 		
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(strings.getNutritionLabel_fxml()));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getNutritionLabel_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		controller = (NutritionLabelFrameController) fxmlLoader.getController();
@@ -47,6 +48,9 @@ public class NutritionLabelFrameController extends AnchorPane implements Initial
 		try
 		{
 			fxmlLoader.load();
+			xButton_black = new Image(string.getxButton_Black_Image());
+			xButton_white = new Image(string.getxButton_White_Image());
+
 		}
 		
 		catch (IOException e)
@@ -70,7 +74,7 @@ public class NutritionLabelFrameController extends AnchorPane implements Initial
 
 			@Override
 			public void handle(MouseEvent event) {
-				//FrameBottomLeftController.controller.clearItemOpacity();	
+
 			}
 		});
 		
@@ -86,7 +90,7 @@ public class NutritionLabelFrameController extends AnchorPane implements Initial
 
 			@Override
 			public void handle(MouseEvent mouseEvent) {
-				Close_Icon.setImage(close_Black);
+				Close_Icon.setImage(xButton_black);
 			}
 		});
 		
@@ -94,7 +98,7 @@ public class NutritionLabelFrameController extends AnchorPane implements Initial
 
 			@Override
 			public void handle(MouseEvent mouseEvent) {
-				Close_Icon.setImage(close_White);
+				Close_Icon.setImage(xButton_white);
 				NutritionLabelFrameController.controller.setVisible(false);
 				FrameController.controller.dim_Pane_Container_SetOpacityZero();
 			}

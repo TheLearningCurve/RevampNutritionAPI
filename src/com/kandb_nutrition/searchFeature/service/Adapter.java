@@ -1,16 +1,17 @@
-package searchFeature.nutritionAPIV2_service;
+package com.kandb_nutrition.searchFeature.service;
 
 import java.util.List;
+
+import com.kandb_nutrition.searchFeature.model.ItemData;
+import com.kandb_nutrition.searchFeature.model.Nutrients;
+import com.kandb_nutrition.searchFeature.model.SearchData;
+import com.kandb_nutrition.searchFeature.model.TypeAHead;
 
 import retrofit.Callback;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import searchFeature.nutritionAPIV2_model.ItemData;
-import searchFeature.nutritionAPIV2_model.Nutrients;
-import searchFeature.nutritionAPIV2_model.SearchData;
-import searchFeature.nutritionAPIV2_model.TypeAHead;
 
 /*
  * Created by Kyle Wolff May 8 2015

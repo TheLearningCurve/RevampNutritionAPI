@@ -1,12 +1,11 @@
-package signOn.service;
+package com.kandb_nutrition.signOn.service;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import signOn.controllers.SignInFormController;
-
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.kandb_nutrition.signOn.controllers.SignInFormController;
 
 public class CreateUser {
 	

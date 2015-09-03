@@ -1,7 +1,9 @@
-package com.macrocalculator.controllers;
+package com.kandb_nutrition.macrocalculator.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.kandb_nutrition.resource.Strings;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,9 +19,13 @@ public class SecondPanelController extends Pane implements Initializable
 	private double width;
 	private double height;
 	
+	public Strings string;
+	
 	public SecondPanelController(double width, double height)
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/macrocalculator/fxml/SecondPanel.fxml"));
+		string = new Strings();
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getSecondPanel_fxml()));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 		

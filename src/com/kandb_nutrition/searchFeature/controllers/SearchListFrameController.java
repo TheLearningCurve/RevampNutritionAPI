@@ -1,4 +1,4 @@
-package searchFeature.nutritionAPIV2_controllers;
+package com.kandb_nutrition.searchFeature.controllers;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.google.gson.annotations.SerializedName;
+import com.kandb_nutrition.resource.Strings;
+import com.kandb_nutrition.searchFeature.model.FoodItem;
+import com.kandb_nutrition.searchFeature.service.QueryVariables;
 import com.sun.prism.paint.Color;
 
-import resource.Strings;
-import searchFeature.nutritionAPIV2_model.FoodItem;
-import searchFeature.nutritionAPIV2_service.QueryVariables;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -66,13 +66,13 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 	public int previousIndex = -1;
 	public int ResponseListSize;
 	public Node previousItem;
-	public Strings strings;
+	public Strings string;
 	
 	public SearchListFrameController()
 	{
-		strings = new Strings();
+		string = new Strings();
 		
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/searchFeature/nutritionAPIV2_view/SearchListFrame.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getSearchListFrame_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		controller = (SearchListFrameController) fxmlLoader.getController();
@@ -204,6 +204,12 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 	{
 		ErrorMessageLabel.setVisible(false);
 	}
+	
+	public void resetSearchScene()
+	{
+		ButtonListContainer.getChildren().clear();
+		resultLabel.setText(" ");
+	}
 
 	public void updateErrorMessageUI(String errorMessage) {
 		
@@ -215,7 +221,7 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 				if(errorMessage == "NETWORK")
 				{
 					resultLabel.setVisible(false);
-					ErrorMessageLabel.setText(errorMessage + " Error. Please connect to the Internet");
+					ErrorMessageLabel.setText(errorMessage + string.getNetworkError_Message());
 					ErrorMessageLabel.setVisible(true);
 					setprogressIndicatorImageView_NotVisible();
 				}					

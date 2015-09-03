@@ -1,4 +1,4 @@
-package signOn.service;
+package com.kandb_nutrition.signOn.service;
 
 public class Config {
 

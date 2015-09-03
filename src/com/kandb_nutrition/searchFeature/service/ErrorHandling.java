@@ -1,4 +1,4 @@
-package searchFeature.nutritionAPIV2_service;
+package com.kandb_nutrition.searchFeature.service;
 import org.omg.CORBA.portable.UnknownException;
 
 import retrofit.ErrorHandler;

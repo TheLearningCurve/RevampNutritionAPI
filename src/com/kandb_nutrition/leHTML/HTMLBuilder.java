@@ -1,4 +1,4 @@
-package leHTML;
+package com.kandb_nutrition.leHTML;
 
 import java.io.File;
 import java.io.FileNotFoundException;

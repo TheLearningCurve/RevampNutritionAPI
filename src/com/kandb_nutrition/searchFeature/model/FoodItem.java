@@ -1,4 +1,4 @@
-package searchFeature.nutritionAPIV2_model;
+package com.kandb_nutrition.searchFeature.model;
 
 public class FoodItem {
 

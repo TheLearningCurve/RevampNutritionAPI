@@ -1,7 +1,9 @@
-package com.macrocalculator.controllers;
+package com.kandb_nutrition.macrocalculator.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.kandb_nutrition.resource.Strings;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,9 +15,13 @@ public class PreviousButtonController extends Button implements Initializable
 {
 	public static PreviousButtonController controller;
 	
+	public Strings string;
+	
 	public PreviousButtonController()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/macrocalculator/fxml/ButtonPrevious.fxml"));
+		string = new Strings();
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getPreviousButton_fxml()));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 		

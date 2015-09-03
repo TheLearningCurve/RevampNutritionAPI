@@ -1,11 +1,13 @@
-package searchFeature.nutritionAPIV2_controllers;
+package com.kandb_nutrition.searchFeature.controllers;
 
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import resource.Strings;
+import com.kandb_nutrition.macrocalculator.controllers.*;
+import com.kandb_nutrition.resource.Strings;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,8 +26,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import javafx.animation.*;
-
-import com.macrocalculator.controllers.*;
 
 
 public class FrameController extends AnchorPane implements Initializable
@@ -60,9 +60,9 @@ public class FrameController extends AnchorPane implements Initializable
 	
 	public static FrameController controller; 
 	
-	public Image standardButton = new Image("searchFeature/resources/menuButton.png");
-	public Image buttonClicked = new Image("searchFeature/resources/menuButtonClicked.png");
-	public Image BackButton = new Image("searchFeature/resources/MenuBackButton.png");
+	public Image standardButton;
+	public Image buttonClicked;
+	public Image BackButton;
 	ImageInput image = new ImageInput();
 	public final double imageX = image.getX();
 	public final double imageY = image.getY();
@@ -82,6 +82,9 @@ public class FrameController extends AnchorPane implements Initializable
 		try
 		{
 			fxmlLoader.load();
+			standardButton = new Image(strings.getStandardButton_Image());
+			buttonClicked = new Image(strings.getButtonClicked_Image());
+			BackButton = new Image(strings.getBackButton_Image());
 		}
 		
 		catch (IOException e)

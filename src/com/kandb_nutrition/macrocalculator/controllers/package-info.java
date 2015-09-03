@@ -5,4 +5,4 @@
  * @author brandon
  *
  */
-package com.macrocalculator.controllers;
+package com.kandb_nutrition.macrocalculator.controllers;

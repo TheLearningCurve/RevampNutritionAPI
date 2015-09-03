@@ -1,10 +1,13 @@
-package navMenu.controller;
+package com.kandb_nutrition.navMenu.controller;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import Manager.ScreenManager;
+import com.kandb_nutrition.manager.ScreenManager;
+import com.kandb_nutrition.resource.Strings;
+import com.kandb_nutrition.searchFeature.controllers.FrameController;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,21 +30,24 @@ public class NavigationController extends AnchorPane implements Initializable{
 	@FXML
 	Label SearchIconLabel, MacroCalcLabel, FitTrackerLabel;
 	
+	public Strings string;
 	
-	public Image SearchactiveImage = new Image("navMenu/resource/searchActiveIcon.png");
-	public Image SearchstandardImage = new Image("navMenu/resource/searchIcon.png");
+	public Image SearchactiveImage;
+	public Image SearchstandardImage;
 	
-	public Image MacroactiveImage = new Image("navMenu/resource/macroActiveIcon.png");
-	public Image MacrostandardImage = new Image("navMenu/resource/macroIcon.png");
+	public Image MacroactiveImage;
+	public Image MacrostandardImage;
 	
-	public Image FitactiveImage = new Image("navMenu/resource/fitTrackerActiveIcon.png");
-	public Image FitstandardImage = new Image("navMenu/resource/fitTrackerIcon.png");
+	public Image FitactiveImage;
+	public Image FitstandardImage;
 
 	
 	
 	public NavigationController() {
 
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/navMenu/view/NavigationMenu.fxml"));
+		string = new Strings();
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getNavigationMenu_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		controller = (NavigationController) fxmlLoader.getController();
@@ -49,6 +55,15 @@ public class NavigationController extends AnchorPane implements Initializable{
 		try
 		{
 			fxmlLoader.load();
+			SearchactiveImage = new Image(string.getSearchActive_Image());
+			SearchstandardImage = new Image(string.getSearchStandard_Image());
+			
+			MacroactiveImage = new Image(string.getMacroActive_Image());
+			MacrostandardImage = new Image(string.getMacroStandard_Image());
+			
+			FitactiveImage = new Image(string.getFitActive_Image());
+			FitstandardImage = new Image(string.getFitStandard_Image());
+
 		}
 		
 		catch (IOException e)
@@ -66,20 +81,22 @@ public class NavigationController extends AnchorPane implements Initializable{
 		if(mouseevent.getSource().equals(SearchIconContainer))
 		{
 			searchImageView.setImage(SearchactiveImage);
-			SearchIconLabel.setStyle("-fx-text-fill: #98FF42");
+			SearchIconLabel.setStyle(string.getFx_text_fill_98FF42());
 			sm.searchFeature();
+			sm.resetSearchField();
+			FrameController.controller.closeMenu();
 
 		}
 		else if(mouseevent.getSource().equals(macroCalculatorContainer))
 		{
 			macorCalcImageView.setImage(MacroactiveImage);
-			MacroCalcLabel.setStyle("-fx-text-fill: #98FF42");
+			MacroCalcLabel.setStyle(string.getFx_text_fill_98FF42());
 			sm.macroCalc();
 		}
 		else if(mouseevent.getSource().equals(FitTrackerContainer))
 		{
 			fitTrackerImageView.setImage(FitactiveImage);
-			FitTrackerLabel.setStyle("-fx-text-fill: #98FF42");
+			FitTrackerLabel.setStyle(string.getFx_text_fill_98FF42());
 			sm.fitTracker();
 		}
 	}
@@ -91,19 +108,19 @@ public class NavigationController extends AnchorPane implements Initializable{
 		if(mouseevent.getSource().equals(SearchIconContainer))
 		{
 			searchImageView.setImage(SearchstandardImage);			
-			SearchIconLabel.setStyle("-fx-text-fill: black");
+			SearchIconLabel.setStyle(string.getFx_text_fill_black());
 
 		}
 		else if(mouseevent.getSource().equals(macroCalculatorContainer))
 		{
 			macorCalcImageView.setImage(MacrostandardImage);
-			MacroCalcLabel.setStyle("-fx-text-fill: black");
+			MacroCalcLabel.setStyle(string.getFx_text_fill_black());
 
 		}
 		else if(mouseevent.getSource().equals(FitTrackerContainer))
 		{
 			fitTrackerImageView.setImage(FitstandardImage);
-			FitTrackerLabel.setStyle("-fx-text-fill: black");
+			FitTrackerLabel.setStyle(string.getFx_text_fill_black());
 		}
 	}
 	

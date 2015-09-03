@@ -1,4 +1,4 @@
-package searchFeature.nutritionAPIV2_model;
+package com.kandb_nutrition.searchFeature.model;
 
 import com.google.gson.annotations.SerializedName;
 import java.util.List;

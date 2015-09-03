@@ -1,13 +1,14 @@
-package fitTracker.controllers;
+package com.kandb_nutrition.fitTracker.controllers;
 
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import resource.Strings;
-import searchFeature.nutritionAPIV2_controllers.DoubleTransition;
-import searchFeature.nutritionAPIV2_controllers.SearchFieldFrame;
+import com.kandb_nutrition.resource.Strings;
+import com.kandb_nutrition.searchFeature.controllers.DoubleTransition;
+import com.kandb_nutrition.searchFeature.controllers.SearchFieldFrame;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -59,22 +60,22 @@ public class FitTrack_FrameController extends AnchorPane implements Initializabl
 		
 		public static FitTrack_FrameController controller; 
 		
-		public Image standardButton = new Image("searchFeature/resources/menuButton.png");
-		public Image buttonClicked = new Image("searchFeature/resources/menuButtonClicked.png");
-		public Image BackButton = new Image("searchFeature/resources/MenuBackButton.png");
-		public ImageInput image = new ImageInput();
-		public Strings strings;
-		public final double imageX = image.getX();
-		public final double imageY = image.getY();
+		public Image standardButton;
+		public Image buttonClicked;
+		public Image backButton;
+		public ImageInput image;
+		public Strings string;
+		public final double imageX;
+		public final double imageY;
 		
 		public boolean open = false;
 		
 		
 		public FitTrack_FrameController()
 		{
-			strings = new Strings();
+			string = new Strings();
 			
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(strings.getFitTracker_fxml()));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getFitTracker_fxml()));
 			fxmlLoader.setRoot(this);
 			fxmlLoader.setController(this);
 			controller = (FitTrack_FrameController) fxmlLoader.getController();
@@ -82,6 +83,13 @@ public class FitTrack_FrameController extends AnchorPane implements Initializabl
 			try
 			{
 				fxmlLoader.load();
+				standardButton = new Image(string.getStandardButton_Image());
+				buttonClicked = new Image(string.getButtonClicked_Image());
+				backButton = new Image(string.getBackButton_Image());
+				
+				image = new ImageInput();
+				imageX = image.getX();
+				imageY = image.getY();
 			}
 			
 			catch (IOException e)
@@ -122,7 +130,7 @@ public class FitTrack_FrameController extends AnchorPane implements Initializabl
 				{
 					if(open == false)
 					{
-						image.setSource(BackButton);
+						image.setSource(backButton);
 						image.setX(8.0);
 						image.setY(4.0);
 						

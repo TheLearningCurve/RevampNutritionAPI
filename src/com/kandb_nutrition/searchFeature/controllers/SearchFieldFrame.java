@@ -1,19 +1,20 @@
-package searchFeature.nutritionAPIV2_controllers;
+package com.kandb_nutrition.searchFeature.controllers;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import resource.Strings;
+import com.kandb_nutrition.resource.Strings;
+import com.kandb_nutrition.searchFeature.model.Results;
+import com.kandb_nutrition.searchFeature.model.SearchData;
+import com.kandb_nutrition.searchFeature.model.TypeAHead;
+import com.kandb_nutrition.searchFeature.service.Adapter;
+import com.kandb_nutrition.searchFeature.service.QueryVariables;
+
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import searchFeature.nutritionAPIV2_model.Results;
-import searchFeature.nutritionAPIV2_model.SearchData;
-import searchFeature.nutritionAPIV2_model.TypeAHead;
-import searchFeature.nutritionAPIV2_service.Adapter;
-import searchFeature.nutritionAPIV2_service.QueryVariables;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -51,16 +52,16 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
     public static SearchFieldFrame controller;
     public int buttonPress = 0;
     public String searchFieldText = "Empty String";
-    public Strings strings;
-    Image SearchButtonClearImage = new Image("searchFeature/resources/SearchButton_Black_Clear.png");
-    Image SearchButtonStandardImage = new Image("searchFeature/resources/SearchButton_Black.png");
+    public Strings string;
+    Image SearchButtonClearImage;
+    Image SearchButtonStandardImage;
 
 	
 	public SearchFieldFrame()
 	{
-		strings = new Strings();
+		string = new Strings();
 		
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(strings.getSearchFieldFrame_fxml()));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getSearchFieldFrame_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		controller = (SearchFieldFrame) fxmlLoader.getController();
@@ -68,6 +69,8 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
 		try
 		{
 			fxmlLoader.load();
+			SearchButtonClearImage = new Image(string.getSearchButtonClear_Image());
+			SearchButtonStandardImage = new Image(string.getSearchButtonStandard_Image());
 		}
 		
 		catch (IOException e)
@@ -292,6 +295,15 @@ public class SearchFieldFrame extends AnchorPane implements Initializable
 	{
 		HBoxContainerForListView.setPrefHeight(40);
 		listView.setVisible(false);	
+	}
+	
+	public void resetSearchScene()
+	{
+		HBoxContainerForListView.setPrefHeight(40);
+		searchField.clear();
+		listView.setVisible(false);	
+		SearchListFrameController.controller.resetSearchScene();
+		FrameController.controller.set_LargeLogo_Visible();
 	}
 	
 	public ObservableList<String> gettypeaHeadtext()

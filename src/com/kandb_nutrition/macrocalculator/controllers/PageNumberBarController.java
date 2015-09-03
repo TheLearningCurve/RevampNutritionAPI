@@ -1,7 +1,9 @@
-package com.macrocalculator.controllers;
+package com.kandb_nutrition.macrocalculator.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.kandb_nutrition.resource.Strings;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,10 +20,13 @@ public class PageNumberBarController extends AnchorPane implements Initializable
 	
 	private double width;
 	private double height;
+	public Strings string;
 	
 	public PageNumberBarController()
 	{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/macrocalculator/fxml/PageNumberBar.fxml"));
+		string = new Strings();
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getPageNumberBar_fxml()));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 		
