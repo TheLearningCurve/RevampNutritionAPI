@@ -1,45 +1,28 @@
 package com.kandb_nutrition.searchFeature.controllers;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import com.google.gson.annotations.SerializedName;
+import com.kandb_nutrition.manager.ScreenManager;
 import com.kandb_nutrition.resource.Strings;
-import com.kandb_nutrition.searchFeature.model.FoodItem;
 import com.kandb_nutrition.searchFeature.service.QueryVariables;
-import com.sun.prism.paint.Color;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 
 
@@ -60,23 +43,26 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 	@FXML
 	ImageView progressIndicatorImageView;
 	
-	public static SearchListFrameController controller;
 	public SingleLabelController singleLabelController;
 	public final ExpandedLabelController expandedLabelController;
 	public int previousIndex = -1;
 	public int ResponseListSize;
 	public Node previousItem;
 	public Strings string;
+	public static SearchListFrameController controller;	
+	private ScreenManager sm;
 	
 	public SearchListFrameController()
 	{
 		string = new Strings();
+		sm = ScreenManager.getInstance();
+		expandedLabelController = new ExpandedLabelController();
+
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getSearchListFrame_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
 		controller = (SearchListFrameController) fxmlLoader.getController();
-		expandedLabelController = new ExpandedLabelController();
 		
 		try
 		{
@@ -92,8 +78,7 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 	public void createListItem(String itemname, String brandname, String nutrientName, float nValue, String nUoM, float sQty, String sUoM, String id, String thumbI)
 	{	
     	singleLabelController = new SingleLabelController(itemname);
-    	
-    	
+    	  	
     	ButtonListContainer.getChildren().add(singleLabelController);	   
 	    
 	    singleLabelController.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -119,7 +104,8 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 		       }
 		    });			
 	    
-    		setListViewVisible(); 
+	    setListViewVisible();
+	    
  }
 	
 	private void setItem(int previousIndex, Node previousItem) {
@@ -134,7 +120,6 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 		   return ButtonListContainer.getChildren().get(index);
 	}
 			
-	
 	public void setListViewVisible()
 	{
 		ListContainerScrollPane.setVisible(true);
@@ -159,7 +144,7 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 				if (newValue.intValue() == 1)
 				{
 					QueryVariables.setOffset(10);
-					SearchFieldFrame.controller.requestSearchData();
+					sm.getSearchFieldFrame().requestSearchData();
 				}
 			}
 		});
@@ -209,7 +194,17 @@ public class SearchListFrameController extends AnchorPane implements Initializab
 	{
 		ButtonListContainer.getChildren().clear();
 		resultLabel.setText(" ");
+
+		sm.getSearchFieldFrame().searchField.clear();
+		sm.getSearchFieldFrame().setListViewVisibleFalse();
+		sm.getFrameController().set_LargeLogo_Visible();
+		sm.getFrameController().closeMenu();
 	}
+	
+	public SearchListFrameController getController() {
+		return controller;
+	}
+	
 
 	public void updateErrorMessageUI(String errorMessage) {
 		

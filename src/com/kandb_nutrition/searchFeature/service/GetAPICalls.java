@@ -1,11 +1,11 @@
 package com.kandb_nutrition.searchFeature.service;
+
 import java.util.List;
 
 import com.kandb_nutrition.searchFeature.model.ItemData;
 import com.kandb_nutrition.searchFeature.model.SearchData;
 import com.kandb_nutrition.searchFeature.model.TypeAHead;
 
-import javafx.collections.ObservableList;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;

@@ -9,15 +9,11 @@ import com.kandb_nutrition.resource.Strings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 
-public class SingleLabelController extends AnchorPane implements Initializable{
+public class SingleLabelController extends AnchorPane implements Initializable {
 	
-	public static SingleLabelController controller;
 	public Strings strings;
 	
 	@FXML
@@ -30,7 +26,6 @@ public class SingleLabelController extends AnchorPane implements Initializable{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(strings.getSingleTextCell_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
-		controller = (SingleLabelController) fxmlLoader.getController();
 		
 		try
 		{

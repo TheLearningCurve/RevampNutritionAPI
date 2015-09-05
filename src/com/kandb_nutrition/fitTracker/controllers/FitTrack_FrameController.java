@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.kandb_nutrition.manager.ScreenManager;
 import com.kandb_nutrition.resource.Strings;
 import com.kandb_nutrition.searchFeature.controllers.DoubleTransition;
-import com.kandb_nutrition.searchFeature.controllers.SearchFieldFrame;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
@@ -15,13 +15,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.SplitPane;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -39,9 +37,6 @@ public class FitTrack_FrameController extends AnchorPane implements Initializabl
 		Pane dimPane, Pane_Controller_Container, NutritionLabel_DimPane;
 		
 		@FXML
-		Button menuButton;
-		
-		@FXML
 		SplitPane navMenuPane;
 		
 		@FXML
@@ -57,14 +52,13 @@ public class FitTrack_FrameController extends AnchorPane implements Initializabl
 		ImageView LargeLogo;
 		
 		public double opacity;
-		
-		public static FitTrack_FrameController controller; 
-		
+				
 		public Image standardButton;
 		public Image buttonClicked;
 		public Image backButton;
 		public ImageInput image;
 		public Strings string;
+		public ScreenManager sm;
 		public final double imageX;
 		public final double imageY;
 		
@@ -74,11 +68,11 @@ public class FitTrack_FrameController extends AnchorPane implements Initializabl
 		public FitTrack_FrameController()
 		{
 			string = new Strings();
+			sm = ScreenManager.getInstance();
 			
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getFitTracker_fxml()));
 			fxmlLoader.setRoot(this);
 			fxmlLoader.setController(this);
-			controller = (FitTrack_FrameController) fxmlLoader.getController();
 
 			try
 			{
@@ -100,52 +94,10 @@ public class FitTrack_FrameController extends AnchorPane implements Initializabl
 		
 		@Override
 		public void initialize(URL url, ResourceBundle resourceBundle) 
-		{
-			opacity = menuButton.getOpacity();
-		
+		{	
 			navMenu.setMaxWidth(158);
 			
-			menuButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
-
-				@Override
-				public void handle(MouseEvent event)
-				{
-					menuButton.setOpacity(1.0);
-				}
-			});
 			
-			menuButton.setOnMouseExited(new EventHandler<MouseEvent>() {
-
-				@Override
-				public void handle(MouseEvent event)
-				{
-					menuButton.setOpacity(opacity);
-				}
-			});
-			
-			menuButton.setOnMousePressed(new EventHandler<MouseEvent>() {
-				
-				@Override
-				public void handle(MouseEvent event)
-				{
-					if(open == false)
-					{
-						image.setSource(backButton);
-						image.setX(8.0);
-						image.setY(4.0);
-						
-					}
-					else 
-					{
-						image.setSource(standardButton);
-						image.setX(imageX);
-						image.setY(imageY);
-					}
-					
-					menuButton.setEffect(image);
-					checkDividerPosition();
-				}
-			});		
 		}
 		
 		public void checkDividerPosition()
@@ -178,6 +130,7 @@ public class FitTrack_FrameController extends AnchorPane implements Initializabl
 				@Override
 				public void handle(ActionEvent event) {
 					dimPane.setMouseTransparent(false);
+					open = true;
 				}
 				
 			});
@@ -185,7 +138,7 @@ public class FitTrack_FrameController extends AnchorPane implements Initializabl
 		}
 		
 		public void closeMenu()
-		{	
+		{								
 			DoubleProperty doubleProperty = navMenuPane.getDividers().get(0).positionProperty();
 			DoubleTransition dt = new DoubleTransition(Duration.millis(1000), doubleProperty);
 			dt.setToValue(0); dt.play();
@@ -199,8 +152,9 @@ public class FitTrack_FrameController extends AnchorPane implements Initializabl
 				
 				@Override
 				public void handle(ActionEvent event) {
-					SearchFieldFrame.controller.changeSearchFieldImageStandard();
+					
 					dimPane.setMouseTransparent(true);
+					open = false;
 				}
 			});
 		}
@@ -232,6 +186,11 @@ public class FitTrack_FrameController extends AnchorPane implements Initializabl
 		{
 			LargeLogo.setVisible(false);
 		}
+
+		public void resetFitTrackScene() {
+
+		}
+
 	}
 
 

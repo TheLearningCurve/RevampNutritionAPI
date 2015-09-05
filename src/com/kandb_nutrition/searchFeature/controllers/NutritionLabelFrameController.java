@@ -5,22 +5,20 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.kandb_nutrition.leHTML.HTMLBuilder;
+import com.kandb_nutrition.manager.ScreenManager;
 import com.kandb_nutrition.resource.Strings;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
-public class NutritionLabelFrameController extends AnchorPane implements Initializable
-{
-	
+public class NutritionLabelFrameController extends AnchorPane implements Initializable {
 	@FXML
 	AnchorPane rightPanel;
 	
@@ -28,17 +26,18 @@ public class NutritionLabelFrameController extends AnchorPane implements Initial
 	WebView webViewControl;
 	
 	@FXML
-	ImageView Close_Icon;
+	Button close_icon;
+	
+	private WebEngine engine;
+	private Strings string;
+	private ScreenManager sm;
 	
 	public static NutritionLabelFrameController controller;
-	public WebEngine engine;
-	public Image xButton_black;
-	public Image xButton_white;
-	public Strings string;
 
 	public NutritionLabelFrameController()
 	{
 		string = new Strings();
+		sm = ScreenManager.getInstance();
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getNutritionLabel_fxml()));
 		fxmlLoader.setController(this);
@@ -48,9 +47,6 @@ public class NutritionLabelFrameController extends AnchorPane implements Initial
 		try
 		{
 			fxmlLoader.load();
-			xButton_black = new Image(string.getxButton_Black_Image());
-			xButton_white = new Image(string.getxButton_White_Image());
-
 		}
 		
 		catch (IOException e)
@@ -66,41 +62,19 @@ public class NutritionLabelFrameController extends AnchorPane implements Initial
 		engine.loadContent(html.getHTMLString());
 	}
 	
+	public NutritionLabelFrameController getController() {
+		return controller;
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		
-		rightPanel.setOnMousePressed(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-
-			}
-		});
-		
-		webViewControl.setOnMousePressed(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-
-			}
-		});
-		
-		Close_Icon.setOnMousePressed(new EventHandler<MouseEvent>() {
+		close_icon.setOnMouseReleased(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent mouseEvent) {
-				Close_Icon.setImage(xButton_black);
-			}
-		});
-		
-		Close_Icon.setOnMouseReleased(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent mouseEvent) {
-				Close_Icon.setImage(xButton_white);
-				NutritionLabelFrameController.controller.setVisible(false);
-				FrameController.controller.dim_Pane_Container_SetOpacityZero();
+				sm.getNutritionLabelFrameController().setVisible(false);
+				sm.getFrameController().dim_Pane_Container_SetOpacityZero();
 			}
 		});
 	}

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.kandb_nutrition.signOn.controllers.SignInFormController;
 
 public class CreateUser {
 	
@@ -33,7 +32,7 @@ public class CreateUser {
 		    	
 		    	user.setValue(accountMap);   
 		    	
-		    	getUser.getUser(firebase, email, password, SignInFormController.controller);
+		    	getUser.getUser(firebase, email, password);
 		    	
 		    }
 		    

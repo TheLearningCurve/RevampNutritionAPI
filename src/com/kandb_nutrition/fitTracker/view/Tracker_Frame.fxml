@@ -14,6 +14,7 @@
 <?import com.kandb_nutrition.searchFeature.controllers.*?>
 <?import com.kandb_nutrition.fitTracker.controllers.*?>
 <?import com.kandb_nutrition.navMenu.controller.*?>
+<?import com.kandb_nutrition.menuButton.controllers.*?>
 
 <fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="832.0" stylesheets="@../../resource/styleSheets/Frame.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
@@ -43,24 +44,14 @@
                </children>
             </AnchorPane>
          </children></StackPane>
-            <Pane id="Frame_Top_Container" prefHeight="74.0" prefWidth="833.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+            <Pane id="Frame_Top_Container" prefHeight="71.0" prefWidth="833.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane layoutX="14.0" layoutY="19.0">
-                     <children>
-                        <Button id="menuButton" fx:id="menuButton" mnemonicParsing="false" opacity="0.37" prefHeight="38.0" prefWidth="38.0">
-                           <effect>
-                              <ImageInput>
-                                 <source>
-                                    <Image url="/com/kandb_nutrition/resource/images/menuButton.png" />
-                                 </source>
-                              </ImageInput>
-                           </effect>
-                        </Button>
-                        <Label id="Title" layoutX="45.0" layoutY="-3.0" prefHeight="35.0" prefWidth="216.0" text="K&amp;B Nutrition" />
-                     </children>
-                  </AnchorPane>
+                  <AnchorPane layoutX="26.0" layoutY="20.0" prefHeight="38.0" prefWidth="38.0">
+           			 <children>
+           			      <MenuButtonController fx:id="menuButton_Controller" /> 
+           			 </children>
+           		 </AnchorPane>                  
                </children>
             </Pane>
-
 	</children>
 </fx:root>

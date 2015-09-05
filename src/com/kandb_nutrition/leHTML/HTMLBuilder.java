@@ -99,8 +99,8 @@ public class HTMLBuilder
 		{
 			File file = new File(getClass().getResource("StartDocument.txt").toURI());
 			Scanner scanner = new Scanner(file);
-			String cssPath = getClass().getResource("/leHTML/nutritionLabelStyles.css").toString();
-			String jsPath = getClass().getResource("/leHTML/nutritionLabelScripts.js").toString();
+			String cssPath = getClass().getResource("/com/kandb_nutrition/leHTML/nutritionLabelStyles.css").toString();
+			String jsPath = getClass().getResource("/com/kandb_nutrition/leHTML/nutritionLabelScripts.js").toString();
 			int cssIndex;
 			int jsIndex;
 			

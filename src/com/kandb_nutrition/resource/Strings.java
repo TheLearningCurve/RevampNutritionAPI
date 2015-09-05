@@ -25,11 +25,12 @@ public class Strings {
 	private String previousButton_fxml = "/com/kandb_nutrition/macrocalculator/fxml/ButtonPrevious.fxml";
 	private String secondPanel_fxml = "/com/kandb_nutrition/macrocalculator/fxml/SecondPanel.fxml";
 	private String thirPanel_fxml = "/com/kandb_nutrition/macrocalculator/fxml/ThirdPanel.fxml";
+	private String menuButton_fxml = "/com/kandb_nutrition/menuButton/view/menuButton.fxml";
 	
 	/*
 	 * Image Strings
 	 */
-	
+
 
 	private String signOn_gif = "@../../../resource/images/sign_in_loader.gif";
 	private String standardButton = "/com/kandb_nutrition/resource/images/menuButton.png";
@@ -157,6 +158,10 @@ public class Strings {
 
 	public String getThirPanel_fxml() {
 		return thirPanel_fxml;
+	}
+	
+	public String getMenuButton_fxml() {
+		return menuButton_fxml;
 	}
 	
 	/* End of the FXML Methods*/

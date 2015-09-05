@@ -6,8 +6,8 @@ import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 import com.kandb_nutrition.leHTML.HTMLBuilder;
+import com.kandb_nutrition.manager.ScreenManager;
 import com.kandb_nutrition.resource.Strings;
-import com.kandb_nutrition.searchFeature.model.FoodItem;
 import com.kandb_nutrition.searchFeature.model.ItemData;
 import com.kandb_nutrition.searchFeature.model.NutrientStrings;
 import com.kandb_nutrition.searchFeature.model.Nutrients;
@@ -18,12 +18,10 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import javafx.application.Platform;
-import javafx.beans.binding.StringExpression;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -31,9 +29,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-class ExpandedLabelController extends AnchorPane implements Initializable {
-
-	public static ExpandedLabelController controller;
+public class ExpandedLabelController extends AnchorPane implements Initializable {
 	
 	@FXML
 	Label calorieLabel, ItemNameLabel, BrandNameLabel;
@@ -41,20 +37,25 @@ class ExpandedLabelController extends AnchorPane implements Initializable {
 	@FXML
 	ImageView Thumbnail, NutritionLabelIcon;
 	
-	public Tooltip tooltip = new Tooltip();
-    public Adapter adapter = new Adapter();
-	public NutrientStrings nutrientStrings = new NutrientStrings();
-	private DecimalFormat df = new DecimalFormat("#,###.00");
-	public Strings string;
+	public Tooltip tooltip;
+    public Adapter adapter;
+	private NutrientStrings nutrientStrings;
+	private Strings string;
+	private DecimalFormat df;
+	private ScreenManager sm;
 	
 	public ExpandedLabelController()
 	{
 		string = new Strings();
+		df = new DecimalFormat("#,###.00");
+		nutrientStrings = new NutrientStrings();
+		adapter = new Adapter();
+		tooltip = new Tooltip();
+		sm = ScreenManager.getInstance();
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getExpandedLabel_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
-		controller = (ExpandedLabelController) fxmlLoader.getController();
 		
 		try
 		{
@@ -73,8 +74,8 @@ class ExpandedLabelController extends AnchorPane implements Initializable {
 			@Override
 			public void handle(MouseEvent mousevent) {
 				
-				NutritionLabelFrameController.controller.setVisible(true);
-				FrameController.controller.dim_Pane_ContainerSetOpacity();
+				sm.getNutritionLabelFrameController().setVisible(true);
+				sm.getFrameController().dim_Pane_ContainerSetOpacity();
 			}
 		});
 		
@@ -174,7 +175,7 @@ class ExpandedLabelController extends AnchorPane implements Initializable {
 			@Override
 			public void failure(RetrofitError retrofitError)
 			{
-				SearchListFrameController.controller.updateErrorMessageUI(retrofitError.getKind().name());
+				sm.getSearchListFrameController().updateErrorMessageUI(retrofitError.getKind().name());
 			}
 		});	
 	}
@@ -467,7 +468,7 @@ class ExpandedLabelController extends AnchorPane implements Initializable {
 		Platform.runLater(new Runnable() {
 			@Override public void run() 
 			{			
-				NutritionLabelFrameController.controller.sendHtml(html);
+				sm.getNutritionLabelFrameController().sendHtml(html);
 			}
 		});
 	}

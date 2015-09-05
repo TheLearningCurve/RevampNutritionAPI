@@ -20,7 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 
 public class SignInFormController extends AnchorPane implements Initializable {
@@ -37,12 +36,9 @@ public class SignInFormController extends AnchorPane implements Initializable {
 	@FXML
 	ImageView signIn_loading_icon;
 	
-	public static SignInFormController controller;
 	public Strings string;
 	public FireBase fireBase;
 	public GetUser getUser;
-
-
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -57,7 +53,6 @@ public class SignInFormController extends AnchorPane implements Initializable {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getSignInForm_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
-		controller = (SignInFormController) fxmlLoader.getController();
 			
 		try
 		{
@@ -77,8 +72,8 @@ public class SignInFormController extends AnchorPane implements Initializable {
 				
 				if(!(EmailField.getText().isEmpty() || PasswordField.getText().isEmpty()))
 				{
-					display_Loading_Icon();
-					getUser.getUser(fireBase.getFireBaseUrl(), EmailField.getText(), PasswordField.getText(), controller);
+					setLoadingIconVisible();
+					getUser.getUser(fireBase.getFireBaseUrl(), EmailField.getText(), PasswordField.getText());
 				}
 				else {
 					
@@ -116,16 +111,19 @@ public class SignInFormController extends AnchorPane implements Initializable {
 			
 			@Override
 			public void run() {
-				
+				setLoadingIconNonVisible();
 				errorLabel.setVisible(true);
 				errorLabel.setText(errorMessage);
 			}
 		});
 	}
 	
-	public void display_Loading_Icon()
-	{
+	public void setLoadingIconVisible() {
 		signIn_loading_icon.setVisible(true);
+	}
+	
+	public void setLoadingIconNonVisible() {
+		signIn_loading_icon.setVisible(false);
 	}
 	
 }

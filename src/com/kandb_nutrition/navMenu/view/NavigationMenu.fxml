@@ -28,12 +28,9 @@
                       <RowConstraints maxHeight="322.0" minHeight="10.0" prefHeight="141.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <HBox fx:id="SearchIconContainer" onMousePressed="#changeToIconActive" onMouseReleased="#changeToIconStandard" prefHeight="100.0" prefWidth="200.0">
+                        <HBox id="SearchIconContainer" fx:id="SearchIconContainer" onMousePressed="#changeToIconActive" onMouseReleased="#changeToIconStandard" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="searchImageView" fitHeight="27.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@/com/kandb_nutrition/resource/images/searchIcon.png" />
-                                 </image>
+                              <ImageView id="searchImageView" fx:id="searchImageView" fitHeight="27.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
                                     <Insets left="5.0" top="20.0" />
                                  </HBox.margin>
@@ -50,10 +47,7 @@
                         </HBox>
                         <HBox fx:id="macroCalculatorContainer" onMousePressed="#changeToIconActive" onMouseReleased="#changeToIconStandard" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <children>
-                              <ImageView fx:id="macorCalcImageView" fitHeight="27.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@/com/kandb_nutrition/resource/images/macroIcon.png" />
-                                 </image>
+                              <ImageView id="macroImageView" fx:id="macorCalcImageView" fitHeight="27.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
                                     <Insets left="7.0" top="20.0" />
                                  </HBox.margin>
@@ -71,14 +65,11 @@
                         <HBox fx:id="FitTrackerContainer" onMousePressed="#changeToIconActive" onMouseReleased="#changeToIconStandard" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                            <children>
                               <ImageView fx:id="fitTrackerImageView" fitHeight="27.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@/com/kandb_nutrition/resource/images/fitTrackerIcon.png" />
-                                 </image>
                                  <HBox.margin>
                                     <Insets left="8.0" top="20.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Label fx:id="FitTrackerLabel" prefHeight="17.0" prefWidth="77.0" text="Fit Tracker">
+                              <Label id="fitTrackerImageView" fx:id="FitTrackerLabel" prefHeight="17.0" prefWidth="77.0" text="Fit Tracker">
                                  <font>
                                     <Font name="SansSerif Bold" size="14.0" />
                                  </font>

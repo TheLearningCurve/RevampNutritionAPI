@@ -45,3 +45,14 @@
 	-fx-background-radius: 0em;
 	-fx-padding: 0 10 0 0;
 }
+
+#xButton:hover {
+	-fx-background-image: url("../images/close_Black.png");
+}
+
+#xButton {
+	-fx-background-image: url("../images/close_White.png");
+	-fx-background-color: transparent;
+	-fx-background-position: center;
+	-fx-background-size: contain;
+}

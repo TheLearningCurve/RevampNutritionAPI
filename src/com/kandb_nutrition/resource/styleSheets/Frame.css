@@ -29,4 +29,8 @@
 #Pane_Controller_Container, #AnchorPaneRightSide {
 	
 	-fx-background-color: transparent;
+} 
+
+#LargeLogo {
+	-fx-image:url("../images/NutritionLargeLogo.png");
 }

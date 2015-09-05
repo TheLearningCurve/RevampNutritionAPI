@@ -6,8 +6,8 @@ import java.util.ResourceBundle;
 
 import com.kandb_nutrition.manager.ScreenManager;
 import com.kandb_nutrition.resource.Strings;
-import com.kandb_nutrition.searchFeature.controllers.FrameController;
 
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,10 +17,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
-public class NavigationController extends AnchorPane implements Initializable{
-	
-	public static NavigationController controller;
-	
+public class NavigationController extends AnchorPane implements Initializable {
+		
 	@FXML
 	HBox SearchIconContainer, macroCalculatorContainer, FitTrackerContainer;
 	
@@ -40,20 +38,23 @@ public class NavigationController extends AnchorPane implements Initializable{
 	
 	public Image FitactiveImage;
 	public Image FitstandardImage;
-
 	
+	public Timeline timer;
+	
+	private ScreenManager sm;
+
 	
 	public NavigationController() {
 
 		string = new Strings();
+		timer = new Timeline();
+		sm = ScreenManager.getInstance();
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getNavigationMenu_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
-		controller = (NavigationController) fxmlLoader.getController();
 			
-		try
-		{
+		try {
 			fxmlLoader.load();
 			SearchactiveImage = new Image(string.getSearchActive_Image());
 			SearchstandardImage = new Image(string.getSearchStandard_Image());
@@ -66,59 +67,94 @@ public class NavigationController extends AnchorPane implements Initializable{
 
 		}
 		
-		catch (IOException e)
-		{
+		catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
+	/*
+	 * onMousePressed
+	 */
+
 	@FXML
-	public void changeToIconActive(MouseEvent mouseevent) throws IOException
-	{
-		ScreenManager sm = ScreenManager.getInstance();
-
+	public void changeToIconActive(MouseEvent mouseevent) throws IOException {
 		
-		if(mouseevent.getSource().equals(SearchIconContainer))
-		{
-			searchImageView.setImage(SearchactiveImage);
-			SearchIconLabel.setStyle(string.getFx_text_fill_98FF42());
-			sm.searchFeature();
-			sm.resetSearchField();
-			FrameController.controller.closeMenu();
-
+		if(mouseevent.getSource().equals(SearchIconContainer)) {
+			
+			if(sm.isSearchFeature()) {
+				
+				sm.getFrameController().checkDividerPosition();
+				setSearchFeatureNavMenuStyle();
+			}
+			else {
+				
+				setSearchFeatureNavMenuStyle();
+				sm.searchFeature();
+				sm.getSearchListFrameController().resetSearchScene();
+			}
 		}
-		else if(mouseevent.getSource().equals(macroCalculatorContainer))
-		{
+		else if(mouseevent.getSource().equals(macroCalculatorContainer)) {
+			
 			macorCalcImageView.setImage(MacroactiveImage);
 			MacroCalcLabel.setStyle(string.getFx_text_fill_98FF42());
 			sm.macroCalc();
 		}
-		else if(mouseevent.getSource().equals(FitTrackerContainer))
-		{
-			fitTrackerImageView.setImage(FitactiveImage);
-			FitTrackerLabel.setStyle(string.getFx_text_fill_98FF42());
-			sm.fitTracker();
+		else if(mouseevent.getSource().equals(FitTrackerContainer)) {
+			
+			if(sm.isFitTracker()) {
+				
+				sm.getFitTrack_FrameController().checkDividerPosition();
+				fitTrackerImageView.setImage(FitactiveImage);
+				FitTrackerLabel.setStyle(string.getFx_text_fill_98FF42());
+			}
+			else {
+				sm.fitTracker();			
+				sm.getFitTrack_FrameController().keepMenuOpen();
+				sm.getFitTrack_FrameController().closeMenu();
+			}
 		}
 	}
-
-	@FXML
-	public void changeToIconStandard(MouseEvent mouseevent) throws IOException
-	{
+	
+	public void setFitTrackerClicked() {
+	
+		fitTrackerImageView.setImage(FitactiveImage);
+		FitTrackerLabel.setStyle(string.getFx_text_fill_98FF42());	
+	}
+	
+	public void setFitTrackerClickedClosed() {
 		
-		if(mouseevent.getSource().equals(SearchIconContainer))
-		{
+		fitTrackerImageView.setImage(FitstandardImage);
+		FitTrackerLabel.setStyle(string.getFx_text_fill_black());
+	}
+	
+	public void setSearchFeatureNavMenuStyle() {
+		
+		SearchIconLabel.setStyle(string.getFx_text_fill_98FF42());
+		searchImageView.setImage(SearchactiveImage);
+	}
+
+	
+	/*
+	 * onMouseReleased
+	 */
+	
+	@FXML 
+	public void changeToIconStandard(MouseEvent mouseevent) throws IOException {
+		
+		if(mouseevent.getSource().equals(SearchIconContainer)) {
+			
 			searchImageView.setImage(SearchstandardImage);			
 			SearchIconLabel.setStyle(string.getFx_text_fill_black());
 
 		}
-		else if(mouseevent.getSource().equals(macroCalculatorContainer))
-		{
+		else if(mouseevent.getSource().equals(macroCalculatorContainer)) {
+			
 			macorCalcImageView.setImage(MacrostandardImage);
 			MacroCalcLabel.setStyle(string.getFx_text_fill_black());
 
 		}
-		else if(mouseevent.getSource().equals(FitTrackerContainer))
-		{
+		else if(mouseevent.getSource().equals(FitTrackerContainer)) {
+			
 			fitTrackerImageView.setImage(FitstandardImage);
 			FitTrackerLabel.setStyle(string.getFx_text_fill_black());
 		}

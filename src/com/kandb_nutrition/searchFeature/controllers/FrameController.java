@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.kandb_nutrition.macrocalculator.controllers.*;
+import com.kandb_nutrition.manager.ScreenManager;
 import com.kandb_nutrition.resource.Strings;
 
 import javafx.beans.property.DoubleProperty;
@@ -14,13 +15,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.SplitPane;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -39,9 +38,6 @@ public class FrameController extends AnchorPane implements Initializable
 	Pane dimPane, Pane_Controller_Container, NutritionLabel_DimPane;
 	
 	@FXML
-	Button menuButton;
-	
-	@FXML
 	SplitPane navMenuPane;
 	
 	@FXML
@@ -57,9 +53,7 @@ public class FrameController extends AnchorPane implements Initializable
 	ImageView LargeLogo;
 	
 	public double opacity;
-	
-	public static FrameController controller; 
-	
+		
 	public Image standardButton;
 	public Image buttonClicked;
 	public Image BackButton;
@@ -67,18 +61,19 @@ public class FrameController extends AnchorPane implements Initializable
 	public final double imageX = image.getX();
 	public final double imageY = image.getY();
 	public Strings strings;
+	private ScreenManager sm;
 	
 	public boolean open = false;
 	
 	public FrameController()
 	{
 		strings = new Strings();
+		sm = ScreenManager.getInstance();
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(strings.getFrame_fxml()));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
-		controller = (FrameController) fxmlLoader.getController();
-
+		
 		try
 		{
 			fxmlLoader.load();
@@ -96,56 +91,16 @@ public class FrameController extends AnchorPane implements Initializable
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) 
 	{
-		opacity = menuButton.getOpacity();
-	
-		navMenu.setMaxWidth(158);
-		
-		menuButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event)
-			{
-				menuButton.setOpacity(1.0);
-			}
-		});
-		
-		menuButton.setOnMouseExited(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event)
-			{
-				menuButton.setOpacity(opacity);
-			}
-		});
-		
-		menuButton.setOnMousePressed(new EventHandler<MouseEvent>() {
-			
-			@Override
-			public void handle(MouseEvent event)
-			{
-				if(open == false)
-				{
-					image.setSource(BackButton);
-					image.setX(8.0);
-					image.setY(4.0);
-				}
-				else 
-				{
-					image.setSource(standardButton);
-					image.setX(imageX);
-					image.setY(imageY);
-				}
-				
-				menuButton.setEffect(image);
-				checkDividerPosition();
-			}
-		});		
+        navMenu.setMaxWidth(158); // Needs to be set for the Nav Menu to work		
 	}
 	
 	public void checkDividerPosition()
 	{		
 		if(open == false)
 		{
+			sm.getSearchFieldFrame().setListViewVisibleFalse();
+			sm.getSearchFieldFrame().searchField.setDisable(true);
+			sm.getSearchFieldFrame().changeSearchFieldImageClear();
 			open = true;
 			openMenu();		
 		}
@@ -171,9 +126,8 @@ public class FrameController extends AnchorPane implements Initializable
 
 			@Override
 			public void handle(ActionEvent event) {
-				SearchFieldFrame.controller.changeSearchFieldImageClear();
-				SearchFieldFrame.controller.searchField.setDisable(true);
 				dimPane.setMouseTransparent(false);
+				open = true;
 			}
 			
 		});
@@ -181,7 +135,7 @@ public class FrameController extends AnchorPane implements Initializable
 	}
 	
 	public void closeMenu()
-	{	
+	{			
 		DoubleProperty doubleProperty = navMenuPane.getDividers().get(0).positionProperty();
 		DoubleTransition dt = new DoubleTransition(Duration.millis(1000), doubleProperty);
 		dt.setToValue(0); dt.play();
@@ -190,14 +144,15 @@ public class FrameController extends AnchorPane implements Initializable
 		ft.setFromValue(.45);
 		ft.setToValue(0.0);
 		ft.play();
-		
+				
 		ft.setOnFinished(new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent event) {
-				SearchFieldFrame.controller.changeSearchFieldImageStandard();
-				SearchFieldFrame.controller.searchField.setDisable(false);
+				sm.getSearchFieldFrame().changeSearchFieldImageStandard();
+				sm.getSearchFieldFrame().searchField.setDisable(false);
 				dimPane.setMouseTransparent(true);
+				open = false;
 			}
 		});
 	}

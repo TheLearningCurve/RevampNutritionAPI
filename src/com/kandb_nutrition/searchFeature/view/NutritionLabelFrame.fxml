@@ -14,11 +14,7 @@
       <AnchorPane layoutY="1.0" prefHeight="391.0" prefWidth="420.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
          <children>
       		<WebView id="WebViewControl" fx:id="webViewControl" layoutX="4.0" layoutY="5.0" prefHeight="418.0" prefWidth="335.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="92.0" AnchorPane.topAnchor="5.0" />
-            <ImageView fx:id="Close_Icon" fitHeight="20.0" fitWidth="34.0" layoutX="343.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/close_White.png" />
-               </image>
-            </ImageView>
+            <Button id="xButton" fx:id="close_icon" layoutX="343.0" layoutY="5.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="20.0" AnchorPane.bottomAnchor="401.0" AnchorPane.leftAnchor="343.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="5.0" />
          </children>
       </AnchorPane>
 	</children>
