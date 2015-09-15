@@ -1,0 +1,65 @@
+
+.text-field {
+	-fx-background-color: #a9a9a9 , white , white;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}
+
+.label {	
+	-fx-font-family: SansSerif;
+	-fx-text-fill:  #76FF03;
+	-fx-font-size: 13px;
+	-fx-font-weight: bold;
+}
+
+.button {	
+	-fx-background-color:  #76FF03, linear-gradient(#76FF03, #64DD17);
+	-fx-text-fill: white;
+	-fx-font-weight: bold;	
+}
+
+.button:hover {	
+	-fx-background-color:  #76FF03, linear-gradient(#76FF03, #B2FF59);
+}
+
+#pane {	
+	-fx-background-color: white;
+}
+
+#createAccountLabel {	
+	-fx-font-family: SansSerif;
+	-fx-text-fill:  #76FF03;
+	-fx-font-size: 40px;
+	-fx-font-weight: bold;
+}
+
+#backButton {	
+	-fx-background-image: url("../images/MenuBackButton.png");
+	-fx-background-color: transparent;
+}
+
+#backButton:hover {
+	-fx-background-color: linear-gradient(transparent, #BDBDBD);
+}
+
+#error_Password_Label {
+	-fx-text-fill: red;
+	-fx-font-size: 13px;
+	-fx-font-weight: bold;
+}
+
+#createAccount_Error_Icon {
+		-fx-image: url("../images/error.png");
+}
+
+#loggingIn_gif {
+	
+	-fx-image: url("../images/loadingIcon.gif");
+}
+
+#password_Message {
+	-fx-text-fill:  derive(black, 80%);
+	-fx-font-size: 12px;
+}
+
+
+

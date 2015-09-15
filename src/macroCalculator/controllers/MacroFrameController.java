@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import searchFeature.nutritionAPIV2_controllers.DoubleTransition;
+import com.kandb_nutrition.searchFeature.controllers.DoubleTransition;
+
 import javafx.animation.FadeTransition;
 import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;

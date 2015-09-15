@@ -1,0 +1,15 @@
+#gridPane, #NavMenu2 {
+	-fx-background-color: white;
+}
+
+#searchImageView {
+	-fx-image: url("../images/searchIcon.png");
+}
+
+#macroImageView {
+	-fx-image: url("../images/macroIcon.png");
+}
+
+#fitTrackerImageView {
+	-fx-image: url("../images/fitTrackerIcon.png");
+}

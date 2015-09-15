@@ -1,0 +1,52 @@
+#SignInPane {	
+	-fx-background-color: white;
+}
+
+.label {
+	
+	-fx-font-family: SansSerif;
+	-fx-text-fill:  #76FF03;
+	-fx-font-size: 50px;
+	-fx-font-weight: bold;
+	
+}
+
+.text-field {
+	-fx-background-color: #a9a9a9 , white , white;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}
+
+.button {
+	
+	-fx-background-color:  #76FF03, linear-gradient(#76FF03, #64DD17);
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	
+}
+
+.button:hover {
+	
+	-fx-background-color:  #76FF03, linear-gradient(#76FF03, #B2FF59);
+}
+
+#signInImage {
+	
+	-fx-image: url("../images/NutritionLogo.png");
+}
+
+#signIn_loading_icon {
+	
+	-fx-image: url("../images/loadingIcon.gif");
+}
+
+.pane {
+	
+	-fx-background-color: white;
+}
+
+#errorLabel {
+	
+	-fx-font-family: SansSerif;
+	-fx-text-fill: #E53935 ;
+	-fx-font-size: 15px;	
+}

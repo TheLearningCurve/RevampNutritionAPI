@@ -1,0 +1,14 @@
+.button {	
+	-fx-background-color: transparent;
+	-fx-background-image: url(../images/menuButton.png);
+	-fx-background-position: center;
+	-fx-background-size: contain;
+}
+
+.button:hover {
+	-fx-opacity: .45;
+}
+
+#anchorPane {
+	-fx-background-color: transparent;
+}
