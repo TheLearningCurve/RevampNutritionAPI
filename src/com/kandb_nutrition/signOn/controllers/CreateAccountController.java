@@ -47,6 +47,7 @@ public class CreateAccountController extends AnchorPane implements Initializable
 	public CreateValidation createValidation;
 	public int enableCreateAccount;
 	public boolean valid_Email;
+	public double confirmLabelY, confirmPasswordY, createAccountButtonY;
 	
 	public static CreateAccountController controller;
 	
@@ -55,7 +56,7 @@ public class CreateAccountController extends AnchorPane implements Initializable
 	{		
 		string = new Strings();
 		createValidation = new CreateValidation();
-		
+
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(string.getCreatAccountForm_fxml()));
 		fxmlLoader.setController(this);
 		fxmlLoader.setRoot(this);
@@ -64,6 +65,9 @@ public class CreateAccountController extends AnchorPane implements Initializable
 		try
 		{
 			fxmlLoader.load();
+			confirmLabelY = confirm_Password_Label.getLayoutY();
+			confirmPasswordY = confirm_Password.getLayoutY();
+			createAccountButtonY = createAccount_Button.getLayoutY();
 		}
 		
 		catch (IOException e)
@@ -179,6 +183,7 @@ public class CreateAccountController extends AnchorPane implements Initializable
 
 			@Override
 			public void handle(MouseEvent event) {
+				resetCreateAccount();
 				
 				ScreenManager sm = ScreenManager.getInstance();
 				sm.initialLogin();
@@ -205,16 +210,41 @@ public class CreateAccountController extends AnchorPane implements Initializable
 			password_Progress.setStyle(string.getFx_accent_green());
 			password_Progress.setProgress(d);
 		}
+		else if(d == 1.5)
+		{
+			password_Progress.setStyle(string.getFx_accent_red());
+			password_Progress.setProgress(d);
+		}
 	}
 	
-	public void seterror_Password_Label_Visible(String errorMessage)
-	{
-		error_Password_Label.setVisible(true);
-		error_Password_Label.setText(errorMessage);
+	public void seterror_Password_Label_Visible(String errorMessage) {
 		
-		confirm_Password.setLayoutY(250);
-		confirm_Password_Label.setLayoutY(245);
-		createAccount_Button.setLayoutY(280);
+		error_Password_Label.setText(errorMessage);
+		if(error_Password_Label.getText().length() >= 70) {
+			error_Password_Label.setLayoutY(210);
+			
+			confirm_Password.setLayoutY(250);
+			confirm_Password_Label.setLayoutY(245);
+			createAccount_Button.setLayoutY(280);
+		}
+		else if(error_Password_Label.getText().length() < 70) {
+			error_Password_Label.setLayoutY(200);
+			
+			confirm_Password.setLayoutY(confirmPasswordY + 5);
+			confirm_Password_Label.setLayoutY(confirmLabelY + 5);
+			createAccount_Button.setLayoutY(createAccountButtonY + 5);
+		}	
+		
+		error_Password_Label.setVisible(true);	
+	}
+	
+	public void seterror_Password_Label_NonVisible() {
+		
+		error_Password_Label.setVisible(false);
+		
+		confirm_Password.setLayoutY(confirmPasswordY);
+		confirm_Password_Label.setLayoutY(confirmLabelY);
+		createAccount_Button.setLayoutY(createAccountButtonY);
 	}
 	
 	public void create_Button_Enable()
@@ -265,5 +295,14 @@ public class CreateAccountController extends AnchorPane implements Initializable
 	
 	public void setLoggingIn_gif_NonVisible() {
 		loggingIn_gif.setVisible(false);
+	}
+	
+	public void resetCreateAccount() {
+		firstName_Field.clear();
+		lastName_Field.clear();
+		email_Field.clear();
+		email_confirm_Field.clear();
+		password_Field.clear();
+		confirm_Password.clear();
 	}
 }

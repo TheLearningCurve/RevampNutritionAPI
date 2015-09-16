@@ -43,7 +43,7 @@
 
 #error_Password_Label {
 	-fx-text-fill: red;
-	-fx-font-size: 13px;
+	-fx-font-size: 11px;
 	-fx-font-weight: bold;
 }
 
