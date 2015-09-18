@@ -1,8 +1,32 @@
 /*Created by Kyle Wolff May 13 2015 */
 
+.button {
+	
+	-fx-background-color:  #76FF03, linear-gradient(#76FF03, #64DD17);
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	
+}
+
+.button:hover {
+	
+	-fx-background-color:  #76FF03, linear-gradient(#76FF03, #B2FF59);
+}
+
+.pane {
+	
+	-fx-background-color: white;
+}
+
 .split-pane .split-pane-divider {
 	-fx-background-color: transparent;
 	-fx-cursor: null;
+}
+
+#anchor {
+	-fx-background-color: white;
+	-fx-min-height: 40em;
+	-fx-min-width: 30em 
 }
 
 /* This is the Pane that acts as the Dimmer when the Nav Menu opens  */
@@ -10,6 +34,7 @@
 	-fx-background-color: black;
 	-fx-opacity: 0;
 }
+
 #stackPaneAnchorPane, #Frame_Top_Container{
 	-fx-background-color: #98FF42;
 }

@@ -46,6 +46,13 @@ public class Strings {
 	private String xButton_White_Image = "/com/kandb_nutrition/searchFeature/resources/close_White.png";
 	private String searchButtonClear_Image = "/com/kandb_nutrition/searchFeature/resources/SearchButton_Black_Clear.png";
 	private String searchButtonStandard_Image = "/com/kandb_nutrition/searchFeature/resources/SearchButton_Black.png";
+	
+	/* 
+	 * CSS Files
+	 */
+
+	private String SignIn_CSS = "/com/kandb_nutrition/resource/styleSheets/SignIn_1366_X_768.css";
+	private String Master_CSS = "/com/kandb_nutrition/resource/styleSheets/MasterCSS.css";
 
 
 	/*
@@ -306,5 +313,17 @@ public class Strings {
 
 	public String getFx_text_fill_black() {
 		return fx_text_fill_black;
+	}
+	
+	/*
+	 * CSS Methods
+	 */
+
+	public String getSignIn_CSS() {
+		return SignIn_CSS;
+	}
+
+	public String getMaster_CSS() {
+		return Master_CSS;
 	}
 }

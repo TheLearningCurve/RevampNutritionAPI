@@ -61,6 +61,29 @@ public class ScreenManager {
 		fitTrackScene = new Scene(fitTrack_FrameController);		
 	}
 	
+	public void setResponsiveStyle(Double maxWidth, Double maxHeight) {
+		
+		if(maxHeight >= 768 && maxWidth >= 1366) {
+			signOnScene.getStylesheets().addAll(strings.getSignIn_CSS(), strings.getMaster_CSS());
+		}
+		else if(maxHeight >= 768 && maxWidth >= 1280) {
+			signOnScene.getStylesheets().addAll(strings.getSignIn_CSS(), strings.getMaster_CSS());
+		}
+		else if(maxHeight >= 720 && maxWidth >= 1280) {
+			signOnScene.getStylesheets().addAll(strings.getSignIn_CSS(), strings.getMaster_CSS());
+		}
+		else if(maxHeight >= 600 && maxWidth >= 1280) {
+			signOnScene.getStylesheets().addAll(strings.getSignIn_CSS(), strings.getMaster_CSS());
+		}
+		else if(maxHeight >= 768 && maxWidth >= 1024) {
+			signOnScene.getStylesheets().addAll(strings.getSignIn_CSS(), strings.getMaster_CSS());
+		}
+		else if(maxHeight >= 600 && maxWidth >= 800) {
+			signOnScene.getStylesheets().addAll(strings.getSignIn_CSS(), strings.getMaster_CSS());
+		}
+		
+	}
+	
 	// Controller Getters
 	
 	public FrameController getFrameController() {

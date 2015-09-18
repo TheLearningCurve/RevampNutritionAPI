@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.TextField?>
 
-<fx:root id="anchor" fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="440.0" prefWidth="385.0" stylesheets="@../../resource/styleSheets/SignIn.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="anchor" fx:id="anchor" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutX="2.0" layoutY="-1.0" prefHeight="440.0" prefWidth="385.0" styleClass="pane" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
+      <Pane id="containsPane" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
          <children>
-            <Pane id="SignInPane" layoutX="77.0" layoutY="105.0" prefHeight="324.0" prefWidth="232.0">
+            <Pane id="SignInPane" layoutX="77.0" layoutY="105.0" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0">
                <children>
                   <TextField fx:id="EmailField" focusTraversable="false" layoutX="33.0" layoutY="126.0" prefHeight="25.0" prefWidth="166.0" promptText="Email" />
                   <PasswordField fx:id="PasswordField" focusTraversable="false" layoutX="33.0" layoutY="162.0" prefHeight="25.0" prefWidth="166.0" promptText="Password" />
