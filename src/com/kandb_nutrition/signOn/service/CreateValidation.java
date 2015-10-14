@@ -1,12 +1,5 @@
 package com.kandb_nutrition.signOn.service;
 
-/*
- * This is the createValidation Class. This class is implemented in the CreateAccountController.
- * We need to verify the user has all the information necessary for an account. 
- * We want the EMAIL ADDRESS to be like this "example@example.com". In coding terms ---> string@string.(2 characters minimum) 
- * The PASSWORD cannot be the email address and it has to have 1 upper case letter, 1 lower case letter, and 1 number. Must be 6 - 15 characters long. 
- */
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,17 +10,29 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
+/*
+ * Created by Kyle Wolff
+ */
+
+/*
+ * This is the createValidation Class. This class is implemented in the CreateAccountController.
+ * We need to verify the user has all the information necessary for an account. 
+ * We want the EMAIL ADDRESS to be like this "example@example.com". In coding terms ---> string@string.(2 characters minimum) 
+ * The PASSWORD cannot be the email address and it has to have 1 upper case letter, 1 lower case letter, and 1 number. Must be 6 - 15 characters long. 
+ */
+
+
 public class CreateValidation implements ChangeListener<String> {
 	
 	public TextField t;
 	public Strings strings;
 	public String first_name, last_name, emailAddress, confirm_emailAddress, password, confirm_Password;
 	
-	public boolean firstName_Filled, lastName_Filled, password_Filled, email_Filled, allFieldsFilled, containsDigit;
+	public boolean firstName_Filled, lastName_Filled, password_Filled, email_Filled, allFieldsFilled;
 
-	private Pattern email_Pattern, password_Pattern, upperCase_Pattern, lowerCase_Pattern, digit_Pattern;
+	private Pattern email_Pattern, password_Pattern, upperCase_Pattern, lowerCase_Pattern, digit_Pattern, characteramount_Pattern, invalidcharacter_Pattern;
 
-	private Matcher email_Matcher, password_Matcher, upperCase_Matcher, lowerCase_Matcher, digit_Matcher;
+	private Matcher email_Matcher, password_Matcher, upperCase_Matcher, lowerCase_Matcher, digit_Matcher, characteramount_Matcher, invalidcharacter_Matcher;
 
 	
 	public CreateValidation()
@@ -43,17 +48,19 @@ public class CreateValidation implements ChangeListener<String> {
 	public String lowerCase;
 	public boolean lowerCase_Passed;
 	
-	private static final String UPPERCASE_PATTERN = "^(?=.*[A-Z])[A-Za-z0-9]+$";
-	private static final String LOWERCASE_PATTERN = "^(?=.*[a-z])[A-Za-z0-9]+$";
-	private static final String DIGIT_PATTERN = "^(?=.*[0-9])[A-Za-z0-9]+$";
-
-
-	private static final String EMAIL_PATTERN = 
-		"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-	
-	private static final String PASSWORD_PATTERN = 
-			"((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})";
+	/*
+	 * This string "^.*[-\\\\_`~!?@#$%^&*()=+{}|\"\':;<>,./\\[\\]].*$" contains all of the keyboard special characters 
+	 * Do not mess with it because of the fact that all the escape characters are correct. 
+	 * If there is a need for a change contact Kyle Wolff. 
+	 */
+	private static final String INVALIDCHARACTER_PATTERN = "^.*[-\\\\_`~!?@#$%^&*()=+{}|\"\':;<>,./\\[\\]].*$";
+	private static final String UPPERCASE_PATTERN 		 = "^(?=.*[A-Z])[A-Za-z0-9]+$";
+	private static final String LOWERCASE_PATTERN 		 = "^(?=.*[a-z])[A-Za-z0-9]+$";
+	private static final String DIGIT_PATTERN 			 = "^(?=.*[0-9])[A-Za-z0-9]+$";
+	private static final String CHARACTERAMOUNT_PATTERN  = ".{6,15}";
+	private static final String EMAIL_PATTERN 			 =  "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" 
+															+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";	
+	private static final String PASSWORD_PATTERN 		 =  "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})";
 	/*
 	 * 		(				#   Start of group
   			(?=.*\d)		#   must contains one digit from 0-9
@@ -73,6 +80,8 @@ public class CreateValidation implements ChangeListener<String> {
 		upperCase_Pattern = Pattern.compile(UPPERCASE_PATTERN);
 		lowerCase_Pattern = Pattern.compile(LOWERCASE_PATTERN);
 		digit_Pattern = Pattern.compile(DIGIT_PATTERN);
+		characteramount_Pattern = Pattern.compile(CHARACTERAMOUNT_PATTERN);
+		invalidcharacter_Pattern = Pattern.compile(INVALIDCHARACTER_PATTERN);
 	}
 
 	public boolean validateEmail(String email) {
@@ -98,6 +107,16 @@ public class CreateValidation implements ChangeListener<String> {
 	public boolean validateDigit(String password) {
 		digit_Matcher= digit_Pattern.matcher(password);
 		return digit_Matcher.matches();
+	}
+	
+	public boolean validateCharacterAmount(String password) {
+		characteramount_Matcher = characteramount_Pattern.matcher(password);
+		return characteramount_Matcher.matches();
+	}
+	
+	public boolean validateInvalidCharacter(String password) {
+		invalidcharacter_Matcher = invalidcharacter_Pattern.matcher(password);
+		return invalidcharacter_Matcher.matches();
 	}
 	
 
@@ -179,45 +198,116 @@ public class CreateValidation implements ChangeListener<String> {
 		{
 			password = newValue;
 			
-			upperCase = password.toLowerCase();
-			upperCase_Passed = !password.equals(upperCase);
-			
-			lowerCase = password.toUpperCase();
-			lowerCase_Passed = !password.equals(lowerCase);
-			
 			if(emailAddress == null && validatePassword(newValue) == true)
 			{
-				CreateAccountController.controller.setPassword_Error_nonVisible();
-				getallfieldsFilled();
-				passwordProgessBar(1);
-				
+				if(validateInvalidCharacter(newValue) == true) 
+				{
+					CreateAccountController.controller.seterror_Password_Label_Visible("Cannot contain special characters.");
+					CreateAccountController.controller.setPassword_Error_Icon();
+					password_Filled = false;
+					passwordProgessBar(1.5);
+				}
+				else 
+				{
+					CreateAccountController.controller.setPassword_Error_nonVisible();
+					getallfieldsFilled();
+					passwordProgessBar(1);
+					CreateAccountController.controller.seterror_Password_Label_NonVisible();
+				}
+							
 				if(newValue != null)
 				{
 					comParePasswordField(newValue);
 				}
 			}
-			else if(validatePassword(newValue) == true && newValue.compareTo(emailAddress) != 0)
+			else if(emailAddress != null && validatePassword(newValue) == true && newValue.compareTo(emailAddress) != 0)
 			{
 				CreateAccountController.controller.setPassword_Error_nonVisible();
 				getallfieldsFilled();
 				passwordProgessBar(1);
+				CreateAccountController.controller.seterror_Password_Label_NonVisible();
 				
 				if(newValue != null)
 				{
 					comParePasswordField(newValue);
 				}
 			}
+			else if(emailAddress != null && password.contains(emailAddress))
+			{					
+				if(password.contains(emailAddress))
+				{
+					CreateAccountController.controller.seterror_Password_Label_Visible("Cannot contain email address");
+				}
+
+				passwordProgessBar(1.5);
+			}	
 			else if(validatePassword(newValue) == false)
-			{
+			{								
 				CreateAccountController.controller.setPassword_Error_Icon();
 				password_Filled = false;
-				containsDigit(password);
 				
-				if(validateUpperCase(newValue) == true && validateLowerCase(newValue) == true || 
+				if(newValue.matches(""))
+				{
+					CreateAccountController.controller.setPassword_Error_nonVisible();
+					CreateAccountController.controller.seterror_Password_Label_NonVisible();
+					passwordProgessBar(0);
+					password_Filled = false;
+
+				}
+				else if(validateInvalidCharacter(newValue) == true) 
+				{
+					CreateAccountController.controller.seterror_Password_Label_Visible("Cannot contain special characters.");
+					passwordProgessBar(1.5);
+				}
+				else if(validateUpperCase(newValue) == true && validateLowerCase(newValue) == true && validateCharacterAmount(newValue) == true ||
+						validateLowerCase(newValue) == true && validateDigit(newValue) == true && validateCharacterAmount(newValue) == true ||
+						validateUpperCase(newValue) == true && validateDigit(newValue) == true && validateCharacterAmount(newValue) == true ||
+						validateUpperCase(newValue) == true && validateLowerCase(newValue) == true && validateDigit(newValue) == true)
+				{
+					passwordProgessBar(.50);
+					
+					if(validateUpperCase(newValue) == true && validateLowerCase(newValue) == true && validateCharacterAmount(newValue) == true)
+					{
+						CreateAccountController.controller.seterror_Password_Label_Visible("Must contain a digit.");
+					}
+					else if(validateLowerCase(newValue) == true && validateDigit(newValue) == true && validateCharacterAmount(newValue) == true)
+					{
+						CreateAccountController.controller.seterror_Password_Label_Visible("Must contain an upper case letter.");
+					}
+					else if(validateUpperCase(newValue) == true && validateDigit(newValue) == true && validateCharacterAmount(newValue) == true)
+					{
+						CreateAccountController.controller.seterror_Password_Label_Visible("Must contain a lower case letter.");
+					}	
+					else if(validateUpperCase(newValue) == true && validateLowerCase(newValue) == true && validateDigit(newValue) == true)
+					{
+						if(newValue.length() < 6)
+						{
+							CreateAccountController.controller.seterror_Password_Label_Visible("Must be at least 6 characters long");
+						}
+						else if(newValue.length() > 15)
+						{
+							CreateAccountController.controller.seterror_Password_Label_Visible("Must be less than 15 characters long");
+						}
+					}				
+				}
+				else if(validateUpperCase(newValue) == true && validateLowerCase(newValue) == true || 
 						validateLowerCase(newValue) == true && validateDigit(newValue) == true || 
 						validateUpperCase(newValue) == true && validateDigit(newValue) == true)
 				{
 					passwordProgessBar(.50);
+					
+					if(validateUpperCase(newValue) == true && validateLowerCase(newValue) == true)
+					{
+						CreateAccountController.controller.seterror_Password_Label_Visible("Must contain a digit and be 6-15 characters long.");
+					}
+					else if(validateLowerCase(newValue) == true && validateDigit(newValue) == true)
+					{
+						CreateAccountController.controller.seterror_Password_Label_Visible("Must contain an upper case letter and be 6-15 characters long.");
+					}
+					else if(validateUpperCase(newValue) == true && validateDigit(newValue) == true)
+					{
+						CreateAccountController.controller.seterror_Password_Label_Visible("Must contain a lower case letter and be 6-15 characters long.");
+					}					
 				}
 				else if(validateUpperCase(newValue) == true || validateLowerCase(newValue) == true || validateDigit(newValue) == true)
 				{
@@ -225,17 +315,17 @@ public class CreateValidation implements ChangeListener<String> {
 					
 					if(validateUpperCase(newValue) == true)
 					{
-						CreateAccountController.controller.seterror_Password_Label_Visible("Must contain a lower case letter and a digit");
+						CreateAccountController.controller.seterror_Password_Label_Visible("Must contain a lower case, a digit and must be 6-15 characters long.");
 					}
 					else if(validateLowerCase(newValue) == true)
 					{
-						CreateAccountController.controller.seterror_Password_Label_Visible("Must contain an upper case letter and a digit");
+						CreateAccountController.controller.seterror_Password_Label_Visible("Must contain an upper case letter, a digit and must be 6-15 characters long.");
 					}
 					else if(validateDigit(newValue) == true)
 					{
-						CreateAccountController.controller.seterror_Password_Label_Visible("Must contain a lower case letter and upper case letter");
+						CreateAccountController.controller.seterror_Password_Label_Visible("Must contain a lower case letter,a upper case letter and must be 6-15 characters long.");
 					}
-				}
+				}		
 				
 				getallfieldsFilled();
 				
@@ -249,7 +339,7 @@ public class CreateValidation implements ChangeListener<String> {
 		{
 			confirm_Password = newValue;
 			
-			if(password != null && newValue.compareTo(password) == 0)
+			if(password != null && password.compareTo("") != 0 && validatePassword(password) == true && newValue.compareTo(password) == 0)
 			{
 				CreateAccountController.controller.setConfirmPassword_Error_nonVisible();
 				password_Filled = true;
@@ -261,21 +351,7 @@ public class CreateValidation implements ChangeListener<String> {
 				password_Filled = false;
 				getallfieldsFilled();
 			}
-		}
-		
-	}
-	
-	public final boolean containsDigit(String string) {
-
-	    if (string != null) {
-	        for (char character : string.toCharArray()) {
-	            if (containsDigit = Character.isDigit(character)) {
-	                break;
-	            }
-	        }
-	    }
-
-	    return containsDigit;
+		}	
 	}
 	
 	public void passwordProgessBar(double d)
@@ -330,5 +406,4 @@ public class CreateValidation implements ChangeListener<String> {
 	{
 		this.t = t;
 	}
-
 }

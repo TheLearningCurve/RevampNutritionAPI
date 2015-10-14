@@ -35,7 +35,7 @@
                   <ImageView id="createAccount_Error_Icon" fx:id="email_Error_Icon" fitHeight="18.0" fitWidth="20.0" layoutX="334.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" visible="false" />
                   <ImageView id="createAccount_Error_Icon" fx:id="password_Error_Icon" fitHeight="18.0" fitWidth="18.0" layoutX="334.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true" visible="false" />
                   <ImageView id="loggingIn_gif" fx:id="loggingIn_gif" fitHeight="75.0" fitWidth="79.0" layoutX="152.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" visible="false" />
-                  <Label id="error_Password_Label" fx:id="error_Password_Label" alignment="CENTER" layoutX="8.0" layoutY="220.0" mouseTransparent="true" prefHeight="28.0" prefWidth="363.0" visible="false" wrapText="true" />
+                  <Label id="error_Password_Label" fx:id="error_Password_Label" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="213.0" mouseTransparent="true" prefHeight="53.0" prefWidth="363.0" textAlignment="CENTER" visible="false" wrapText="true" />
                </children>
             </Pane>
             <Line endX="250.0" layoutX="117.0" layoutY="127.0" startX="-100.0" />
