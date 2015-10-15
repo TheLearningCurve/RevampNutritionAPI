@@ -67,6 +67,7 @@ public class Strings {
 	private String emptyEmailField_Message = "Email field cannot be empty";
 	private String emptyPasswordField_Message = "Password field cannot be empty";
 	private String networkError_Message = " Error. Please connect to the Internet";
+	private String emailError_Message = "Please enter the correct email format example@example.com";
 	
 	/*
 	 * Style Strings
@@ -288,6 +289,10 @@ public class Strings {
 	 * Style Methods
 	 */
 	
+	public String getEmailError_Message() {
+		return emailError_Message;
+	}
+
 	public String getFx_accent_red() {
 		return fx_accent_red;
 	}
