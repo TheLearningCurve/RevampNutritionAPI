@@ -20,7 +20,7 @@ import javafx.scene.layout.*;
 public class NavigationController extends AnchorPane implements Initializable {
 		
 	@FXML
-	HBox SearchIconContainer, macroCalculatorContainer, FitTrackerContainer;
+	HBox SearchIconContainer, macroCalculatorContainer, FitTrackerContainer, logoutContainer;
 	
 	@FXML
 	ImageView searchImageView, macorCalcImageView, fitTrackerImageView;
@@ -112,6 +112,11 @@ public class NavigationController extends AnchorPane implements Initializable {
 				sm.getFitTrack_FrameController().keepMenuOpen();
 				sm.getFitTrack_FrameController().closeMenu();
 			}
+		}
+		else if(mouseevent.getSource().equals(logoutContainer)) {		
+			sm.getSignInFormController().resetlogin();
+			sm.logout();
+			sm.getSearchListFrameController().resetSearchScene();
 		}
 	}
 	

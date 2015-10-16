@@ -13,3 +13,7 @@
 #fitTrackerImageView {
 	-fx-image: url("../images/fitTrackerIcon.png");
 }
+
+#logoutImage {
+	-fx-image: url("../images/Exit_Image.png");
+}

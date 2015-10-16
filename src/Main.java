@@ -19,6 +19,8 @@ public class Main extends Application
 	@Override
 	public void start(Stage stage) 
 	{		
+		stage.setResizable(false);
+		
 		ScreenManager sm = ScreenManager.getInstance();
 		sm.setStage(stage);
 		sm.instaniateControllers();
