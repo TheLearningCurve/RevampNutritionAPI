@@ -22,6 +22,7 @@ public class GetUser {
 				sm = ScreenManager.getInstance();
 				sm.loggedIn();
 				
+				
 				sm.getCreateAccountController().setLoggingIn_gif_NonVisible();
 			}
 

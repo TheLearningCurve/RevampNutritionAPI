@@ -55,6 +55,15 @@ public class NutritionLabelFrameController extends AnchorPane implements Initial
 		}	
 		
 		engine = webViewControl.getEngine();	
+		
+		close_icon.setOnMouseReleased(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				sm.getNutritionLabelFrameController().setVisible(false);
+				sm.getFrameController().dim_Pane_Container_SetOpacityZero();
+			}
+		});
 	}
 	
 	public void sendHtml(HTMLBuilder html)
@@ -65,17 +74,10 @@ public class NutritionLabelFrameController extends AnchorPane implements Initial
 	public NutritionLabelFrameController getController() {
 		return controller;
 	}
-	
-	@Override
-	public void initialize(URL location, ResourceBundle resources)
-	{
-		close_icon.setOnMouseReleased(new EventHandler<MouseEvent>() {
 
-			@Override
-			public void handle(MouseEvent mouseEvent) {
-				sm.getNutritionLabelFrameController().setVisible(false);
-				sm.getFrameController().dim_Pane_Container_SetOpacityZero();
-			}
-		});
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 }
