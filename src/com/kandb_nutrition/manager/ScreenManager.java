@@ -30,7 +30,7 @@ public class ScreenManager {
 	private SearchFieldFrame searchFieldFrame;
 	private SearchListFrameController searchListFrameController;
 	
-	public boolean searchFeature, fitTracker, initialLogin;
+	public boolean searchFeature, fitTracker, initialLogin, loggedout;
 
 	public Strings strings;
 	
@@ -112,7 +112,12 @@ public class ScreenManager {
 	// Initial Login 
 	public void initialLogin() {		
 		
+		if(isLoggedOut()) {
+			signInFormController.userLoggedOut();
+		}
+		
 		primaryStage.setScene(signOnScene);
+		primaryStage.centerOnScreen();
 		primaryStage.show();
 	}
 	
@@ -165,12 +170,22 @@ public class ScreenManager {
 		primaryStage.show();
 	}
 	
+	public void logout() {
+		
+		loggedout = true;
+		initialLogin();	
+	}
+	
 	// This method will get the stage from the Main class. Called once
 	public void setStage(Stage stage) {
 		primaryStage = stage;
 	}
 	
 	// Booleans
+	
+	public boolean isLoggedOut() {
+		return loggedout;
+	}
 	
 	public boolean isSearchFeature() {
 		return searchFeature;

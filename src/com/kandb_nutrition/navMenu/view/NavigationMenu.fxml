@@ -14,7 +14,7 @@
          <children>
             <AnchorPane prefHeight="451.0" prefWidth="190.0">
                <children>
-                  <GridPane id="gridPane" prefHeight="451.0" prefWidth="170.0" style="-fx-background-color: white;">
+                  <GridPane id="gridPane" layoutX="-1.0" prefHeight="451.0" prefWidth="170.0" style="-fx-background-color: white;">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.0" minWidth="10.0" prefWidth="170.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="163.0" minWidth="0.0" prefWidth="0.0" />
@@ -75,6 +75,23 @@
                                  </font>
                                  <HBox.margin>
                                     <Insets left="10.0" top="25.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox id="logoutContainer" fx:id="logoutContainer" onMousePressed="#changeToIconActive" onMouseReleased="#changeToIconStandard" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                           <children>
+                              <ImageView id="logoutImage" fitHeight="27.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+                                 <HBox.margin>
+                                    <Insets left="8.0" top="15.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label id="fitTrackerImageView" fx:id="FitTrackerLabel1" prefHeight="17.0" prefWidth="77.0" text="Log Out">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="20.0" />
                                  </HBox.margin>
                               </Label>
                            </children>

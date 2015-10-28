@@ -12,24 +12,19 @@ import com.kandb_nutrition.signOn.service.FireBase;
 import com.kandb_nutrition.signOn.service.GetUser;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import sun.security.util.Password;
 
 
 public class SignInFormController extends AnchorPane implements Initializable {
@@ -90,10 +85,6 @@ public class SignInFormController extends AnchorPane implements Initializable {
 					
 					//Sets the Password field to focused 
 					PasswordField.setFocusTraversable(true);
-					
-					if(validateEmail(EmailField.getText()) == false) {
-						textFieldError(string.getEmailError_Message());
-					}
 				}
 			}
 		});
@@ -208,6 +199,16 @@ public class SignInFormController extends AnchorPane implements Initializable {
 	
 	public void setLoadingIconNonVisible() {
 		signIn_loading_icon.setVisible(false);
+	}
+	
+	public void userLoggedOut() {
+		setLoadingIconNonVisible();
+	}
+
+	public void resetlogin() {
+		PasswordField.clear();
+		this.requestFocus();
+		
 	}
 	
 }
